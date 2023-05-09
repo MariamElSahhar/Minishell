@@ -6,7 +6,7 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:28:04 by melsahha          #+#    #+#              #
-#    Updated: 2023/05/05 15:00:45 by melsahha         ###   ########.fr        #
+#    Updated: 2023/05/09 18:55:05 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(OBJ_DIR):
 	mkdir -p $@
 
 clean:
-	rm -rf $(OBJ_DIR) $(LIBFT)
+	rm -rf $(OBJ_DIR)
 	make -sC $(LIBFT_DIR) clean
 
 

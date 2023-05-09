@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/09 17:59:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:55:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_input(char *input)
 {
 	char	**sep;
-	int		i;
+	// int		i;
 
 	sep = ft_split(input, ' ');
 }
