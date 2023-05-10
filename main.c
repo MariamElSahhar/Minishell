@@ -6,11 +6,11 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/10 17:47:38 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:01:32 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(void)
+int	main(int argc, char **argv, char **envp)
 {
     
 }
