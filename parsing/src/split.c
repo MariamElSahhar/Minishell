@@ -6,32 +6,37 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 16:45:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:39:43 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	count_words(char *s)
+static int	count_commands(char *s)
 {
-	int	res;
+	int	count;
 	int	i;
 
 	i = 0;
-	res = 0;
-	while (s[i])
+	count = 0;
+	while (s && s[i])
 	{
-		while (s[i] && is_space(s[i]))
+		while (s[i] && s[i] != ';')
 			i++;
-		if (s[i] && !is_space(s[i]))
-			res++;
-		while (s[i] && !is_space(s[i]))
+		if (s[i] && s[i] == ';')
+		{
+			count++;
+			i++;
+		}
+		while (s[i] && s[i] != ';')
 			i++;
 	}
-	return (res);
+	if (!count)
+		return (1);
+	return (count);
 }
 
-static void	init_word(char *d, char *s, int start)
+/* static void	init_word(char *d, char *s, int start)
 {
 	int	i;
 
@@ -70,17 +75,19 @@ static void	init_arr(char **arr, char *s)
 		}
 	}
 }
-
+ */
 char	**split_input(char const *s)
 {
-	int		num_words;
-	char	**arr;
+	int		num_commands;
+	// char	**arr;
 
-	num_words = count_words((char *) s);
-	arr = (char **)malloc(sizeof(char *) * (num_words + 1));
-	if (!arr)
-		return (0);
-	init_arr(arr, (char *) s);
-	arr[num_words] = 0;
-	return (arr);
+	num_commands = count_commands((char *) s);
+	printf("%i commands\n", num_commands);
+	return (0);
+	// arr = (char **)malloc(sizeof(char *) * (num_commands + 1));
+	// if (!arr)
+	// 	return (0);
+	// init_arr(arr, (char *) s);
+	// arr[num_commands] = 0;
+	// return (arr);
 }

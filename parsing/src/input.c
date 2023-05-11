@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 17:12:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:51:21 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,30 @@ static int	invalid_pipe(char *input)
 	while (piped && piped[++i])
 	{
 		if (empty_pipe(piped[i]))
+			{
+				free_double_ptr((void **) piped);
+				return (1);
+			}
+	}
+	free_double_ptr((void **) piped);
+	return (0);
+}
+
+static int	invalid_char(char *input, char c)
+{
+	char	**sep;
+	int		i;
+
+	if (!ft_strchr(input, c))
+		return (0);
+	if (!ft_strncmp(input, ft_strchr(input, c), ft_strlen(input))
+		|| ft_strlen(ft_strrchr(input, c)) == 1)
+		return (1);
+	sep = ft_split(input, c);
+	i = -1;
+	while (sep && sep[++i])
+	{
+		if (!open_quotes(sep[i]))
 			return (1);
 	}
 	return (0);
@@ -84,12 +108,9 @@ int	check_input(char *input)
 {
 	if (open_quotes(input))
 		printf("open quote\n");
-	else
-		printf("closed quote\n");
-
 	if (invalid_pipe(input))
 		printf("invalid pipe\n");
-	else
-		printf("valid pipes\n");
+	if (invalid_char(input, ';') || invalid_char(input, '\\'))
+		printf("unexpected char ; or \\\n");
 	return (0);
 }
