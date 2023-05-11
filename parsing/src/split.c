@@ -6,20 +6,11 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/10 19:28:56 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:45:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-
-static int	is_space(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n')
-		return (1);
-	if (c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
 
 static int	count_words(char *s)
 {
