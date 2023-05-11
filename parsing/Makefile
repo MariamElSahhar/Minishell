@@ -6,7 +6,7 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 18:01:35 by melsahha          #+#    #+#              #
-#    Updated: 2023/05/09 18:51:41 by melsahha         ###   ########.fr        #
+#    Updated: 2023/05/10 19:59:16 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,13 @@ LIBFT_DIR = ../libft/
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj
-SRC_FILES = main.c list.c
+SRC_FILES = main.c split.c utils.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 $(NAME): $(OBJ) $(OBJ_DIR)
-	make -C $(LIBFT_DIR)
+	make -sC $(LIBFT_DIR)
 	mv $(LIBFT_DIR)$(LIBFT) .
 	$(CC) $(CFLAGS) $(OBJ) $(LINK) -o $(NAME)
 
@@ -41,8 +41,8 @@ $(OBJ_DIR):
 
 clean:
 	rm -rf $(OBJ_DIR)
-	make -sC $(PRINTF_DIR) clean
-	rm -f $(PRINTF_LIB)
+	make -sC $(LIBFT_DIR) clean
+	rm -f $(LIBFT)
 
 fclean: clean
 	rm -f $(NAME)
