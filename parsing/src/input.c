@@ -6,55 +6,26 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 17:51:21 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:04:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	open_quotes(char *input)
-{
-	int	open;
-	int	i;
-	int	quote;
-
-	open = 0;
-	i = 0;
-	while (input && input[i])
-	{
-		while (input[i] && !is_quote(input[i]))
-			i++;
-		if (is_quote(input[i]))
-		{
-			open = 1;
-			quote = input[i];
-			i++;
-		}
-		while (input[i] && input[i] != quote)
-			i++;
-		if (input[i] && input[i] == quote)
-		{
-			open = 0;
-			i++;
-		}
-	}
-	return (open);
-}
-
-static int	empty_pipe(char *piped)
+static int	is_empty(char *split)
 {
 	int	j;
 	int	empty;
 
 	j = 0;
 	empty = 1;
-	if (open_quotes(piped))
+	if (open_quotes(split))
 		return (0);
-	while (empty && piped[j])
+	while (empty && split[j])
 	{
-		while (is_space(piped[j]) || is_quote(piped[j]))
+		while (is_space(split[j]) || is_quote(split[j]))
 			j++;
-		if (piped[j] && !is_space(piped[j]) && !is_quote(piped[j]))
+		if (split[j] && !is_space(split[j]) && !is_quote(split[j]))
 			empty = 0;
 	}
 	return (empty);
@@ -74,11 +45,11 @@ static int	invalid_pipe(char *input)
 	i = -1;
 	while (piped && piped[++i])
 	{
-		if (empty_pipe(piped[i]))
-			{
-				free_double_ptr((void **) piped);
-				return (1);
-			}
+		if (is_empty(piped[i]))
+		{
+			free_double_ptr((void **) piped);
+			return (1);
+		}
 	}
 	free_double_ptr((void **) piped);
 	return (0);
@@ -104,6 +75,35 @@ static int	invalid_char(char *input, char c)
 	return (0);
 }
 
+static int	invalid_redir(char *input)
+{
+	char	**split;
+	int		invalid;
+	int		i;
+
+	if (ft_strlen(ft_strrchr(input, '>')) == 1
+		|| ft_strlen(ft_strrchr(input, '<')) == 1)
+		return (1);
+	invalid = 0;
+	split = ft_split(input, '<');
+	i = -1;
+	while (split && split[++i])
+	{
+		if (is_empty(split[i]))
+			invalid = 1;
+	}
+	free_double_ptr((void **) split);
+	split = ft_split(input, '>');
+	i = -1;
+	while (split && split[++i])
+	{
+		if (is_empty(split[i]))
+			invalid = 1;
+	}
+	free_double_ptr((void **) split);
+	return (invalid);
+}
+
 int	check_input(char *input)
 {
 	if (open_quotes(input))
@@ -112,5 +112,7 @@ int	check_input(char *input)
 		printf("invalid pipe\n");
 	if (invalid_char(input, ';') || invalid_char(input, '\\'))
 		printf("unexpected char ; or \\\n");
+	if (invalid_redir(input))
+		printf("invalid redirection\n");
 	return (0);
 }

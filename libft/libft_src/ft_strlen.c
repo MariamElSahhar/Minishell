@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:13:35 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/05 11:14:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:55:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s && s[i] && s[i] != '\0')
 		i++;
 	return (i);
 }

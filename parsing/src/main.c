@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 18:07:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:09:23 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	main_loop(int sig)
 
 int	main(void)
 {
-	signal(SIGINT, &main_loop);
+	// signal(SIGINT, &main_loop);
 
 	main_loop(0);
 	return (0);
