@@ -6,13 +6,55 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 17:39:43 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:44:56 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	count_commands(char *s)
+static int	count_commands(char *input)
+{
+	int		i;
+	int		open;
+	int		count;
+	int		quote;
+
+	i = 0;
+	count = 0;
+	while (input && input[i])
+	{
+		open = 0;
+		while (input[i] && !is_quote(input[i]) && input[i] != '|')
+			i++;
+		if (is_quote(input[i]))
+		{
+			open = 1;
+			quote = input[i];
+			i++;
+		}
+		while (input[i] && !is_quote(input[i]) && input[i] != '|')
+			i++;
+		if (input[i] == quote)
+		{
+			open = 0;
+			i++;
+		}
+		while (input[i] && !is_quote(input[i]) && input[i] != '|')
+			i++;
+		if (input[i] == '|' && !open)
+		{
+			count++;
+			i++;
+		}
+		while (input[i] && !is_quote(input[i]) && input[i] != '|')
+			i++;
+	}
+
+	return (count);
+}
+
+
+/* static int	count_commands(char *s)
 {
 	int	count;
 	int	i;
@@ -21,20 +63,20 @@ static int	count_commands(char *s)
 	count = 0;
 	while (s && s[i])
 	{
-		while (s[i] && s[i] != ';')
+		while (s[i] && s[i] != '|')
 			i++;
-		if (s[i] && s[i] == ';')
+		if (s[i] && s[i] == '|')
 		{
 			count++;
 			i++;
 		}
-		while (s[i] && s[i] != ';')
+		while (s[i] && s[i] != '|')
 			i++;
 	}
 	if (!count)
 		return (1);
 	return (count);
-}
+} */
 
 /* static void	init_word(char *d, char *s, int start)
 {
@@ -76,12 +118,12 @@ static void	init_arr(char **arr, char *s)
 	}
 }
  */
-char	**split_input(char const *s)
+char	**split_input(char *input)
 {
 	int		num_commands;
 	// char	**arr;
 
-	num_commands = count_commands((char *) s);
+	num_commands = count_commands(input);
 	printf("%i commands\n", num_commands);
 	return (0);
 	// arr = (char **)malloc(sizeof(char *) * (num_commands + 1));

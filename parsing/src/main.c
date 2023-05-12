@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/11 18:09:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:03:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ t_command	*get_commands(char **split)
 //TO-DO: take pipes in quotation marks into account
 t_list	*parse_input(char *input)
 {
-	// char	**split;
+	//split should have portions of the input separated by pipe
+	//each portion should now be ready to be parsed into commands and arguments
+	char	**split;
 
-	// split = split_input(input);
+	split = split_input(input);
 
 	// int	i = -1;
 	// while (split && split[++i])

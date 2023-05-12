@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/12 09:05:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:08:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-
-typedef enum e_redirect
-{
-	INPUT,
-	OUTPUT,
-	APPEND,
-}	t_redirect;
 
 typedef struct s_command
 {
@@ -39,7 +32,7 @@ typedef struct s_input
 	t_command	*command_list;
 }	t_input;
 
-char	**split_input(char const *s);
+char	**split_input(char *s);
 void	free_double_ptr(void **ptr);
 int		check_input(char *input);
 int		is_space(char c);
