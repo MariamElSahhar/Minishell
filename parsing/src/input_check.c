@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/12 09:04:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:27:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	is_empty(char *split)
+static int	empty_pipe(char *input)
 {
-	int	j;
+	int	i;
 	int	empty;
 
-	j = 0;
-	empty = 1;
-	if (open_quotes(split))
-		return (0);
-	while (empty && split[j])
+	i = 0;
+	while (input && input[i])
 	{
-		while (is_space(split[j]) || is_quote(split[j]))
-			j++;
-		if (split[j] && !is_space(split[j]) && !is_quote(split[j]))
+		empty = 1;
+		while (input[i] && is_space(input[i]))
+			i++;
+		while (is_quote(input[i]))
+			in_quotes(&i, input);
+		if (input[i] && !is_space(input[i]) && !is_quote(input[i]))
 			empty = 0;
 	}
 	return (empty);
@@ -33,25 +33,13 @@ static int	is_empty(char *split)
 
 static int	invalid_pipe(char *input)
 {
-	char	**piped;
-	int		i;
-
 	if (!ft_strchr(input, '|'))
 		return (0);
 	if (!ft_strncmp(input, ft_strchr(input, '|'), ft_strlen(input))
 		|| ft_strlen(ft_strrchr(input, '|')) == 1)
 		return (1);
-	piped = ft_split(input, '|');
-	i = -1;
-	while (piped && piped[++i])
-	{
-		if (is_empty(piped[i]))
-		{
-			free_double_ptr((void **) piped);
-			return (1);
-		}
-	}
-	free_double_ptr((void **) piped);
+	if (empty_pipe(input))
+		return (1);
 	return (0);
 }
 

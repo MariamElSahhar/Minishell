@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/12 14:08:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:26:33 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ typedef struct s_input
 	t_command	*command_list;
 }	t_input;
 
-char	**split_input(char *s);
+t_input	*split_input(char *input);
 void	free_double_ptr(void **ptr);
 int		check_input(char *input);
 int		is_space(char c);
 int		is_quote(char c);
 int		open_quotes(char *input);
+void	in_quotes(int *i, char *input);
+
 
 #endif

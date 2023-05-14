@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/14 15:28:47 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:27:43 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	in_quotes(int *i, char *input)
+void	in_quotes(int *i, char *input)
 {
 	int	quote;
 
@@ -21,92 +21,55 @@ static int	in_quotes(int *i, char *input)
 	while (input[*i] && input[*i] != quote)
 		(*i) = (*i) + 1;
 	if (input[*i] && input[*i] == quote)
-	{
 		(*i) = (*i) + 1;
-		return (0);
-	}
-	return (1);
 }
 
 static int	count_commands(char *input)
 {
 	int		i;
-	int		open;
 	int		count;
 
 	i = 0;
 	count = 1;
-	open = 0;
 	while (input && input[i])
 	{
 		while (input[i] && !is_quote(input[i]) && input[i] != '|')
 			i++;
-		if (input[i] && is_quote(input[i]))
-			open = in_quotes(&i, input);
+		while (input[i] && is_quote(input[i]))
+			in_quotes(&i, input);
 		while (input[i] && !is_quote(input[i]) && input[i] != '|')
 			i++;
-		if (input[i] && input[i] == '|' && !open && !is_quote(input[i]))
+		if (input[i] && input[i] == '|' && !is_quote(input[i]))
 		{
 			count++;
 			i++;
 		}
 	}
+	printf("%i commands\n", count);
 	return (count);
 }
 
-
-/* static void	init_word(char *d, char *s, int start)
+/* static t_command	*get_commands(char *input, int num)
 {
-	int	i;
+	t_command	*commands;
 
-	i = 0;
-	while (s[start + i] && !is_space(s[start + i]))
-	{
-		d[i] = s[start + i];
-		i++;
-	}
-	d[i] = '\0';
-}
-
-static void	init_arr(char **arr, char *s)
-{
-	int	i;
-	int	j;
-	int	word_size;
-
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		word_size = 0;
-		while (s[i] && is_space(s[i]))
-			i++;
-		if (s[i] && !is_space(s[i]))
-		{
-			while (s[i] && !is_space(s[i]))
-			{
-				i++;
-				word_size++;
-			}
-			arr[j] = (char *) malloc(word_size + 1);
-			init_word(arr[j], s, i - word_size);
-			j++;
-		}
-	}
+	commands = (t_command *)ft_calloc(num, sizeof(t_command));
+	if (!commands)
+		return (0);
+	// printf("%s\n", (input, '|'));
+	return (0);
 }
  */
-char	**split_input(char *input)
+t_input	*split_input(char *input)
 {
-	int		num_commands;
-	char	**commands_str;
+	t_input	*list;
 
-	num_commands = count_commands(input);
-	printf("%i commands\n", num_commands);
-	commands_str = (char **)malloc(sizeof(char *) * (num_commands + 1));
-	if (!commands_str)
+	list = (t_input *)ft_calloc(1, sizeof(t_input));
+	if (!list)
 		return (0);
-	return (0);
-	// init_arr(arr, (char *) s);
-	// arr[num_commands] = 0;
-	// return (arr);
+	list->pipes = count_commands(input);
+	// list->command_list = get_commands(input, list->pipes);
+	// if (!list->command_list)
+	// 	return (0);
+	return (list);
 }
