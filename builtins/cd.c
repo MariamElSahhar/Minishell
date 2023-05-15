@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/15 17:47:59 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:06:19 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,24 +126,24 @@ int cd(t_utils *utils, t_cmds *cmds)
 // 	}
 // 	return (rtn);
 // }
-int main(int ac, char **av, char **envp )
-{
-    t_utils utils;
-    t_cmds  cmds;
+// int main(int ac, char **av, char **envp )
+// {
+//     t_utils utils;
+//     t_cmds  cmds;
 
-    utils.envp = ft_arrdup(envp);
-    // initialize the utils structure with appropriate values
-    utils.pwd = "/Users/szerisen/Desktop/minishell";
-    utils.old_pwd = "/Users/szerisen/Desktop/";
+//     utils.envp = ft_arrdup(envp);
+//     // initialize the utils structure with appropriate values
+//     utils.pwd = "/Users/szerisen/Desktop/minishell";
+//     utils.old_pwd = "/Users/szerisen/Desktop/";
  
-    // initialize the cmds structure with appropriate values
-    cmds.str[0] = "cd";
-    cmds.str[1] = "/Users/szerisen/";
+//     // initialize the cmds structure with appropriate values
+//     cmds.str[0] = "cd";
+//     cmds.str[1] = "/Users/szerisen/";
 
-    // call the cd function
-    cd(&utils, &cmds);
+//     // call the cd function
+//     cd(&utils, &cmds);
 
-    return (0);
-}
+//     return (0);
+// }
 
  
