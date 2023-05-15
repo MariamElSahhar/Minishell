@@ -10,3 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
+
+int	pwd(t_utils *utils, t_cmds *cmds)
+{
+	(void) cmds;
+	ft_putendl_fd(utils->pwd, STDOUT_FILENO);
+	return (EXIT_SUCCESS);
+}
