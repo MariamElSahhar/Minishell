@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:43:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/15 17:44:04 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:42:25 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ typedef struct s_utils
 {
 	char					*args;
 	char					**paths;
-	char					**envp;
+	char					**envp;    
 	struct s_cmds	*cmds;
 	char					*pwd;
 	char					*old_pwd;
