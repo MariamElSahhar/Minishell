@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/16 11:55:04 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:46:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,42 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <stdbool.h>
 
 typedef struct s_utils
 {
 	char			*args;
-	char			**paths;
 	char			**envp;
 	struct s_cmds	*cmds;
 	char			*pwd;
 	char			*old_pwd;
 	int				pipes;
 	int				*pid;
-	bool			heredoc;
-	bool			reset;
 }	t_utils;
 
+//  < src/main.c wc -l < src/main.c < src/input_utils.c > out.txt
+// cmd.command = wc
+// cmd.args = {-lns, ...}
+// wc -l | cd parsing/ | ls
 typedef struct s_cmds
 {
 	char			**str;
-	int				num_redirections;
-	char			*hd_file_name;
+		//  < src/main.c wc -l < src/main.c < src/input_utils.c > out.txt
+		// command + flag/path
+	char			*command;
+		// wc echo
+	char			**args; //flags or path
+		// -l -n
+	int				num_output;
+		// 1
+	char			**out_file_name;
+		// out.txt
+	int				*append;
+		// true / false
+	char			*in_file_name;
+		// src/input_utils.c / NULL
+	bool			heredoc;
+		// true / false
 	struct s_cmds	*next;
 	struct s_cmds	*prev;
 }	t_cmds;

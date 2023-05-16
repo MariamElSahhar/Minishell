@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   input_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/16 12:26:02 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:42:52 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,39 @@ static void	push_cmd(t_cmds *list, t_cmds *new_cmd)
 	new_cmd->next = 0;
 }
 
+/* static void	cmd_args(t_cmds *cmd)
+{
+	int	i;
+
+	i = 0;
+
+} */
+
 static t_cmds	*init_cmd(char *input, int *i)
 {
-	
+	int		j;
+	char	*cmd_str;
+	t_cmds	*cmd;
+
+	cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
+	j = *i;
+	if (input[(*i)] == '|')
+		(*i)++;
+	while (input[(*i)] && input[(*i)] != '|')
+	{
+		while (input[(*i)] && is_quote(input[(*i)]))
+			in_quotes(&(*i), input);
+		(*i)++;
+	}
+	cmd_str = (char *)ft_calloc((*i) - j + 1, sizeof(char));
+	while (j < (*i))
+	{
+		cmd_str[j] = input[j];
+		j++;
+	}
+	return (0);
+	// cmd_redirect(cmd);
+	// cmd_args(cmd);
 }
 
 static t_cmds	*parse_cmds(char *input, int num)
@@ -105,6 +135,7 @@ t_utils	*split_input(char *input)
 	utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
 	if (!utils)
 		return (0);
+	utils->args = input;
 	utils->pipes = count_pipes(input);
 	utils->cmds = parse_cmds(input, utils->pipes);
 	// list->command_list = get_commands(input, list->pipes);

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/14 15:42:56 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:50:56 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_command	*get_commands(char **split)
 
 }
 */
-t_list	*parse_input(char *input)
+t_utils	*parse_input(char *input)
 {
-	t_input	*list;
+	t_utils	*list;
 
 	check_input(input);
 	list = split_input(input);
@@ -48,7 +48,7 @@ t_list	*parse_input(char *input)
 void	main_loop(int sig)
 {
 	char	*input;
-	t_list	*list;
+	t_utils	*list;
 
 	sig = 0;
 	while (1)
