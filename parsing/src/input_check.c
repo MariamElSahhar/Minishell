@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/14 16:27:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:40:03 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	empty_pipe(char *input)
+static int	empty_space(char *input, char c, int twice)
 {
 	int	i;
 	int	empty;
@@ -21,14 +21,23 @@ static int	empty_pipe(char *input)
 	while (input && input[i])
 	{
 		empty = 1;
-		while (input[i] && is_space(input[i]))
+		while (input[i] && input[i] != c)
+		{
+			while (input[i] && is_quote(input[i]))
+				in_quotes(&i, input);
+			if (input[i] && !is_space(input[i])
+				&& !is_quote(input[i]) && input[i] != c)
+				empty = 0;
 			i++;
-		while (is_quote(input[i]))
-			in_quotes(&i, input);
-		if (input[i] && !is_space(input[i]) && !is_quote(input[i]))
-			empty = 0;
+		}
+		if (input[i] && input[i] == c && empty)
+			return (1);
+		else
+			i++;
+		if (input[i] == c && twice)
+			i++;
 	}
-	return (empty);
+	return (0);
 }
 
 static int	invalid_pipe(char *input)
@@ -38,8 +47,11 @@ static int	invalid_pipe(char *input)
 	if (!ft_strncmp(input, ft_strchr(input, '|'), ft_strlen(input))
 		|| ft_strlen(ft_strrchr(input, '|')) == 1)
 		return (1);
-	if (empty_pipe(input))
+	if (empty_space(input, '|', 0))
+	{
+		printf("empty pipe - ");
 		return (1);
+	}
 	return (0);
 }
 
@@ -65,31 +77,18 @@ static int	invalid_char(char *input, char c)
 
 static int	invalid_redir(char *input)
 {
-	char	**split;
-	int		invalid;
-	int		i;
-
 	if (ft_strlen(ft_strrchr(input, '>')) == 1
 		|| ft_strlen(ft_strrchr(input, '<')) == 1)
+	{
+		printf("start/end - ");
 		return (1);
-	invalid = 0;
-	split = ft_split(input, '<');
-	i = -1;
-	while (split && split[++i])
-	{
-		if (is_empty(split[i]))
-			invalid = 1;
 	}
-	free_double_ptr((void **) split);
-	split = ft_split(input, '>');
-	i = -1;
-	while (split && split[++i])
+	if (empty_space(input, '<', 1) || empty_space(input, '>', 1))
 	{
-		if (is_empty(split[i]))
-			invalid = 1;
+		printf("empty - ");
+		return (1);
 	}
-	free_double_ptr((void **) split);
-	return (invalid);
+	return (0);
 }
 
 int	check_input(char *input)
