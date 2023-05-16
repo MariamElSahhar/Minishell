@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/14 16:27:43 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:26:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	in_quotes(int *i, char *input)
 		(*i) = (*i) + 1;
 }
 
-static int	count_commands(char *input)
+static int	count_pipes(char *input)
 {
 	int		i;
 	int		count;
@@ -49,27 +49,66 @@ static int	count_commands(char *input)
 	return (count);
 }
 
-/* static t_command	*get_commands(char *input, int num)
+//FIX THIS
+static void	push_cmd(t_cmds *list, t_cmds *new_cmd)
 {
-	t_command	*commands;
+	t_cmds	*ptr;
 
-	commands = (t_command *)ft_calloc(num, sizeof(t_command));
+	if (!list || !new_cmd)
+		return ;
+	ptr = list;
+	if (!ptr)
+	{
+		list = new_cmd;
+		list->next = 0;
+		list->prev = 0;
+	}
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = new_cmd;
+	new_cmd->prev = ptr;
+	new_cmd->next = 0;
+}
+
+static t_cmds	*init_cmd(char *input, int *i)
+{
+	
+}
+
+static t_cmds	*parse_cmds(char *input, int num)
+{
+	t_cmds	*commands;
+	t_cmds	*curr;
+	int		i;
+	int		cmd_num;
+
+	commands = (t_cmds *)ft_calloc(num, sizeof(t_cmds));
 	if (!commands)
 		return (0);
+	i = 0;
+	cmd_num = 0;
+	while (cmd_num < num)
+	{
+		curr = init_cmd(input, &i);
+		push_cmd(commands, curr);
+		cmd_num++;
+	}
 	// printf("%s\n", (input, '|'));
 	return (0);
 }
- */
-t_input	*split_input(char *input)
-{
-	t_input	*list;
 
-	list = (t_input *)ft_calloc(1, sizeof(t_input));
-	if (!list)
+
+t_utils	*split_input(char *input)
+{
+	t_utils	*utils;
+
+	utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
+	if (!utils)
 		return (0);
-	list->pipes = count_commands(input);
+	utils->pipes = count_pipes(input);
+	utils->cmds = parse_cmds(input, utils->pipes);
 	// list->command_list = get_commands(input, list->pipes);
 	// if (!list->command_list)
 	// 	return (0);
-	return (list);
+	return (utils);
 }

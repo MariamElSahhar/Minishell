@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/14 16:26:33 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:55:04 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,30 @@
 # include <readline/history.h>
 # include <signal.h>
 
-typedef struct s_command
+typedef struct s_utils
 {
-	const char	*pathname;
-	const char	**argv;
-	const char	*envp[];
-}	t_command;
+	char			*args;
+	char			**paths;
+	char			**envp;
+	struct s_cmds	*cmds;
+	char			*pwd;
+	char			*old_pwd;
+	int				pipes;
+	int				*pid;
+	bool			heredoc;
+	bool			reset;
+}	t_utils;
 
-typedef struct s_input
+typedef struct s_cmds
 {
-	int			pipes;
-	t_command	*command_list;
-}	t_input;
+	char			**str;
+	int				num_redirections;
+	char			*hd_file_name;
+	struct s_cmds	*next;
+	struct s_cmds	*prev;
+}	t_cmds;
 
-t_input	*split_input(char *input);
+t_utils	*split_input(char *input);
 void	free_double_ptr(void **ptr);
 int		check_input(char *input);
 int		is_space(char c);
