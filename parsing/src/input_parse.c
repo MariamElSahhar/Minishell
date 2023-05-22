@@ -6,23 +6,11 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/17 17:44:55 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:37:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-
-void	skip_quotes(int *i, char *input)
-{
-	int	quote;
-
-	quote = input[*i];
-	(*i) = (*i) + 1;
-	while (input[*i] && input[*i] != quote)
-		(*i) = (*i) + 1;
-	if (input[*i] && input[*i] == quote)
-		(*i) = (*i) + 1;
-}
 
 static int	count_pipes(char *input)
 {
@@ -70,13 +58,6 @@ static void	push_cmd(t_cmds *list, t_cmds *new_cmd)
 	new_cmd->next = 0;
 }
 
-/* static void	cmd_args(t_cmds *cmd)
-{
-	int	i;
-
-	i = 0;
-
-} */
 
 static t_cmds	*init_cmd(char *input, int *i)
 {

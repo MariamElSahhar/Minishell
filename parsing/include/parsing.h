@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/22 17:16:56 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:27:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	free_double_ptr(void **ptr);
 int		check_input(char *input);
 int		is_space(char c);
 int		is_quote(char c);
+int		is_symbol(char c);
 int		open_quotes(char *input);
 void	skip_quotes(int *i, char *input);
 

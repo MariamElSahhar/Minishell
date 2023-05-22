@@ -6,48 +6,79 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/22 17:15:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:30:21 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-char	**join_str(char **arr, char *str);
-void	skip_quotes(char *input, int *i);
-char	**split_input(char *input);
-
-int	count_chunks(char *input)
+int	is_symbol(char c)
 {
-	int	i;
-	int	count;
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
+}
+
+void	allocate_cmd_args(t_cmds *cmd, char *input, int i)
+{
+	int	cmd_cnt;
+	int	arg_cnt;
+
+	cmd_cnt = 0;
+	arg_cnt = 0;
+	while (input[i])
+	{
+		while (input[i] && is_space(input[i]))
+			i++;
+		if ()
+	}
+}
+
+t_cmds	*add_item(t_utils *utils, int *i, char *input)
+{
+	t_cmds	*new_cmd;
+	int		j;
+
+	j = *i;
+	new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
+	allocate_cmd_args(new_cmd, input, j);
+	while (input[j])
+	{
+		j++;
+	}
+	return (new_cmd);
+}
+
+void	itemize(char *input, t_utils *utils)
+{
+	int		i;
+	t_cmds	*new_cmd;
+	t_cmds	*last_cmd;
 
 	i = 0;
-	count = 0;
+	last_cmd = utils->cmds;
 	while (input && input[i])
 	{
 		while(input[i] && is_space(input[i]))
 			i++;
 		if (input[i] && !is_space(input[i]))
-			count++;
-		if (input[i] && is_quote(input[i]))
-			skip_quotes(&i, input);
-		else if (input[i] && (input[i] == '|'
-			|| input[i] == '>' || input[i] == '<'))
-		while (input[i] && !is_space(input[i]))
-			i++;
+		{
+			new_cmd = add_item(utils, &i, input);
+			if (!utils->cmds)
+				utils->cmds = new_cmd;
+			new_cmd->next = 0;
+			new_cmd->prev = last_cmd;
+			last_cmd = new_cmd;
+		}
 	}
 }
 
-char	**split_input(char *input)
+t_utils	*split_input(char *input)
 {
-	int	num_chunks;
-	char	**arr;
+	t_utils	*utils;
 
-	num_chunks = count_chunks(input);
-	arr = (char **)ft_calloc(sizeof(char *) * (num_chunks + 1));
-	if (!arr)
-		return (0);
-	init_arr(arr, input);
-	arr[num_chunks] = 0;
-	return (arr);
+	utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
+	utils->args = input;
+	itimize(input, utils);
+	return (utils);
 }
