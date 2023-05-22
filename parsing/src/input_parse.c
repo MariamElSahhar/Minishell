@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:39:14 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/16 18:42:52 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:44:55 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	in_quotes(int *i, char *input)
+void	skip_quotes(int *i, char *input)
 {
 	int	quote;
 
@@ -36,7 +36,7 @@ static int	count_pipes(char *input)
 		while (input[i] && !is_quote(input[i]) && input[i] != '|')
 			i++;
 		while (input[i] && is_quote(input[i]))
-			in_quotes(&i, input);
+			skip_quotes(&i, input);
 		while (input[i] && !is_quote(input[i]) && input[i] != '|')
 			i++;
 		if (input[i] && input[i] == '|' && !is_quote(input[i]))
