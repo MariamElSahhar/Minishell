@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/16 18:50:56 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:01:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,27 @@ t_command	*get_commands(char **split)
 */
 t_utils	*parse_input(char *input)
 {
-	t_utils	*list;
+	t_split	*split;
+	// t_utils	*utils;
 
-	check_input(input);
-	list = split_input(input);
-	// int	i = -1;
-	// while (split && split[++i])
-	// 	printf("%s\n", split[i]);
+	if (!check_input(input))
+		return (0);
+	split = split_input(input);
+	if (!split)
+		return (0);
+	//3+ redirections in a row, pipe after redirection
+
+	// double_check_input(split);
+	// utils = tokenize_input(split);
+	// free_split(split, utils);
+	// return (split);
 	return (0);
 }
 
 void	main_loop(int sig)
 {
 	char	*input;
-	t_utils	*list;
+	t_utils	*utils;
 
 	sig = 0;
 	while (1)
@@ -60,10 +67,10 @@ void	main_loop(int sig)
 			return ;
 		}
 		add_history((const char *) input);
-		list = parse_input(input);
-		// if (!list)
+		utils = parse_input(input);
+		// if (!utils)
 		// 	return (0);
-		free(list);
+		// free_utils(utils);
 		free(input);
 	}
 }

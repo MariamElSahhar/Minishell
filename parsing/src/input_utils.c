@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:58:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/22 17:37:10 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:38:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,14 @@ int	is_quote(char c)
 	return (0);
 }
 
-//checks if this string has open/invalid quotes
-int	open_quotes(char *input)
+//checks if character is a marker symbol
+int	is_symbol(char c)
 {
-	int	open;
-	int	i;
-	int	quote;
-
-	open = 0;
-	i = 0;
-	while (input && input[i])
-	{
-		while (input[i] && !is_quote(input[i]))
-			i++;
-		if (is_quote(input[i]))
-		{
-			open = 1;
-			quote = input[i];
-			i++;
-		}
-		while (input[i] && input[i] != quote)
-			i++;
-		if (input[i] && input[i] == quote)
-		{
-			open = 0;
-			i++;
-		}
-	}
-	return (open);
+	if (is_space(c) || is_quote(c))
+		return (1);
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
 
 //if input[i] is a quote, we jump i to the input[i] character after the close of the quote

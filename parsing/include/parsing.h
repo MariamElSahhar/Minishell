@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/22 18:27:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:07:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdbool.h>
+# include "split_input.h"
+
+
+typedef struct s_redir
+{
+	int		type;
+	char	*path;
+	int		fd;
+	struct s_redir	*next;
+	struct s_redir	*prev;
+} t_redir;
+
+typedef struct s_cmds
+{
+	char			*command;
+	char			**args; //flags or path
+	int				num_output;
+	t_redir			*redirections;
+	struct s_cmds	*next;
+	struct s_cmds	*prev;
+}	t_cmds;
 
 typedef struct s_utils
 {
@@ -31,34 +52,6 @@ typedef struct s_utils
 	int				*pid;
 }	t_utils;
 
-//  < src/main.c wc -l < src/main.c < src/input_utils.c > out.txt
-// cmd.command = wc
-// cmd.args = {-lns, ...}
-// wc -l | cd parsing/ | ls
-typedef struct s_cmds
-{
-	/* char			**str;
-		//  < src/main.c wc -l < src/main.c < src/input_utils.c > out.txt
-		// command + flag/path */
-	char			*command;
-		// wc echo
-	char			**args; //flags or path
-		// -l -n
-	int				num_output;
-		// 1
-	t_redir			*redirections;
-	struct s_cmds	*next;
-	struct s_cmds	*prev;
-}	t_cmds;
-
-typedef struct s_redir
-{
-	int		type;
-	char	*path;
-	int		fd;
-	t_redir	*next;
-	t_redir	*prev;
-} t_redir;
 
 typedef enum e_redir
 {
@@ -66,9 +59,9 @@ typedef enum e_redir
 	WRITE,
 	HEREDOC,
 	INPUT,
-}	t_redir;
+	OPEN, //for output files that only get opened not written to
+}	t_redir_type;
 
-t_utils	*split_input(char *input);
 void	free_double_ptr(void **ptr);
 int		check_input(char *input);
 int		is_space(char c);
@@ -76,6 +69,7 @@ int		is_quote(char c);
 int		is_symbol(char c);
 int		open_quotes(char *input);
 void	skip_quotes(int *i, char *input);
+void	skip_space(char *input, int *j);
 
 
 #endif
