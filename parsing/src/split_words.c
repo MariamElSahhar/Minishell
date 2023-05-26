@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_split.c                                      :+:      :+:    :+:   */
+/*   split_words.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/25 21:49:14 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:27:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-
-void	skip_space(char *input, int *j)
-{
-	int	i;
-
-	i = *j;
-	while (input[i] && is_space(input[i]))
-		i++;
-	*j = i;
-}
 
 int	push_word(t_split *split, char *c, int type)
 {
@@ -102,6 +92,8 @@ int	add_flag(t_split *split, char *input, int *i)
 	(*i)++;
 	while (input[(*i)] && !is_symbol(input[(*i)]))
 		(*i)++;
+	if (is_quote(input[(*i)]))
+		skip_quotes(i, input);
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
@@ -141,7 +133,7 @@ int	add_str(t_split *split, char *input, int *i)
 	return (1);
 }
 
-int	parse_word(char *input, int *i, t_split *split)
+int	define_word(char *input, int *i, t_split *split)
 {
 	int	success;
 	if (input[(*i)] == '|')
@@ -196,13 +188,12 @@ t_split	*split_input(char *input)
 		skip_space(input, &i);
 		if (input[i])
 		{
-			if (!parse_word(input, &i, split))
+			if (!define_word(input, &i, split))
 			{
 				free_split(split);
 				return (0);
 			}
 		}
 	}
-	free_split(split);
 	return (split);
 }

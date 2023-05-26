@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/25 22:01:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:29:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,15 @@ t_utils	*parse_input(char *input)
 	if (!split)
 		return (0);
 	//3+ redirections in a row, pipe after redirection
+	//empty quotes are invalid unless in path name (after redirection)
+	if(!check_split(split))
+	{
+		printf("error\n");
+		free_split(split);
+		return (0);
+	}
 
-	// double_check_input(split);
 	// utils = tokenize_input(split);
-	// free_split(split, utils);
 	// return (split);
 	return (0);
 }

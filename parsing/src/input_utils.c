@@ -6,26 +6,11 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:58:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/25 21:38:12 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:58:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-
-//frees double pointer
-void	free_double_ptr(void **ptr)
-{
-	int	i;
-
-	i = 0;
-	while (ptr && ptr[i])
-	{
-		free(ptr[i]);
-		i++;
-	}
-	if (ptr)
-		free(ptr);
-}
 
 //checks if character is a space
 int	is_space(char c)
@@ -66,4 +51,15 @@ void	skip_quotes(int *i, char *input)
 		(*i) = (*i) + 1;
 	if (input[*i] && input[*i] == quote)
 		(*i) = (*i) + 1;
+}
+
+//if input[i] is a space, we jump i to the input[i] character that is not a space or 0 if end of array
+void	skip_space(char *input, int *j)
+{
+	int	i;
+
+	i = *j;
+	while (input[i] && is_space(input[i]))
+		i++;
+	*j = i;
 }

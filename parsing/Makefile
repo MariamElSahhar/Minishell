@@ -6,7 +6,7 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 18:01:35 by melsahha          #+#    #+#              #
-#    Updated: 2023/05/25 21:03:55 by melsahha         ###   ########.fr        #
+#    Updated: 2023/05/26 18:09:13 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT_DIR = ../libft/
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj
-SRC_FILES = main.c input_split.c input_check.c input_utils.c
+SRC_FILES = main.c check_input.c input_utils.c input_utils2.c split_words.c check_split.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
