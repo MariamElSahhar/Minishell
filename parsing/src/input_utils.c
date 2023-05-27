@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:58:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/26 17:58:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:23:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	is_quote(char c)
 //checks if character is a marker symbol
 int	is_symbol(char c)
 {
-	if (is_space(c) || is_quote(c))
-		return (1);
 	if (c == '|' || c == '<' || c == '>')
 		return (1);
 	return (0);

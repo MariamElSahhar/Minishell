@@ -6,33 +6,12 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/26 19:29:11 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:10:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-/* int	count_pipes(char *input)
-{
-	int	i;
-	int	pipes;
-
-	i = 0;
-	pipes = 0;
-	while (input[i])
-	{
-		if (input[i] == '|')
-			pipes ++;
-		i++;
-	}
-	return (pipes);
-}
-
-t_command	*get_commands(char **split)
-{
-
-}
-*/
 t_utils	*parse_input(char *input)
 {
 	t_split	*split;
@@ -43,14 +22,7 @@ t_utils	*parse_input(char *input)
 	split = split_input(input);
 	if (!split)
 		return (0);
-	//3+ redirections in a row, pipe after redirection
-	//empty quotes are invalid unless in path name (after redirection)
-	if(!check_split(split))
-	{
-		printf("error\n");
-		free_split(split);
-		return (0);
-	}
+	print_split(split);
 
 	// utils = tokenize_input(split);
 	// return (split);

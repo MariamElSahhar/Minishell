@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_check.c                                      :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/25 22:05:16 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:34:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-
-static int	invalid_pipe(char *input)
-{
-	if (!ft_strchr(input, '|'))
-		return (0);
-	if (!ft_strncmp(input, ft_strchr(input, '|'), ft_strlen(input))
-		|| ft_strlen(ft_strrchr(input, '|')) == 1)
-		return (1);
-	return (0);
-}
 
 static int	invalid_char(char *input, char c)
 {
@@ -41,21 +31,8 @@ static int	invalid_char(char *input, char c)
 	return (0);
 }
 
-//checks if redirection is at end of input
-static int	invalid_redir(char *input, char c)
-{
-	if (!ft_strchr(input, c))
-		return (0);
-	if (ft_strlen(ft_strrchr(input, c)) == 1)
-	{
-		printf("last char - invalid redirection");
-		return (1);
-	}
-	return (0);
-}
-
 //checks if this string has open/invalid quotes
-int	open_quotes(char *input)
+static int	open_quotes(char *input)
 {
 	int	open;
 	int	i;
@@ -97,12 +74,6 @@ int	check_input(char *input)
 		printf("invalid character\n");
 		return (0);
 	}
-	if (invalid_redir(input, '<') || invalid_redir(input, '>'))
-		return (0);
-	if (invalid_pipe(input))
-	{
-		printf("invalid pipe\n");
-		return (0);
-	}
 	return (1);
 }
+

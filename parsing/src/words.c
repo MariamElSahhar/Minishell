@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_words.c                                      :+:      :+:    :+:   */
+/*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/26 19:27:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:22:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-int	push_word(t_split *split, char *c, int type)
-{
-	t_word	*word;
-
-	word = (t_word *)ft_calloc(1, sizeof(t_word));
-	if (!word)
-		return (0);
-	word->type = type;
-	word->cont = c;
-	word->index = split->cmds;
-	word->next = 0;
-	word->prev = split->last;
-	if (split->cmds == 0)
-		split->first = word;
-	else
-		split->last->next = word;
-	split->last = word;
-	split->cmds++;
-	return (1);
-}
-
-int	add_redir(t_split *split, char *input, int *i)
+static int	add_redir(t_split *split, char *input, int *i)
 {
 	int	success;
 
@@ -56,7 +35,7 @@ int	add_redir(t_split *split, char *input, int *i)
 	return (success);
 }
 
-int	add_quote(t_split *split, char *input, int *i)
+static int	add_quote(t_split *split, char *input, int *i)
 {
 	int		start;
 	int		j;
@@ -64,7 +43,9 @@ int	add_quote(t_split *split, char *input, int *i)
 	char	*str;
 
 	start = (*i);
-	skip_quotes(i, input);
+	while (input[(*i)] && !is_space(input[(*i)])
+		&& input[(*i)] != '|' && input[(*i)] != '<' && input[(*i)] != '>')
+		(*i)++;
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
@@ -73,7 +54,6 @@ int	add_quote(t_split *split, char *input, int *i)
 	while ((j + start) < (*i))
 	{
 		str[j] = input[start + j];
-
 		j++;
 	}
 	if (!push_word(split, str, QUOTE))
@@ -81,7 +61,7 @@ int	add_quote(t_split *split, char *input, int *i)
 	return (1);
 }
 
-int	add_flag(t_split *split, char *input, int *i)
+static int	add_flag(t_split *split, char *input, int *i)
 {
 	int		start;
 	int		len;
@@ -90,9 +70,9 @@ int	add_flag(t_split *split, char *input, int *i)
 
 	start = (*i);
 	(*i)++;
-	while (input[(*i)] && !is_symbol(input[(*i)]))
+	while (input[(*i)] && !(is_symbol(input[(*i)]) || is_quote(input[(*i)])))
 		(*i)++;
-	if (is_quote(input[(*i)]))
+	while (input[(*i)] && is_quote(input[(*i)]))
 		skip_quotes(i, input);
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
@@ -104,19 +84,20 @@ int	add_flag(t_split *split, char *input, int *i)
 		str[k] = input[start + k];
 		k++;
 	}
+	printf("%s\n", str);
 	if(!push_word(split, str, FLAG))
 		return (0);
 	return (1);
 }
 
-int	add_str(t_split *split, char *input, int *i)
+static int	add_str(t_split *split, char *input, int *i)
 {	int		start;
 	int		len;
 	int		k;
 	char	*str;
 
 	start = (*i);
-	while (input[(*i)] && !is_symbol(input[(*i)]))
+	while (input[(*i)] && !(is_symbol(input[(*i)]) || is_space(input[(*i)]) || is_quote(input[(*i)])))
 		(*i)++;
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
@@ -136,6 +117,8 @@ int	add_str(t_split *split, char *input, int *i)
 int	define_word(char *input, int *i, t_split *split)
 {
 	int	success;
+
+	success = 0;
 	if (input[(*i)] == '|')
 	{
 		success = push_word(split, "|", PIPE);
@@ -149,51 +132,5 @@ int	define_word(char *input, int *i, t_split *split)
 		success = add_flag(split, input, i);
 	else
 		success = add_str(split, input, i);
-	if (!success)
-		return (0);
-	printf("%i: %s\n", split->cmds, split->last->cont);
-	return (1);
-}
-
-void	free_split(t_split *split)
-{
-	t_word	*del;
-	t_word	*ptr;
-
-	ptr = split->first;
-	while (ptr)
-	{
-		del = ptr;
-		ptr = ptr->next;
-		// free(del->cont);
-		free(del);
-	}
-	free(split);
-}
-
-t_split	*split_input(char *input)
-{
-	t_split	*split;
-	int		i;
-
-	split = (t_split *)ft_calloc(1, sizeof(t_split));
-	split->cmds = 0;
-	split->first = 0;
-	split->last = 0;
-	if (!split || !input)
-		return (0);
-	i = 0;
-	while (input[i])
-	{
-		skip_space(input, &i);
-		if (input[i])
-		{
-			if (!define_word(input, &i, split))
-			{
-				free_split(split);
-				return (0);
-			}
-		}
-	}
-	return (split);
+	return (success);
 }
