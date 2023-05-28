@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 14:02:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:39:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,15 @@ t_split	*split_input(char *input)
 		return (0);
 	if (!split_words(input, split))
 		return (0);
-	if(!check_split(split) || !expand_split(split))
+	if(!check_split(split))
 	{
-		printf("error\n");
+		printf("check split error\n");
+		free_split(split);
+		return (0);
+	}
+	if(!expand_split(split) || !expand_env(split))
+	{
+		printf("expand split error\n");
 		free_split(split);
 		return (0);
 	}

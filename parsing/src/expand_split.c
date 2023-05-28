@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 18:34:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:38:09 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,27 @@ int	comb_quote_len(char *str)
 	int		i;
 	int		len;
 	char	quote;
-	int		open;
 
 	i = 0;
 	len = 0;
-	if (str[0] && str[i] == '-')
+	while (str[i])
 	{
-		i++;
-		len++;
-	}
-	open = 0;
-	while (str[i] && is_quote(str[i]))
-	{
-		if (is_quote(str[i]))
+		if (i == 0 && str[0] == '-')
 		{
-			quote = str[i];
-			open = 1;
 			i++;
-		}
-		while (str[i] && (!open || (open && str[i] != quote)))
-		{
 			len++;
-			i++;
 		}
-		if (str[i] == quote)
+		else if (is_quote(str[i]))
+		{
+			quote = str[i++];
+			while (str[i] && str[i++] != quote)
+				len++;
+		}
+		while (str[i] && !is_quote(str[i]))
+		{
 			i++;
+			len++;
+		}
 	}
 	return (len);
 }
@@ -52,36 +48,25 @@ char	*comb_quote_str(t_word *word, int len)
 	int		i;
 	int		j;
 	char	quote;
-	int		open;
 
 	comb = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!comb)
 		return (0);
 	i = 0;
 	j = 0;
-	if (word->cont[0] && word->cont[i] == '-')
-	{
-		comb[j] = '-';
-		i++;
-		j++;
-	}
-	open = 0;
+	if (word->cont[j] && word->cont[i] == '-')
+		comb[j++] = word->cont[i++];
 	while (word->cont[i])
 	{
 		if (is_quote(word->cont[i]))
 		{
-			quote = word->cont[i];
-			open = 1;
+			quote = word->cont[i++];
+			while (word->cont[i] && word->cont[i] != quote)
+				comb[j++] = word->cont[i++];
 			i++;
 		}
-		while (word->cont[i] && (!open || (open && word->cont[i] != quote)))
-		{
-			comb[j] = word->cont[i];
-			i++;
-			j++;
-		}
-		if (word->cont[i] == quote)
-			i++;
+		while (word->cont[i] && !is_quote(word->cont[i]))
+			comb[j++] = word->cont[i++];
 	}
 	return (comb);
 }

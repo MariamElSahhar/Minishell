@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:03:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 16:07:52 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/28 11:37:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ static int	empty_flag(t_word *flag)
 	str = flag->cont;
 	if (ft_strlen(str) == 1)
 		return (1);
-	if (str[1] && (str[1] == '|' || str[1] == '>' || str[1] == '<'))
-		return (1);
 	i = 1;
 	while (str[i])
 	{
 		if (is_quote(str[i]))
 		{
-			quote = str[i];
-			i++;
-			if (str[i] && (is_space(str[i]) || str[i] == quote))
+			quote = str[i++];
+			skip_space(str, &i);
+			if (str[i] && str[i] == quote)
 				return (1);
+			while (str[i] && str[i] != quote)
+				i++;
+			i++;
 		}
 		while (str[i] && !is_quote(str[i]))
 			i++;
@@ -53,9 +54,8 @@ int	check_split(t_split *split)
 		if (ptr->type == REDIR &&
 			(ptr->next && (ptr->next->type == REDIR || ptr->next->type == PIPE)))
 				return (0);
-		if(ptr->type == FLAG &&
-			(empty_flag(ptr) ||  (ptr->next && (ptr->next->type == REDIR || ptr->next->type == PIPE))))
-				return (0);
+		if (ptr->type == FLAG && !(ptr->prev && ptr->prev->type == REDIR) && empty_flag(ptr))
+			return (0);
 		if (ptr->type == PIPE &&
 			(ptr->next && (ptr->next->type == PIPE || ptr->next->type == FLAG)))
 				return (0);
