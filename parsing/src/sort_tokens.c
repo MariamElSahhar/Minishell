@@ -6,13 +6,12 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 20:57:43 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 20:58:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-//BIG ERROR
 void	push_redir(t_cmds *cmd, t_word *ptr)
 {
 	t_redir	*r;
@@ -31,16 +30,16 @@ void	push_redir(t_cmds *cmd, t_word *ptr)
 	if (ptr->type == PATH)
 		redir->path = ptr->cont;
 	r = cmd->redirections;
-	// if (!r)
-	// 	cmd->redirections = redir;
-	// else
-	// {
-	// 	while (r->next)
-	// 		r = r->next;
-	// 	r->next = redir;
-	// }
-	// redir->prev = r;
-	// cmd->num_output++;
+	if (!r)
+		cmd->redirections = redir;
+	else
+	{
+		while (r->next)
+			r = r->next;
+		r->next = redir;
+	}
+	redir->prev = r;
+	cmd->num_output++;
 }
 
 char	**init_args(t_split *split)
