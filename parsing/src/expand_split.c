@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/28 11:38:09 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:38:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ int	expand_split(t_split *split)
 				ptr->type = CMD;
 			else if (ptr->prev && ptr->prev->type == REDIR)
 				ptr->type = PATH;
-			else
+			else if (ptr->cont[0] == '-')
 				ptr->type = FLAG;
+			else
+				ptr->type = CMD;
 		}
 		else if (ptr->type == FLAG)
 			expand_quote(ptr);

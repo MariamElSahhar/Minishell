@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:35:04 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/05 11:44:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/05/27 12:58:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
+void	free_double_ptr(void **ptr);
 
 #endif

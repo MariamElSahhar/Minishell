@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 16:42:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:32:24 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,22 @@ void	print_split(t_split *split)
 	{
 		printf("%i. ", ptr->index);
 		printf("%s", ptr->cont);
-		printf(" - %i\n", ptr->type);
+		if (ptr->type == CMD)
+			printf(" - CMD\n");
+		else if (ptr->type == FLAG)
+			printf(" - FLAG\n");
+		else if (ptr->type == REDIR)
+			printf(" - REDIR\n");
+		else if (ptr->type == PATH)
+			printf(" - PATH\n");
+		else if (ptr->type == PIPE)
+			printf(" - PIPE\n");
+		else if (ptr->type == QUOTE)
+			printf(" - QUOTE\n");
+		else if (ptr->type == ARG)
+			printf(" - ARG\n");
+		else if (ptr->type == STR)
+			printf(" - STR\n");
 		ptr = ptr->next;
 	}
 }

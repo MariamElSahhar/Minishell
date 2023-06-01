@@ -6,16 +6,31 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 13:10:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:17:43 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+int_fast32_t	init_utils(t_utils *utils, char *input)
+{
+	utils->input = input;
+	utils->envp = environ;
+	utils->pwd = (char *)ft_calloc(4069, sizeof(char));
+	utils->old_pwd = (char *)ft_calloc(4069, sizeof(char));
+	if (!getcwd(utils->pwd, 4096) || !getcwd(utils->pwd, 4096))
+		return (0);
+	utils->pid = (int *)ft_calloc(2, sizeof(int));
+	if (!utils->pid)
+		return (0);
+	utils->pid[0] = getpid();
+	return (1);
+}
+
 t_utils	*parse_input(char *input)
 {
 	t_split	*split;
-	// t_utils	*utils;
+	t_utils	*utils;
 
 	if (!check_input(input))
 		return (0);
@@ -23,9 +38,9 @@ t_utils	*parse_input(char *input)
 	if (!split)
 		return (0);
 	print_split(split);
-
-	// utils = tokenize_input(split);
-	// return (split);
+	utils = sort_tokens(split);
+	if (!utils || !init_utils(utils, input))
+		return (0);
 	return (0);
 }
 

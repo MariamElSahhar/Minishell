@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/28 12:38:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:19:00 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	found_env(char *str, int *i, t_word *word)
 	while (j < len)
 		var[j++] = str[(*i)++];
 	exp = getenv(var);
+	if (!exp)
+		return (0);
 	word->cont = replace_env(str, i, exp, len);
 	free(var);
 	if (!word->cont)
@@ -70,7 +72,7 @@ int	expand_env_str(t_word *word)
 		return (1);
 	i = 0;
 	if (word->type == FLAG)
-		i++;
+		i = 1;
 	while (word->cont[i])
 	{
 		if (word->cont[i] == '$')
@@ -84,6 +86,30 @@ int	expand_env_str(t_word *word)
 	return (1);
 }
 
+int	expand_var_quote(t_word *word)
+{
+	int	i;
+
+	if (!ft_strchr(word->cont, '$'))
+		return (1);
+	i = 0;
+	while (word->cont[i])
+	{
+		if (word->cont[i] == '\"')
+			i++;
+		else if (word->cont[i] == '\'')
+			skip_quotes(&i, word->cont);
+		else if (word->cont[i] == '$')
+		{
+			if (!found_env(word->cont, &i, word))
+				return (0);
+		}
+		else
+			i++;
+	}
+	return (word->index + 1);
+}
+
 int	expand_env(t_split *split)
 {
 	t_word	*ptr;
@@ -94,7 +120,7 @@ int	expand_env(t_split *split)
 	{
 		if (ptr->type == STR || ptr->type == CMD || ptr->type == FLAG || ptr->type == PATH)
 			success = expand_env_str(ptr);
-		else if (ptr->type == QUOTE && ptr->cont[0] == '\"')
+		else if (ptr->type == QUOTE)
 			success = expand_var_quote(ptr);
 		if (!success)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/28 11:32:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:41:00 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	add_flag(t_split *split, char *input, int *i)
 	(*i)++;
 	while (input[(*i)] && !is_space(input[(*i)] )&& !is_symbol(input[(*i)]))
 	{
-		while (input[(*i)] && !(is_symbol(input[(*i)]) || is_quote(input[(*i)])))
+		while (input[(*i)] && !(is_space(input[(*i)]) || is_symbol(input[(*i)]) || is_quote(input[(*i)])))
 			(*i)++;
 		while (input[(*i)] && is_quote(input[(*i)]))
 			skip_quotes(i, input);

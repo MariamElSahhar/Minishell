@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/28 11:39:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:58:35 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,32 @@ t_split	*split_input(char *input)
 		free_split(split);
 		return (0);
 	}
-	if(!expand_split(split) || !expand_env(split))
+	if (!expand_env(split) || !expand_split(split))
 	{
-		printf("expand split error\n");
-		free_split(split);
+		printf("expand error\n");
 		return (0);
 	}
+	sort_split(split);
 	return (split);
 }
 
+void	sort_split(t_split *split)
+{
+	t_word	*ptr;
+
+	ptr = split->first;
+	if (ptr && ptr->type == STR)
+		ptr->type = CMD;
+	while (ptr)
+	{
+		if (ptr->prev && ptr->prev->type == PIPE)
+			ptr->type = CMD;
+		else if (ptr->prev && ptr->prev->type == REDIR)
+			ptr->type = PATH;
+		else if (ptr->prev && ptr->type == STR && ptr->prev->type == PATH)
+			ptr->type = CMD;
+		else if (ptr->type == STR)
+			ptr->type = ARG;
+		ptr = ptr->next;
+	}
+}
