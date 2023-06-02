@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   words.c                                            :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 17:41:00 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:27:14 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,14 @@ static int	add_flag(t_split *split, char *input, int *i)
 }
 
 static int	add_str(t_split *split, char *input, int *i)
-{	int		start;
+{
+	int		start;
 	int		len;
 	int		k;
 	char	*str;
 
 	start = (*i);
-	while (input[(*i)] && !(is_symbol(input[(*i)]) || is_space(input[(*i)]) || is_quote(input[(*i)])))
+	while (input[(*i)] && !(is_symbol(input[(*i)]) || is_space(input[(*i)])))
 		(*i)++;
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
@@ -111,7 +112,11 @@ static int	add_str(t_split *split, char *input, int *i)
 		str[k] = input[start + k];
 		k++;
 	}
-	if(!push_word(split, str, STR))
+	if (ft_strchr(str, '\'') || ft_strchr(str, '\"'))
+		len = push_word(split, str, QUOTE);
+	else
+		len = push_word(split, str, STR);
+	if (!len)
 		return (0);
 	return (1);
 }

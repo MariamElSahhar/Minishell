@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 19:32:19 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:44:13 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_cmds
 {
 	char			*command;
 	char			**args;
-	int				num_output;
 	t_redir			*redirections;
 	struct s_cmds	*next;
 	struct s_cmds	*prev;
@@ -57,11 +56,12 @@ typedef struct s_redir
 
 typedef enum e_redir
 {
+	IGNORE,
+	OPEN, //for output files that only get opened not written to
 	APPEND,
 	WRITE,
-	HEREDOC,
 	INPUT,
-	OPEN, //for output files that only get opened not written to
+	HEREDOC,
 }	t_redir_type;
 
 void	free_double_ptr(void **ptr);
@@ -70,10 +70,9 @@ int		is_quote(char c);
 int		is_symbol(char c);
 void	skip_quotes(int *i, char *input);
 void	skip_space(char *input, int *j);
+void	push_cmd(t_utils *utils, t_cmds *cmd);
 
 int		check_input(char *input);
 t_utils	*sort_tokens(t_split *split);
-
-
 
 #endif

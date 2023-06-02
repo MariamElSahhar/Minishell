@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 18:17:43 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:49:05 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-int_fast32_t	init_utils(t_utils *utils, char *input)
+int	init_utils(t_utils *utils, char *input)
 {
 	utils->input = input;
 	utils->envp = environ;
@@ -37,11 +37,34 @@ t_utils	*parse_input(char *input)
 	split = split_input(input);
 	if (!split)
 		return (0);
-	print_split(split);
 	utils = sort_tokens(split);
 	if (!utils || !init_utils(utils, input))
 		return (0);
-	return (0);
+	// print_split(split);
+	return (utils);
+}
+
+void	print_utils(t_utils *utils)
+{
+	t_cmds	*c_ptr;
+	int		i;
+	t_redir	*r_ptr;
+
+	c_ptr = utils->cmds;
+	while (c_ptr)
+	{
+		printf("%s\n", c_ptr->command);
+		i = 0;
+		while (c_ptr->args[i])
+			printf("arg: %s\n", c_ptr->args[i++]);
+		r_ptr = c_ptr->redirections;
+		while (r_ptr)
+		{
+			printf("%i - %s\n", r_ptr->type, r_ptr->path);
+			r_ptr = r_ptr->next;
+		}
+		c_ptr = c_ptr->next;
+	}
 }
 
 void	main_loop(int sig)
@@ -60,6 +83,9 @@ void	main_loop(int sig)
 		}
 		add_history((const char *) input);
 		utils = parse_input(input);
+		if (!utils)
+			printf("parse error\n");
+		print_utils(utils);
 		// if (!utils)
 		// 	return (0);
 		// free_utils(utils);
