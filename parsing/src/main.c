@@ -6,16 +6,16 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 17:49:05 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:08:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// init the utils struct with default info
 int	init_utils(t_utils *utils, char *input)
 {
 	utils->input = input;
-	utils->envp = environ;
 	utils->pwd = (char *)ft_calloc(4069, sizeof(char));
 	utils->old_pwd = (char *)ft_calloc(4069, sizeof(char));
 	if (!getcwd(utils->pwd, 4096) || !getcwd(utils->pwd, 4096))
@@ -27,6 +27,7 @@ int	init_utils(t_utils *utils, char *input)
 	return (1);
 }
 
+// checks input and parses to a util struct
 t_utils	*parse_input(char *input)
 {
 	t_split	*split;
@@ -40,10 +41,10 @@ t_utils	*parse_input(char *input)
 	utils = sort_tokens(split);
 	if (!utils || !init_utils(utils, input))
 		return (0);
-	// print_split(split);
 	return (utils);
 }
 
+// print utils for visualization
 void	print_utils(t_utils *utils)
 {
 	t_cmds	*c_ptr;
@@ -53,7 +54,7 @@ void	print_utils(t_utils *utils)
 	c_ptr = utils->cmds;
 	while (c_ptr)
 	{
-		printf("%s\n", c_ptr->command);
+		printf("cmd: %s\n", c_ptr->command);
 		i = 0;
 		while (c_ptr->args[i])
 			printf("arg: %s\n", c_ptr->args[i++]);
@@ -67,6 +68,7 @@ void	print_utils(t_utils *utils)
 	}
 }
 
+// reads line and updates history
 void	main_loop(int sig)
 {
 	char	*input;
@@ -76,27 +78,18 @@ void	main_loop(int sig)
 	while (1)
 	{
 		input = readline("> ");
-		if (!input || !ft_strlen(input))
-		{
-			printf("exit");
-			return ;
-		}
 		add_history((const char *) input);
 		utils = parse_input(input);
 		if (!utils)
 			printf("parse error\n");
-		print_utils(utils);
-		// if (!utils)
-		// 	return (0);
-		// free_utils(utils);
+		else
+			print_utils(utils);
 		free(input);
 	}
 }
 
 int	main(void)
 {
-	// signal(SIGINT, &main_loop);
-
 	main_loop(0);
 	return (0);
 }

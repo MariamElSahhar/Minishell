@@ -6,19 +6,17 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 16:29:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:59:07 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-int	comb_quote_len(char *str)
+int	comb_quote_len(char *str, int i)
 {
-	int		i;
 	int		len;
 	char	quote;
 
-	i = 0;
 	len = 0;
 	while (str[i])
 	{
@@ -80,7 +78,7 @@ int	expand_quote(t_word *word)
 		return (0);
 	if (ft_strlen(word->cont) == 2)
 		return (0);
-	len = comb_quote_len(word->cont);
+	len = comb_quote_len(word->cont, 0);
 	comb = comb_quote_str(word, len);
 	if (!comb)
 		return (0);
@@ -98,7 +96,7 @@ int	expand_split(t_split *split)
 	{
 		if (ptr->type == QUOTE && !(ptr->prev && ptr->prev->type == REDIR))
 		{
-			expand_quote(ptr); //handle errors
+			expand_quote(ptr);
 			if (ptr == split->first || (ptr->prev && ptr->prev->type == PIPE))
 				ptr->type = CMD;
 			else if (ptr->prev && ptr->prev->type == REDIR)
@@ -106,7 +104,7 @@ int	expand_split(t_split *split)
 			else if (ptr->cont[0] == '-')
 				ptr->type = FLAG;
 			else
-				ptr->type = CMD;
+				ptr->type = STR;
 		}
 		else
 			expand_quote(ptr);

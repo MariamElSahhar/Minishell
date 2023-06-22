@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:58:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 15:23:47 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:57:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	is_symbol(char c)
 	return (0);
 }
 
-//if input[i] is a quote, we jump i to the input[i] character after the close of the quote
+//if input[i] is a quote, we jump i to the input[i] character
+// after the close of the quote
 void	skip_quotes(int *i, char *input)
 {
 	int	quote;
@@ -51,7 +52,8 @@ void	skip_quotes(int *i, char *input)
 		(*i) = (*i) + 1;
 }
 
-//if input[i] is a space, we jump i to the input[i] character that is not a space or 0 if end of array
+//if input[i] is a space, we jump i to the input[i] character
+// that is not a space or 0 if end of array
 void	skip_space(char *input, int *j)
 {
 	int	i;

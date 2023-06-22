@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 17:44:13 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:56:24 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 # include <stdbool.h>
 # include "split.h"
 
-extern char **environ;
-typedef struct s_cmds t_cmds;
-typedef struct s_redir t_redir;
+typedef struct s_cmds	t_cmds;
+typedef struct s_redir	t_redir;
 
 typedef struct s_utils
 {
@@ -47,17 +46,17 @@ typedef struct s_cmds
 
 typedef struct s_redir
 {
-	int		type;
-	char	*path; // or delimiter
-	int		fd;
+	int				type;
+	char			*path;
+	int				fd;
 	struct s_redir	*next;
 	struct s_redir	*prev;
-} t_redir;
+}	t_redir;
 
 typedef enum e_redir
 {
 	IGNORE,
-	OPEN, //for output files that only get opened not written to
+	OPEN,
 	APPEND,
 	WRITE,
 	INPUT,
@@ -74,5 +73,9 @@ void	push_cmd(t_utils *utils, t_cmds *cmd);
 
 int		check_input(char *input);
 t_utils	*sort_tokens(t_split *split);
+void	end_of_flag(char *input, int *i);
+void	last_in_redir(t_cmds *cmd);
+void	last_out_redir(t_cmds *cmd);
+void	sort_redir(t_word *ptr, t_redir *redir);
 
 #endif

@@ -6,16 +6,16 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:14:20 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 17:57:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:00:59 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPLIT_INPUT_H
-# define SPLIT_INPUT_H
+#ifndef SPLIT_H
+# define SPLIT_H
 
 # include "parsing.h"
 
-typedef struct s_word t_word;
+typedef struct s_word	t_word;
 
 typedef struct s_split
 {
@@ -43,7 +43,7 @@ typedef enum e_word_type
 	QUOTE,
 	ARG,
 	STR,
-} t_word_type;
+}	t_word_type;
 
 t_split	*split_input(char *input);
 int		check_split(t_split *split);

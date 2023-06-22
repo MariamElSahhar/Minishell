@@ -6,29 +6,23 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 17:51:45 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:56:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	push_redir(t_cmds *cmd, t_word *ptr)
+t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 {
 	t_redir	*r;
 	t_redir	*redir;
 
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
-	if (ptr->cont[0] == '<' && !ptr->cont[1])
-		redir->type = INPUT;
-	else if (ptr->cont[0] == '<' && !ptr->cont[1])
-		redir->type = WRITE;
-	else if (ptr->cont[0] == '<' && ptr->cont[1] == '<')
-		redir->type = HEREDOC;
-	else if (ptr->cont[0] == '>' && ptr->cont[1] == '>')
-		redir->type = APPEND;
-	ptr = ptr->next;
-	if (ptr->type == PATH)
-		redir->path = ptr->cont;
+	if (ptr->next->type == PATH)
+		redir->path = ptr->next->cont;
+	else
+		return (0);
+	sort_redir(ptr, redir);
 	r = cmd->redirections;
 	if (!r)
 		cmd->redirections = redir;
@@ -39,6 +33,7 @@ void	push_redir(t_cmds *cmd, t_word *ptr)
 		r->next = redir;
 	}
 	redir->prev = r;
+	return (cmd);
 }
 
 char	**init_args(t_word *ptr)
@@ -65,54 +60,6 @@ char	**init_args(t_word *ptr)
 		hold = hold->next;
 	}
 	return (args);
-}
-
-void	last_in_redir(t_cmds *cmd)
-{
-	t_redir	*ptr;
-	t_redir	*last;
-	int		type;
-
-	if (!cmd->redirections)
-		return ;
-	type = -1;
-	ptr = cmd->redirections;
-	while (ptr)
-	{
-		if (ptr->type == INPUT || ptr->type == HEREDOC)
-		{
-			type = ptr->type;
-			ptr->type = IGNORE;
-			last = ptr;
-		}
-		ptr = ptr->next;
-	}
-	if (type != -1)
-		last->type = type;
-}
-
-void	last_out_redir(t_cmds *cmd)
-{
-	t_redir	*ptr;
-	t_redir	*last;
-	int		type;
-
-	if (!cmd->redirections)
-		return ;
-	type = -1;
-	ptr = cmd->redirections;
-	while (ptr)
-	{
-		if (ptr->type == WRITE || ptr->type == APPEND)
-		{
-			type = ptr->type;
-			ptr->type = OPEN;
-			last = ptr;
-		}
-		ptr = ptr->next;
-	}
-	if (type != -1)
-		last->type = type;
 }
 
 void	push_cmd(t_utils *utils, t_cmds *cmd)
@@ -150,9 +97,11 @@ t_utils	*sort_tokens(t_split *split)
 			if (ptr->type == CMD)
 				new_cmd->command = ptr->cont;
 			else if (ptr->type == REDIR)
-				push_redir(new_cmd, ptr);
+				new_cmd = push_redir(new_cmd, ptr);
 			ptr = ptr->next;
 		}
+		if (!new_cmd)
+			return (0);
 		if (ptr && ptr->type == PIPE)
 			ptr = ptr->next;
 		push_cmd(utils, new_cmd);

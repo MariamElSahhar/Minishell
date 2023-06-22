@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 17:07:04 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:53:07 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	free_split(t_split *split)
 	{
 		del = ptr;
 		ptr = ptr->next;
-		// free(del->cont);
 		free(del);
 	}
 	free(split);
@@ -57,7 +56,7 @@ t_split	*split_input(char *input)
 		return (0);
 	if (!split_words(input, split))
 		return (0);
-	if(!check_split(split))
+	if (!check_split(split))
 	{
 		printf("check split error\n");
 		free_split(split);
@@ -81,7 +80,7 @@ void	sort_split(t_split *split)
 		ptr->type = CMD;
 	while (ptr)
 	{
-		if (ptr->prev && ptr->prev->type == PIPE)
+		if (ptr->prev && ptr->type == STR && ptr->prev->type == PIPE)
 			ptr->type = CMD;
 		else if (ptr->prev && ptr->prev->type == REDIR)
 			ptr->type = PATH;

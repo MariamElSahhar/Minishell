@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/02 16:27:14 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:52:05 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	add_quote(t_split *split, char *input, int *i)
 		str[j] = input[start + j];
 		j++;
 	}
-	printf("%s\n", str);
 	if (!push_word(split, str, QUOTE))
 		return (0);
 	return (1);
@@ -68,15 +67,9 @@ static int	add_flag(t_split *split, char *input, int *i)
 	int		k;
 	char	*str;
 
-	start = (*i);
+	start = (*i)++;
 	(*i)++;
-	while (input[(*i)] && !is_space(input[(*i)] )&& !is_symbol(input[(*i)]))
-	{
-		while (input[(*i)] && !(is_space(input[(*i)]) || is_symbol(input[(*i)]) || is_quote(input[(*i)])))
-			(*i)++;
-		while (input[(*i)] && is_quote(input[(*i)]))
-			skip_quotes(i, input);
-	}
+	end_of_flag(input, i);
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
@@ -87,7 +80,7 @@ static int	add_flag(t_split *split, char *input, int *i)
 		str[k] = input[start + k];
 		k++;
 	}
-	if(!push_word(split, str, FLAG))
+	if (!push_word(split, str, FLAG))
 		return (0);
 	return (1);
 }

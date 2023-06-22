@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 15:34:18 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:08:17 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// checks if char is present in string
 static int	invalid_char(char *input, char c)
 {
 	int		i;
@@ -61,6 +62,7 @@ static int	open_quotes(char *input)
 	return (open);
 }
 
+// checks for basic input issues
 int	check_input(char *input)
 {
 	if (open_quotes(input))
@@ -70,10 +72,8 @@ int	check_input(char *input)
 	}
 	if (invalid_char(input, ';') || invalid_char(input, '\\'))
 	{
-
 		printf("invalid character\n");
 		return (0);
 	}
 	return (1);
 }
-

@@ -6,19 +6,21 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/01 17:19:00 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:09:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// replaces the environment var with its value
 char	*replace_env(char *str, int *i, char *exp, int len)
 {
 	char	*full;
 	int		j;
 	int		k;
 
-	full = (char *)ft_calloc((ft_strlen(str) - len) + ft_strlen(exp) + 2, sizeof(char));
+	full = (char *)ft_calloc((ft_strlen(str) - len)
+			+ ft_strlen(exp) + 2, sizeof(char));
 	if (!full)
 		return (0);
 	j = -1;
@@ -35,6 +37,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	return (full);
 }
 
+//
 int	found_env(char *str, int *i, t_word *word)
 {
 	int		len;
@@ -118,7 +121,8 @@ int	expand_env(t_split *split)
 	ptr = split->first;
 	while (ptr)
 	{
-		if (ptr->type == STR || ptr->type == CMD || ptr->type == FLAG || ptr->type == PATH)
+		if (ptr->type == STR || ptr->type == CMD
+			|| ptr->type == FLAG || ptr->type == PATH)
 			success = expand_env_str(ptr);
 		else if (ptr->type == QUOTE)
 			success = expand_var_quote(ptr);
