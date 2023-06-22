@@ -3,12 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/22 14:55:34 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:28:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef PARSING_H
+# define PARSING_H
+
+# include "libft.h"
+# include "ft_printf.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <stdbool.h>
+# include "split.h"
+
+# define CLEAR_SCREEN_SEQ "\033[2J\033[H"
+
+
+typedef struct s_cmds	t_cmds;
+typedef struct s_redir	t_redir;
 
 typedef struct s_utils
 {

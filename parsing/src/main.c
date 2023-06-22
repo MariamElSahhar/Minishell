@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/22 12:12:21 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:38:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	main_loop(void)
 	while (1)
 	{
 		utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
-		utils->input = readline("> ");
+		utils->input = ft_strdup("hello");
 		if (!utils->input)
 			return ;
 		add_history((const char *) utils->input);
