@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/10 17:56:23 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:20:14 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@
 # define MAGENTA_BOLD 	"\033[1;35m"
 # define CYAN_BOLD    	"\033[1;36m"
 # define WHITE_BOLD   	"\033[1;37m"
+# define WELCOME_MSG "hello"
+# define HEREDOC_MSG	"\033[1;34m> \033[0m"
+
+# define READLINE_MSG	"\033[1;36msimon\033[34m$ \033[0m"
 
 #endif

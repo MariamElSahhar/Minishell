@@ -1,12 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/14 16:01:54 by szerisen         ###   ########.fr       */
+/*   Created: 2023/05/29 19:40:29 by szerisen          #+#    #+#             */
+/*   Updated: 2023/05/29 19:41:03 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ERROR_H
+# define ERROR_H
+# include "minishell.h"
+
+void	parser_error(int error, t_utils *utils, t_lexer *lexer_list);
+int		parser_double_token_error(t_utils *utils, t_lexer *lexer_list,
+			t_tokens token);
+void	lexer_error(int error, t_utils *utils);
+int		cmd_not_found(char *str);
+int		export_error(char *c);
+
+//ft_error
+int		ft_error(int error, t_utils *utils);
+
+#endif

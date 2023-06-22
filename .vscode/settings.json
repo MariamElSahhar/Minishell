@@ -4,6 +4,7 @@
 		"builtins.h": "c",
 		"parsing.h": "c",
 		"sstream": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"locale": "c"
 	}
 }

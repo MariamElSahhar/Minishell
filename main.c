@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/14 19:50:20 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:46:07 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,21 @@ char	**ft_arrdup(char **arr)
 	return (rtn);
 }
 
+#include "minishell.h"
+
 int	main(int argc, char **argv, char **envp)
 {
-	t_utils		utils;
-    if (argc != 1 || argv[1])
+	t_utils	utils;
+
+	if (argc != 1 || argv[1])
 	{
-		printf("%s\n", "This program does not accept arguments");
+		printf("This program does not accept arguments\n");
 		exit(0);
 	}
-    utils.envp = ft_arrdup(envp);
+	utils.envp = ft_arrdup(envp);
+	find_pwd(&utils);x
+	implement_utils(&utils);
+	printf("\n%s\n\n", WELCOME_MSG);
+	minishell_loop(&utils);
+	return (0);
 }
