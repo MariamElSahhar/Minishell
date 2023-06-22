@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:56:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:10:32 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// adds redirection to list
 t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 {
 	t_redir	*r;
@@ -36,6 +37,7 @@ t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 	return (cmd);
 }
 
+// ints the argument list
 char	**init_args(t_word *ptr)
 {
 	t_word	*hold;
@@ -62,6 +64,7 @@ char	**init_args(t_word *ptr)
 	return (args);
 }
 
+// pushed command to list
 void	push_cmd(t_utils *utils, t_cmds *cmd)
 {
 	t_cmds	*ptr;
@@ -80,6 +83,7 @@ void	push_cmd(t_utils *utils, t_cmds *cmd)
 	}
 }
 
+// sorts tokens to list of commands
 t_utils	*sort_tokens(t_split *split)
 {
 	t_utils	*utils;

@@ -6,7 +6,7 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/08 18:01:35 by melsahha          #+#    #+#              #
-#    Updated: 2023/06/21 16:52:31 by melsahha         ###   ########.fr        #
+#    Updated: 2023/06/22 10:54:14 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC_DIR = ./src/
 OBJ_DIR = ./obj
 SRC_FILES = main.c check_input.c input_utils.c \
 	tokens.c split.c split_utils.c check_split.c \
-	expand_split.c expand_env.c sort_tokens.c token_utils.c
+	expand_quotes.c expand_env.c \
+	sort_tokens.c token_utils.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))

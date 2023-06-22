@@ -6,36 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:36:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:12:05 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	replace_word(t_word *cmd_word, int index, t_split *split)
-{
-	int		i;
-	t_word	*old_word;
-
-	i = 0;
-	old_word = split->first;
-	while (i < index)
-		old_word = old_word->next;
-	cmd_word->index = index;
-	cmd_word->prev = old_word->prev;
-	cmd_word->next = old_word->next;
-	if (cmd_word->next)
-		cmd_word->next->prev = cmd_word;
-	if (cmd_word->prev)
-		cmd_word->prev->next = cmd_word;
-	if (index == 0)
-		split->first = cmd_word;
-	if (index == split->cmds - 1)
-		split->last = cmd_word;
-	free(old_word->cont);
-	free(old_word);
-}
-
+// creates new workd
 t_word	*new_word(char *c, int type)
 {
 	t_word	*word;
@@ -48,6 +25,7 @@ t_word	*new_word(char *c, int type)
 	return (word);
 }
 
+// pushes word to list
 int	push_word(t_split *split, char *c, int type)
 {
 	t_word	*word;
@@ -65,6 +43,7 @@ int	push_word(t_split *split, char *c, int type)
 	return (1);
 }
 
+// prints split list for visualization
 void	print_split(t_split *split)
 {
 	t_word	*ptr;

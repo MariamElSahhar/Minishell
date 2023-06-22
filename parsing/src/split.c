@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:53:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:14:38 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// frees split structure
 void	free_split(t_split *split)
 {
 	t_word	*del;
@@ -27,6 +28,7 @@ void	free_split(t_split *split)
 	free(split);
 }
 
+// splits input to space-separated words
 int	split_words(char *input, t_split *split)
 {
 	int	i;
@@ -47,6 +49,8 @@ int	split_words(char *input, t_split *split)
 	return (1);
 }
 
+// splits input, checks errors, expands env,
+// combines quotes, and sorts type
 t_split	*split_input(char *input)
 {
 	t_split	*split;
@@ -71,6 +75,7 @@ t_split	*split_input(char *input)
 	return (split);
 }
 
+// sorts the type of word
 void	sort_split(t_split *split)
 {
 	t_word	*ptr;

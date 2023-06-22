@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_split.c                                     :+:      :+:    :+:   */
+/*   expand_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:59:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:09:30 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// caculates length of string with combined quotes
 int	comb_quote_len(char *str, int i)
 {
 	int		len;
@@ -40,6 +41,7 @@ int	comb_quote_len(char *str, int i)
 	return (len);
 }
 
+// returns the combined-quote string
 char	*comb_quote_str(t_word *word, int len)
 {
 	char	*comb;
@@ -69,6 +71,7 @@ char	*comb_quote_str(t_word *word, int len)
 	return (comb);
 }
 
+// calls functions to combine quotes in words
 int	expand_quote(t_word *word)
 {
 	int		len;
@@ -87,6 +90,7 @@ int	expand_quote(t_word *word)
 	return (1);
 }
 
+// finds quotes, calls expander, and replaces with correct type
 int	expand_split(t_split *split)
 {
 	t_word	*ptr;

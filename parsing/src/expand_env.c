@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 17:09:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:07:44 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	return (full);
 }
 
-//
+// finds location of env and allocates memory for replacement
 int	found_env(char *str, int *i, t_word *word)
 {
 	int		len;
@@ -67,6 +67,7 @@ int	found_env(char *str, int *i, t_word *word)
 	return (1);
 }
 
+// expands env variables except in quotes
 int	expand_env_str(t_word *word)
 {
 	int		i;
@@ -89,6 +90,7 @@ int	expand_env_str(t_word *word)
 	return (1);
 }
 
+// expands env variables in double quotes
 int	expand_var_quote(t_word *word)
 {
 	int	i;
@@ -110,9 +112,10 @@ int	expand_var_quote(t_word *word)
 		else
 			i++;
 	}
-	return (word->index + 1);
+	return (1);
 }
 
+// redirects tokens to expanders
 int	expand_env(t_split *split)
 {
 	t_word	*ptr;

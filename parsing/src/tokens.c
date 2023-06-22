@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:52:05 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:16:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// adds redirection to list
 static int	add_redir(t_split *split, char *input, int *i)
 {
 	int	success;
@@ -35,6 +36,7 @@ static int	add_redir(t_split *split, char *input, int *i)
 	return (success);
 }
 
+// adds quote to list
 static int	add_quote(t_split *split, char *input, int *i)
 {
 	int		start;
@@ -60,6 +62,7 @@ static int	add_quote(t_split *split, char *input, int *i)
 	return (1);
 }
 
+// adds flag to list
 static int	add_flag(t_split *split, char *input, int *i)
 {
 	int		start;
@@ -85,6 +88,7 @@ static int	add_flag(t_split *split, char *input, int *i)
 	return (1);
 }
 
+// adds unspecified string to list
 static int	add_str(t_split *split, char *input, int *i)
 {
 	int		start;
@@ -114,6 +118,7 @@ static int	add_str(t_split *split, char *input, int *i)
 	return (1);
 }
 
+// calls the correct function to add word
 int	define_word(char *input, int *i, t_split *split)
 {
 	int	success;

@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:59 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 16:56:19 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:15:30 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
+// changes i to the index of the end of the flag
 void	end_of_flag(char *input, int *i)
 {
 	while (input[(*i)] && !is_space(input[(*i)]) && !is_symbol(input[(*i)]))
@@ -24,6 +25,7 @@ void	end_of_flag(char *input, int *i)
 	}
 }
 
+// finds the last input redirection
 void	last_in_redir(t_cmds *cmd)
 {
 	t_redir	*ptr;
@@ -48,6 +50,7 @@ void	last_in_redir(t_cmds *cmd)
 		last->type = type;
 }
 
+// finds the last output redirection
 void	last_out_redir(t_cmds *cmd)
 {
 	t_redir	*ptr;
@@ -72,6 +75,7 @@ void	last_out_redir(t_cmds *cmd)
 		last->type = type;
 }
 
+// sorts redirection types
 void	sort_redir(t_word *ptr, t_redir *redir)
 {
 	if (ptr->cont[0] == '<' && !ptr->cont[1])

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/21 17:08:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:12:21 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_utils	*parse_input(char *input)
 	utils = sort_tokens(split);
 	if (!utils || !init_utils(utils, input))
 		return (0);
+	// write(STDOUT_FILENO, CLEAR_SCREEN_SEQ, ft_strlen(CLEAR_SCREEN_SEQ));
 	return (utils);
 }
 
@@ -69,27 +70,45 @@ void	print_utils(t_utils *utils)
 }
 
 // reads line and updates history
-void	main_loop(int sig)
+void	main_loop(void)
 {
-	char	*input;
 	t_utils	*utils;
 
-	sig = 0;
 	while (1)
 	{
-		input = readline("> ");
-		add_history((const char *) input);
-		utils = parse_input(input);
+		utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
+		utils->input = readline("> ");
+		if (!utils->input)
+			return ;
+		add_history((const char *) utils->input);
+		utils = parse_input(utils->input);
 		if (!utils)
 			printf("parse error\n");
 		else
 			print_utils(utils);
-		free(input);
+		free(utils->input);
+		// free_utils(utils);
 	}
+}
+
+void	signal_handler(int sig)
+{
+	if ((sig == SIGQUIT && !rl_line_buffer[0])
+		|| (sig == SIGINT && rl_line_buffer[0]))
+	{
+		printf("\n");
+		rl_on_new_line();
+		// rl_replace_line(">", 0);
+		rl_redisplay();
+	}
+	else
+		exit(0);
 }
 
 int	main(void)
 {
-	main_loop(0);
+	signal(SIGQUIT, signal_handler);
+	signal(SIGINT, signal_handler);
+	main_loop();
 	return (0);
 }
