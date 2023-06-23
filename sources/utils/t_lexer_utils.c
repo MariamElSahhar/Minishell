@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_lexer_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:35:35 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/29 22:00:10 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:28:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../../includes/minishell.h"
 /*
 This function creates a new node for the t_lexer linked list.
 It takes two arguments: str, which represents the string associated with the node, and token, which represents the token type.

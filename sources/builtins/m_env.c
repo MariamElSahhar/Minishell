@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   m_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/30 20:12:26 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:29:53 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../../includes/minishell.h"
 
 int	m_env(t_utils *utils, t_cmds *cmds)
 {

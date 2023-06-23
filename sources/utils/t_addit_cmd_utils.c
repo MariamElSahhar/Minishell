@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_addit_cmd_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:09:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/29 19:56:09 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:28:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../../includes/minishell.h"
 /*
 This function creates a new node for the t_cmds linked list.
 It takes three arguments: str, which represents an array of strings (command and arguments), num_redirections, which represents

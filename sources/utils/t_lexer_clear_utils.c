@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_lexer_clear_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:35:13 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/29 19:59:50 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:28:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../../includes/minishell.h"
 /*
 This function clears a single node in the t_lexer linked list.
 It frees the memory allocated for the str member of the node and sets it to NULL.

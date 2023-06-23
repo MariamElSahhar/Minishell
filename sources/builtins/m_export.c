@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:59 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/30 20:11:41 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:46:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "builtins.h"
+#include "../../includes/minishell.h"
 
 int	variable_exist(t_utils *utils, char *str)
 {
@@ -41,17 +40,17 @@ int	check_parameter(char *str)
 	int	i;
 
 	i = 0;
-	//verifies that a variable is not a digit if it is returns an error not valid identifier.
+	//verifies that a variable is not a digit. if it is, returns an error not valid identifier.
 	if (ft_isdigit(str[0]))
-		return (export_error(str));
-	if (equal_sign(str) == 0)	
+		return (EXIT_FAILURE);
+	if (equal_sign(str) == 0)
 		return (EXIT_FAILURE);
 	if (str[0] == '=')
-		return (export_error(str));
+		return (EXIT_FAILURE);
 	while (str[i] != '=')
 	{
 		if (check_valid_identifier(str[i]))
-			return (export_error(str));
+			return (EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -112,20 +111,20 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 
 	i = 1;
 	// if the command export is passed without any arguments we just return env (acts as env)
-	if (!cmds->str[1] || cmds->str[1][0] == '\0')
-		mini_env(utils, cmds);
+	if (!cmds->args[1] || cmds->args[1][0] == '\0')
+		m_env(utils, cmds);
 	else
 	{
 		// if there is a second argument it will go inside the while loop
-		// variable exist will check if str exist in env variable 
-		while (cmds->str[i])
+		// variable exist will check if str exist in env variable
+		while (cmds->args[i])
 		{
-			if (check_parameter(cmds->str[i]) == 0
-				&& variable_exist(utils, cmds->str[i]) == 0)
+			if (check_parameter(cmds->args[i]) == 0
+				&& variable_exist(utils, cmds->args[i]) == 0)
 			{
-				if (cmds->str[i])
+				if (cmds->args[i])
 				{
-					tmp = add_var(utils->envp, cmds->str[i]);
+					tmp = add_var(utils->envp, cmds->args[i]);
 					free_arr(utils->envp);
 					utils->envp = tmp;
 				}
@@ -137,7 +136,7 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 }
 
 /*
-the function calls ft_strlcpy to copy the remaining part of the string str (after the consecutive occurrences of c) 
+the function calls ft_strlcpy to copy the remaining part of the string str (after the consecutive occurrences of c)
 */
 // Supposed to be added in utils file in parser folder
 

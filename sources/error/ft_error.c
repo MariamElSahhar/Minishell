@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:49 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/29 19:05:30 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:44:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "../../includes/minishell.h"
 
 /**
- * @brief 
+ * @brief
  * Finds corresponding error and frees args;
- * @param error 
+ * @param error
  * Number of related error:
  * 0 = If there is no string following a redirection or a pipe.
- * @param utils 
+ * @param utils
  */
 int	ft_error(int error, t_utils *utils)
 {
@@ -43,6 +43,9 @@ int	ft_error(int error, t_utils *utils)
 		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
 	else if (error == 8)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	reset_utils(utils);
+	else if (error == 9)
+		ft_putendl_fd("Path does not exist", STDERR_FILENO);
+	if (utils)
+		reset_utils(utils);
 	return (EXIT_FAILURE);
 }

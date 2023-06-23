@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:44 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/29 19:55:32 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:29:44 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../../includes/minishell.h"
 
 // it accepts *str, and returns function pointer if there is no much it returns null.
 

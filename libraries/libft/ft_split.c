@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:23:50 by szeris            #+#    #+#             */
-/*   Updated: 2023/05/11 21:04:42 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:48:55 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**create_arr(char const *s, char c, int c_count, char **split_arr)
 	return (split_arr);
 }
 
-void	free_arr(char **split_arr)
+static void	free_arr(char **split_arr)
 {
 	int	i;
 

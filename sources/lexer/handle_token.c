@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:44:58 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/31 20:09:12 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:29:13 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "lexer.h"
+#include "../../includes/minishell.h"
 /*
 Parameters: c (int)
 Returns: The corresponding token value (enum t_tokens) based on the input character c.
@@ -40,14 +39,14 @@ t_tokens	check_token(int c)
 /*
 Parameters: str (char array), i (int), lexer_list (pointer to a pointer of t_lexer)
 Returns: The number of characters consumed by the token handling (either 0, 1, or 2).
-This function is responsible for handling tokens in the input string str at the specified 
+This function is responsible for handling tokens in the input string str at the specified
 index i and updating the lexer_list accordingly.
 It first calls check_token to determine the token type based on the character at str[i].
-If the token is a double-greater-than (>>) or a double-less-than (<<), it checks the next character 
-using check_token as well. If it matches the corresponding token, it adds the appropriate node to the 
+If the token is a double-greater-than (>>) or a double-less-than (<<), it checks the next character
+using check_token as well. If it matches the corresponding token, it adds the appropriate node to the
 lexer_list using add_node (presumably defined elsewhere).
 If the token is a single character token (e.g., |, >, <), it adds the corresponding node to the lexer_list.
-Finally, it returns the number of characters consumed by the token handling (0, 1, or 2) to allow for the 
+Finally, it returns the number of characters consumed by the token handling (0, 1, or 2) to allow for the
 next iteration to resume parsing from the appropriate position.
 */
 int	handle_token(char *str, int i, t_lexer **lexer_list)
@@ -72,6 +71,6 @@ int	handle_token(char *str, int i, t_lexer **lexer_list)
 		if (!add_node(NULL, token, lexer_list))
 			return (-1);
 		return (1);
-	}	
+	}
 	return (0);
 }

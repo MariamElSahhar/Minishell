@@ -1,14 +1,14 @@
 NAME = minishell
-MKDIR = mkdir  // specifies the command used to create directories, which is "mkdir"
-
+# MKDIR = mkdir
+# specifies the command used to create directories, which is "mkdir"
 CC = gcc
 
 LIBFTP = libraries/libft
 PATHB = build/
 PATHO = build/objs/
 PATHS = sources/
-PATHSL = sources/lexer/
-# PATHSP = sources/parser/
+# PATHSL = sources/lexer/
+PATHSP = sources/parsing/
 PATHSB = sources/builtins/
 PATHSEX = sources/expander/
 PATHSU = sources/utils/
@@ -19,10 +19,7 @@ PATHEX = sources/executor/
 BUILD_PATHS = $(PATHB) $(PATHO)
 
 sources	=	sources/main.c \
-		sources/signals.c \
-		sources/lexer/handle_quotes.c \
-		sources/lexer/handle_token.c \
-		sources/lexer/token_reader.c \
+		sources/signal.c \
 		sources/builtins/builtins.c \
 		sources/builtins/m_cd.c \
 		sources/builtins/m_echo.c \
@@ -34,9 +31,6 @@ sources	=	sources/main.c \
 		sources/builtins/utils_builtins.c \
 		sources/utils/minishell_loop.c \
 		sources/utils/parse_envp.c \
-		sources/utils/t_lexer_clear_utils.c \
-		sources/utils/t_lexer_utils.c \
-		sources/utils/t_cmds_utils.c \
 		sources/utils/utils.c \
 		sources/error/error_handling.c \
 		sources/error/ft_error.c \
@@ -45,10 +39,28 @@ sources	=	sources/main.c \
 		sources/executor/cmds_handler.c \
 		sources/executor/heredoc.c \
 		sources/executor/executor_utils.c \
+		sources/parsing/check_input.c \
+		sources/parsing/check_split.c \
+		sources/parsing/expand_env.c \
+		sources/parsing/expand_quotes.c \
+		sources/parsing/input_utils.c \
+		sources/parsing/parsing.c \
+		sources/parsing/sort_tokens.c \
+		sources/parsing/split_utils.c \
+		sources/parsing/split.c \
+		sources/parsing/token_utils.c \
+		sources/parsing/tokens.c
+
+		# sources/utils/t_lexer_clear_utils.c \
+		# sources/utils/t_lexer_utils.c \
+		# sources/utils/t_cmds_utils.c \
+		# sources/lexer/handle_quotes.c \
+		# sources/lexer/handle_token.c \
+		# sources/lexer/token_reader.c \
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
-FLAGS	=	-Wall -Werror -Wextra -g #-fsanitize=address
+FLAGS	=	-Wall -Werror -Wextra -g -fsanitize=address
 
 LIBFT	=	./libraries/libft/libft.a
 
@@ -56,30 +68,33 @@ HEADER	=	.includes/builtins.h \
 			.includes/color.h \
 			.includes/error.h \
 			.includes/executor.h \
-			.includes/lexer.h \
 			.includes/minishell.h \
-			.includes/parser.h \
-			.includes/utils.h 
+			.includes/parsing.h \
+			.includes/split.h \
+			.includes/utils.h
 
-READLINE_DIR = $(shell brew --prefix readline)
+			# .includes/lexer.h \
+			# .includes/parser.h \
 
-READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib
-	
-INCLUDES =-Iincludes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include 
+# READLINE_DIR = $(shell brew --prefix readline)
+
+# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/libft
+READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
+
+INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
 all: $(BUILD_PATHS) $(NAME)
 
-$(PATHO)%.o:: $(PATHS)%.c
+$(NAME): $(LIBFT) $(OBJS) $(BUILD_PATHS)
+	@$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(READLINE_LIB) -o $(NAME)
+
+$(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSP)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHS)%.c $(HEADERS)
 	@echo "Compiling ${notdir $<}			in	$(PATHS)"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
-
-$(PATHO)%.o:: $(PATHSL)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}			in	$(PATHSL)"
-	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
-
-# $(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
-# 	@echo "Compiling ${notdir $<}			in	$(PATHSP)"
-# 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)
 	@echo "Compiling ${notdir $<}			in	$(PATHSB)"
@@ -101,8 +116,6 @@ $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
 	@echo "Compiling ${notdir $<}			in	$(PATHEX)"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
-$(NAME): $(LIBFT) $(OBJS) $(HEADERS)
-	@$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(READLINE_LIB) -o $(NAME)
 
 	@echo "Success"
 
@@ -110,16 +123,16 @@ $(LIBFT):
 	@$(MAKE) -C ./libraries/libft
 
 $(PATHB):
-	@$(MKDIR) $(PATHB)
+	@mkdir $(PATHB)
 
 $(PATHO):
-	@$(MKDIR) $(PATHO)
+	@mkdir $(PATHO)
 
 clean:
 	@echo "Cleaning"
 	@rm -f $(OBJS)
 	@rm -f $(PATHB).tmp*
-	@rmdir $(PATHO) $(PATHB)
+	@rm -rf $(PATHO) $(PATHB)
 	@make fclean -C libraries/libft
 
 fclean: clean

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/01 21:00:26 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:29:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 // get's hold of the present working directory and old pwd from the copied envp (utils->envp)
 /*
 This function takes a t_utils structure (which likely holds some utility variables) as a parameter.
@@ -37,10 +37,10 @@ int	find_pwd(t_utils *utils)
 	return (1);
 }
 /*
-This function takes a char** parameter called envp, which is assumed to be an array of strings containing 
+This function takes a char** parameter called envp, which is assumed to be an array of strings containing
 environment variables. It iterates through the envp array, similar to the previous function.
-Inside the loop, it looks for the environment variable "PATH" and returns its corresponding value 
-(the part after the equals sign) using ft_substr. If the "PATH" environment variable is not found, it returns 
+Inside the loop, it looks for the environment variable "PATH" and returns its corresponding value
+(the part after the equals sign) using ft_substr. If the "PATH" environment variable is not found, it returns
 an empty string obtained by duplicating the null terminator character.
 Note: It assumes that ft_substr is a custom function to extract substrings.
 */

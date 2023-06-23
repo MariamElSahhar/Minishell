@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../includes/minishell.h"
 /*
- the function scans a string starting from a given position i and counts the number 
- of characters until it reaches a delimiter character. The resulting count includes 
+ the function scans a string starting from a given position i and counts the number
+ of characters until it reaches a delimiter character. The resulting count includes
  the delimiter itself, and this count is returned as the length of the delimited section.
 */
 

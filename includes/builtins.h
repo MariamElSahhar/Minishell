@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/05/31 20:24:23 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:18:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 # include <dirent.h>
 # include "minishell.h"
+# include "parsing.h"
 
 //builtins
 // void	change_path(t_utils *utils);
@@ -38,5 +39,6 @@ int		m_exit(t_utils *utils, t_cmds *cmds);
 
 size_t	equal_sign(char *str);
 int		check_valid_identifier(char c);
+void	change_path(t_utils *utils);
 
 #endif
