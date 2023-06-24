@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 17:34:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:43:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 	free(utils->old_pwd);
 	if (utils->pipes)
 		free(utils->pid);
-}
- */
+} */
+
 int	is_str_digit(char *str)
 {
 	int	i;

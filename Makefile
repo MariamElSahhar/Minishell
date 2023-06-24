@@ -7,8 +7,8 @@ LIBFTP = libraries/libft
 PATHB = build/
 PATHO = build/objs/
 PATHS = sources/
-# PATHSL = sources/lexer/
-PATHSP = sources/parsing/
+PATHSL = sources/lexer/
+PATHSP = sources/parser/
 PATHSB = sources/builtins/
 PATHSEX = sources/expander/
 PATHSU = sources/utils/
@@ -39,17 +39,17 @@ sources	=	sources/main.c \
 		sources/executor/cmds_handler.c \
 		sources/executor/heredoc.c \
 		sources/executor/executor_utils.c \
-		sources/parsing/check_input.c \
-		sources/parsing/check_split.c \
-		sources/parsing/expand_env.c \
-		sources/parsing/expand_quotes.c \
-		sources/parsing/input_utils.c \
-		sources/parsing/parsing.c \
-		sources/parsing/sort_tokens.c \
-		sources/parsing/split_utils.c \
-		sources/parsing/split.c \
-		sources/parsing/token_utils.c \
-		sources/parsing/tokens.c
+		sources/lexer/input_validation.c \
+		sources/lexer/lexer.c \
+		sources/lexer/lexer_utils.c \
+		sources/lexer/lexer_validation.c \
+		sources/lexer/symbol_utils.c \
+		sources/parser/expand_env.c \
+		sources/parser/expand_quotes.c \
+		sources/parser/parser.c \
+		sources/parser/parser_utils.c \
+		sources/parser/redirections.c \
+		sources/parser/tokens.c
 
 		# sources/utils/t_lexer_clear_utils.c \
 		# sources/utils/t_lexer_utils.c \
@@ -76,10 +76,10 @@ HEADER	=	.includes/builtins.h \
 			# .includes/lexer.h \
 			# .includes/parser.h \
 
-# READLINE_DIR = $(shell brew --prefix readline)
+READLINE_DIR = $(shell brew --prefix readline)
 
-# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/libft
-READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
+READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/ -lft
+# READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
@@ -94,6 +94,10 @@ $(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
 
 $(PATHO)%.o:: $(PATHS)%.c $(HEADERS)
 	@echo "Compiling ${notdir $<}			in	$(PATHS)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHSL)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSL)"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:30 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:01:13 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 }
 
 // finds location of env and allocates memory for replacement
-int	found_env(char *str, int *i, t_word *word)
+int	envfound_env(char *str, int *i, t_word *word)
 {
 	int		len;
 	char	*var;

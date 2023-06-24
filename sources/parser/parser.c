@@ -1,16 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 16:59:12 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:15:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+// sorts tokens to list of commands
+int	sort_tokens(t_split *split, t_utils *utils)
+{
+	t_word	*ptr;
+	t_cmds	*new_cmd;
+
+	ptr = split->first;
+	while (ptr)
+	{
+		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
+		new_cmd->args = init_args(ptr);
+		while (ptr && ptr->type != PIPE)
+		{
+			if (ptr->type == CMD)
+				new_cmd->command = ptr->cont;
+			else if (ptr->type == REDIR)
+				new_cmd = push_redir(new_cmd, ptr);
+			ptr = ptr->next;
+		}
+		if (!new_cmd)
+			return (0);
+		new_cmd->args[0] = new_cmd->command;
+		push_cmd(utils, new_cmd);
+		if (ptr && ptr->type == PIPE)
+			ptr = ptr->next;
+	}
+	return (1);
+}
 
 int	count_pipes(t_utils *utils)
 {
@@ -105,11 +134,3 @@ void	signal_handler(int sig)
 }
  */
 
-/* int	main(void)
-{
-	signal(SIGQUIT, signal_handler);
-	signal(SIGINT, signal_handler);
-	main_loop();
-	return (0);
-}
- */

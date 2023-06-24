@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 17:27:19 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:03:48 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	check_input(char *input)
 {
 	if (open_quotes(input))
 	{
-		printf("open quote\n");
 		ft_error(2, 0);
 		return (0);
 	}

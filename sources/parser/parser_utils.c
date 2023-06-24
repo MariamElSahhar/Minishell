@@ -1,41 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_tokens.c                                      :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 19:24:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:18:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// adds redirection to list
-t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
-{
-	t_redir	*r;
-	t_redir	*redir;
-
-	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
-	if (ptr->next->type == PATH)
-		redir->path = ptr->next->cont;
-	else
-		return (0);
-	sort_redir(ptr, redir);
-	r = cmd->redirections;
-	if (!r)
-		cmd->redirections = redir;
-	else
-	{
-		while (r->next)
-			r = r->next;
-		r->next = redir;
-	}
-	redir->prev = r;
-	return (cmd);
-}
 
 // ints the argument list
 char	**init_args(t_word *start)
@@ -64,6 +39,7 @@ char	**init_args(t_word *start)
 	return (args);
 }
 
+// checks if command is a builtin and assigns it the builtin function
 void	check_builtin(t_cmds *cmd)
 {
 	if (!ft_strncmp(cmd->command, "cd", ft_strlen(cmd->command)))
@@ -102,31 +78,15 @@ void	push_cmd(t_utils *utils, t_cmds *cmd)
 	}
 }
 
-// sorts tokens to list of commands
-int	sort_tokens(t_split *split, t_utils *utils)
+// changes i to the index of the end of the flag
+void	end_of_flag(char *input, int *i)
 {
-	t_word	*ptr;
-	t_cmds	*new_cmd;
-
-	ptr = split->first;
-	while (ptr)
+	while (input[(*i)] && !is_space(input[(*i)]) && !is_symbol(input[(*i)]))
 	{
-		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
-		new_cmd->args = init_args(ptr);
-		while (ptr && ptr->type != PIPE)
-		{
-			if (ptr->type == CMD)
-				new_cmd->command = ptr->cont;
-			else if (ptr->type == REDIR)
-				new_cmd = push_redir(new_cmd, ptr);
-			ptr = ptr->next;
-		}
-		if (!new_cmd)
-			return (0);
-		new_cmd->args[0] = new_cmd->command;
-		push_cmd(utils, new_cmd);
-		if (ptr && ptr->type == PIPE)
-			ptr = ptr->next;
+		while (input[(*i)] && !(is_space(input[(*i)])
+				|| is_symbol(input[(*i)]) || is_quote(input[(*i)])))
+			(*i)++;
+		while (input[(*i)] && is_quote(input[(*i)]))
+			skip_quotes(i, input);
 	}
-	return (1);
 }

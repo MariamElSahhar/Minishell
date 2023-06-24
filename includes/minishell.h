@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:56:55 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:58:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	sigquit_handler(int sig);
 void	init_signals(void);
 char	*delete_quotes(char *str, char c);
 char	*delete_quotes_export(char *str, char c);
-int		question_mark(char **tmp);
+// int		question_mark(char **tmp);
 void	free_arr(char **split_arr);
 void	free_utils(t_utils *utils);
 

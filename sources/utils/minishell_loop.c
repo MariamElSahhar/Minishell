@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 19:31:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:35:20 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	implement_utils(t_utils *utils)
 	g_global.in_cmd = 0;
 	g_global.in_heredoc = 0;
 	parse_envp(utils);
-	init_signals();
 	return (1);
 }
 /*
@@ -79,19 +78,17 @@ void	free_utils(t_utils *utils)
 	}
 	if (utils->input)
 		free(utils->input);
-	if (utils->pwd)
+/* 	if (utils->pwd)
 		free(utils->pwd);
 	if (utils->old_pwd)
-		free(utils->old_pwd);
+		free(utils->old_pwd); */
 	if (utils->pid)
-		free(utils->pwd);
+		free(utils->pid);
 }
 
 int	reset_utils(t_utils *utils)
 {
 	free_utils(utils);
-	if (utils->pid)
-		free(utils->pid);
 	free_arr(utils->paths);
 	implement_utils(utils);
 	utils->reset = true;
@@ -144,20 +141,16 @@ void	minishell_loop(t_utils *utils)
 		utils->input = readline(READLINE_MSG);
 		if (!utils->input)
 		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
+			// ft_putendl_fd("exit", STDOUT_FILENO);
+			rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
 		if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
-			return ;
+			continue ;
 		}
 		add_history(utils->input);
-		// checks for balanced single and double qoutes (even it will return 1 / odd it will return 0)
-		/* if (!count_quotes(utils->input))
-			return (ft_error(2, utils));
-		if (!token_reader(utils))
-			return (ft_error(1, utils)); */
 		if (parse_input(utils))
 			prepare_executor(utils);
 		reset_utils(utils);
