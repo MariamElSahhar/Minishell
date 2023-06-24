@@ -51,13 +51,6 @@ sources	=	sources/main.c \
 		sources/parser/redirections.c \
 		sources/parser/tokens.c
 
-		# sources/utils/t_lexer_clear_utils.c \
-		# sources/utils/t_lexer_utils.c \
-		# sources/utils/t_cmds_utils.c \
-		# sources/lexer/handle_quotes.c \
-		# sources/lexer/handle_token.c \
-		# sources/lexer/token_reader.c \
-
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
 FLAGS	=	-Wall -Werror -Wextra -g -fsanitize=address
@@ -72,8 +65,6 @@ HEADER	=	.includes/builtins.h \
 			.includes/parsing.h \
 			.includes/lexer.h \
 			.includes/utils.h
-
-			# .includes/parser.h \
 
 READLINE_DIR = $(shell brew --prefix readline)
 
