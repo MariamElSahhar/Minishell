@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 15:11:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:21:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	return (full);
 }
 
+// returns value of the variable var in utils.envp
 char	*ft_getenv(char *var, t_utils *utils)
 {
 	int		i;
