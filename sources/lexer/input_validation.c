@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 12:03:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:20:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ int	check_input(char *input)
 		return (0);
 	}
 	if (invalid_char(input, ';'))
+	{
+		parser_token_error(0, ERR_SEMICOL);
+		return (0);
+	}
+	if (invalid_char(input, '&'))
 	{
 		parser_token_error(0, ERR_SEMICOL);
 		return (0);
