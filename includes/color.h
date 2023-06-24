@@ -31,6 +31,7 @@
 # define GREY    		"\033[90m"
 # define LIGHT_GREY		"\033[37m"
 
+# define PINK		    "\e[38;5;212m"
 # define BLACK_BOLD   	"\033[1;30m"
 # define RED_BOLD     	"\033[1;31m"
 # define GREEN_BOLD   	"\033[1;32m"
@@ -42,6 +43,6 @@
 # define WELCOME_MSG "hello"
 # define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
-# define READLINE_MSG	"\033[1;36msimon\033[34m$ \033[0m"
+# define READLINE_MSG	"\e[38;5;212mminishell\033[34m$ \033[0m"
 
 #endif
