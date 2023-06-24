@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:30 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:50:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	split_words(char *input, t_split *split)
 
 // splits input, checks errors, expands env,
 // combines quotes, and sorts type
-t_split	*split_input(char *input)
+t_split	*split_input(char *input, t_utils *utils)
 {
 	t_split	*split;
 
@@ -66,7 +66,7 @@ t_split	*split_input(char *input)
 		free_split(split);
 		return (0);
 	}
-	if (!expand_env(split) || !expand_split(split))
+	if (!expand_env(split, utils) || !expand_split(split))
 	{
 		printf("expand error\n");
 		return (0);

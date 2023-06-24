@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 12:22:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:57:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdbool.h>
-# include "split.h"
+# include "lexer.h"
 
 # define CLEAR_SCREEN_SEQ "\033[2J\033[H"
 

@@ -70,10 +70,9 @@ HEADER	=	.includes/builtins.h \
 			.includes/executor.h \
 			.includes/minishell.h \
 			.includes/parsing.h \
-			.includes/split.h \
+			.includes/lexer.h \
 			.includes/utils.h
 
-			# .includes/lexer.h \
 			# .includes/parser.h \
 
 READLINE_DIR = $(shell brew --prefix readline)

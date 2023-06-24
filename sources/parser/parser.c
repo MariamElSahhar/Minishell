@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 12:15:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:58:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_input(t_utils *utils)
 
 	if (!check_input(utils->input))
 		return (0);
-	split = split_input(utils->input);
+	split = split_input(utils->input, utils);
 	if (!split)
 		return (0);
 	sorted = sort_tokens(split, utils);

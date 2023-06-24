@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 14:44:12 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:11:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,28 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	return (full);
 }
 
+char	*ft_getenv(char *var, t_utils *utils)
+{
+	int		i;
+	char	*value;
+	char	c;
+
+	i = -1;
+	value = var;
+	c = '=';
+	while (utils->envp[++i])
+	{
+		if (!ft_strncmp(var, utils->envp[i], ft_strlen(var)))
+		{
+			value = ft_strtrim(ft_strchr(utils->envp[i], '='), &c);
+			return (value);
+		}
+	}
+	return (0);
+}
+
 // finds location of env and allocates memory for replacement
-int	found_env(char *str, int *i, t_word *word)
+int	found_env(char *str, int *i, t_word *word, t_utils *utils)
 {
 	int		len;
 	char	*var;
@@ -57,7 +77,7 @@ int	found_env(char *str, int *i, t_word *word)
 	(*i)++;
 	while (j < len)
 		var[j++] = str[(*i)++];
-	exp = getenv(var);
+	exp = ft_getenv(var, utils);
 	if (!exp)
 		return (0);
 	word->cont = replace_env(str, i, exp, len);
@@ -68,7 +88,7 @@ int	found_env(char *str, int *i, t_word *word)
 }
 
 // expands env variables except in quotes
-int	expand_env_str(t_word *word)
+int	expand_env_str(t_word *word, t_utils *utils)
 {
 	int		i;
 
@@ -86,7 +106,7 @@ int	expand_env_str(t_word *word)
 				i = i + 2;
 				word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
 			}
-			else if (!found_env(word->cont, &i, word))
+			else if (!found_env(word->cont, &i, word, utils))
 				return (0);
 			i = 0;
 		}
@@ -97,7 +117,7 @@ int	expand_env_str(t_word *word)
 }
 
 // expands env variables in double quotes
-int	expand_var_quote(t_word *word)
+int	expand_var_quote(t_word *word, t_utils *utils)
 {
 	int	i;
 
@@ -112,7 +132,7 @@ int	expand_var_quote(t_word *word)
 			skip_quotes(&i, word->cont);
 		else if (word->cont[i] == '$')
 		{
-			if (!found_env(word->cont, &i, word))
+			if (!found_env(word->cont, &i, word, utils))
 				return (0);
 		}
 		else
@@ -122,7 +142,7 @@ int	expand_var_quote(t_word *word)
 }
 
 // redirects tokens to expanders
-int	expand_env(t_split *split)
+int	expand_env(t_split *split, t_utils *utils)
 {
 	t_word	*ptr;
 	int		success;
@@ -132,9 +152,9 @@ int	expand_env(t_split *split)
 	{
 		if (ptr->type == STR || ptr->type == CMD
 			|| ptr->type == FLAG || ptr->type == PATH)
-			success = expand_env_str(ptr);
+			success = expand_env_str(ptr, utils);
 		else if (ptr->type == QUOTE)
-			success = expand_var_quote(ptr);
+			success = expand_var_quote(ptr, utils);
 		if (!success)
 			return (0);
 		ptr = ptr->next;
