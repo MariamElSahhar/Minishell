@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 13:50:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:30:56 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	found_env(char *str, int *i, t_word *word)
 	exp = getenv(var);
 	if (!exp)
 		return (0);
+	printf("%i and %i\n", *i, len);
 	word->cont = replace_env(str, i, exp, len);
 	free(var);
 	if (!word->cont)
@@ -83,8 +84,8 @@ int	expand_env_str(t_word *word)
 		{
 			if (word->cont[i + 1] == '?')
 			{
-				replace_env(word->cont, &i, ft_itoa(g_global.error_code), 2);
 				i = i + 2;
+				word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
 			}
 			else if (!found_env(word->cont, &i, word))
 				return (0);
