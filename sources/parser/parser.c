@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 14:58:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:13:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	sort_tokens(t_split *split, t_utils *utils)
 	while (ptr)
 	{
 		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
+		if (!new_cmd)
+			return(!ft_error(1, 0));
 		new_cmd->args = init_args(ptr);
-		while (ptr && ptr->type != PIPE)
+		if (!new_cmd->args)
+			return (0);
+		while (ptr && ptr->type != PIPE && new_cmd)
 		{
 			if (ptr->type == CMD)
 				new_cmd->command = ptr->cont;
