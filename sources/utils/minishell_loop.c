@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/24 12:35:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/24 20:52:09 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	minishell_loop(t_utils *utils)
 		utils->input = readline(READLINE_MSG);
 		if (!utils->input)
 		{
-			// ft_putendl_fd("exit", STDOUT_FILENO);
-			rl_replace_line("exit", 0);
+			ft_putendl_fd("exit", STDOUT_FILENO);
+			// rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
 		if (utils->input[0] == '\0')

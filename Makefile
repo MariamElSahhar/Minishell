@@ -78,8 +78,9 @@ HEADER	=	.includes/builtins.h \
 
 READLINE_DIR = $(shell brew --prefix readline)
 
-READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/ -lft
+# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/ -lft
 # READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
+READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -L libraries/libft/ -lft -lcurses
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
