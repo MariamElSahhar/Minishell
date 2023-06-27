@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 14:14:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:23:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ int	split_words(char *input, t_split *split)
 		if (input[i])
 		{
 			if (!define_word(input, &i, split))
-			{
-				free_split(split);
 				return (0);
-			}
 		}
 	}
 	return (1);
@@ -56,16 +53,13 @@ t_split	*split_input(char *input, t_utils *utils)
 	t_split	*split;
 
 	split = (t_split *)ft_calloc(1, sizeof(t_split));
-	if (!split || !input)
+	if (!split)
 	{
 		ft_error(1, utils);
 		return (0);
 	}
-	if (!split_words(input, split))
-		return (0);
-	if (!check_split(split))
+	if (!split_words(input, split) || !check_split(split))
 	{
-		printf("check split error\n");
 		free_split(split);
 		return (0);
 	}

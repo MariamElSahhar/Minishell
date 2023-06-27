@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 15:21:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:04:29 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	full = (char *)ft_calloc((ft_strlen(str) - len)
 			+ ft_strlen(exp) + 2, sizeof(char));
 	if (!full)
+	{
+		ft_error(1, 0);
 		return (0);
+	}
 	j = -1;
 	k = (*i) - len - 1;
 	while (++j < k)
@@ -41,21 +44,28 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 char	*ft_getenv(char *var, t_utils *utils)
 {
 	int		i;
-	char	*value;
+	char	**value;
 	char	c;
 
 	i = -1;
-	value = var;
 	c = '=';
 	while (utils->envp[++i])
 	{
-		if (!ft_strncmp(var, utils->envp[i], ft_strlen(var)))
+		value = ft_split(utils->envp[i], '=');
+		if (!value)
 		{
-			value = ft_strtrim(ft_strchr(utils->envp[i], '='), &c);
-			return (value);
+			ft_error(1, 0);
+			return (0);
 		}
+		if (!ft_strncmp(var, value[0], ft_strlen(value[0]))
+			&& !ft_strncmp(var, value[0], ft_strlen(var)))
+		{
+			free(value[0]);
+			return (value[1]);
+		}
+		free_double_ptr((void **) value);
 	}
-	return (0);
+	return ("");
 }
 
 // finds location of env and allocates memory for replacement
@@ -64,7 +74,7 @@ int	found_env(char *str, int *i, t_word *word, t_utils *utils)
 	int		len;
 	char	*var;
 	int		j;
-	char	*exp;
+	char	*env;
 
 	len = 0;
 	j = (*i);
@@ -73,18 +83,19 @@ int	found_env(char *str, int *i, t_word *word, t_utils *utils)
 		len++;
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
-		return (0);
+		return (!ft_error(1, 0));
 	j = 0;
 	(*i)++;
 	while (j < len)
 		var[j++] = str[(*i)++];
-	exp = ft_getenv(var, utils);
-	if (!exp)
+	env = ft_getenv(var, utils);
+	if (!env)
 		return (0);
-	word->cont = replace_env(str, i, exp, len);
+	word->cont = replace_env(str, i, env, len);
 	free(var);
 	if (!word->cont)
 		return (0);
+	*i = 0;
 	return (1);
 }
 
@@ -100,17 +111,17 @@ int	expand_env_str(t_word *word, t_utils *utils)
 		i = 1;
 	while (word->cont[i])
 	{
-		if (word->cont[i] == '$')
+		if (word->cont[i] == '$' && word->cont[i + 1] == '?')
 		{
-			if (word->cont[i + 1] == '?')
-			{
-				i = i + 2;
-				word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
-			}
-			else if (!found_env(word->cont, &i, word, utils))
+			i = i + 2;
+			word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
+			if (!word->cont)
 				return (0);
 			i = 0;
 		}
+		else if (word->cont[i] == '$'
+				&& !found_env(word->cont, &i, word, utils))
+			return (0);
 		else
 			i++;
 	}
