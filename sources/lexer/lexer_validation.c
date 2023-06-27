@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_split.c                                      :+:      :+:    :+:   */
+/*   lexer_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:03:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:30 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:10:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ int	check_split(t_split *split)
 	if (ptr
 		&& (ptr->type == PIPE || ptr->type == FLAG
 			|| split->last->type == PIPE || split->last->type == REDIR))
-		return (0);
+		return (!parser_error(ptr));
 	while (ptr)
 	{
 		if (ptr->type == REDIR
 			&& (ptr->next && (ptr->next->type == REDIR
 					|| ptr->next->type == PIPE)))
-			return (0);
+			return (!parser_error(ptr));
 		if (ptr->type == FLAG && !(ptr->prev && ptr->prev->type == REDIR)
 			&& empty_flag(ptr))
-			return (0);
+			return (!parser_error(ptr));
 		if (ptr->type == PIPE
 			&& (ptr->next && (ptr->next->type == PIPE
 					|| ptr->next->type == FLAG)))
-			return (0);
+			return (!parser_error(ptr));
 		ptr = ptr->next;
 	}
 	return (1);

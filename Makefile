@@ -33,7 +33,6 @@ sources	=	sources/main.c \
 		sources/utils/parse_envp.c \
 		sources/utils/utils.c \
 		sources/error/error_handling.c \
-		sources/error/ft_error.c \
 		sources/executor/redirection_check.c \
 		sources/executor/executor.c \
 		sources/executor/cmds_handler.c \

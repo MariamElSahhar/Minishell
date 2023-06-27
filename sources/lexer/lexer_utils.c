@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:30 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:14:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ t_word	*new_word(char *c, int type)
 
 	word = (t_word *)ft_calloc(1, sizeof(t_word));
 	if (!word)
+	{
+		ft_error(1, 0);
 		return (0);
+	}
 	word->type = type;
 	word->cont = c;
 	return (word);
@@ -31,6 +34,8 @@ int	push_word(t_split *split, char *c, int type)
 	t_word	*word;
 
 	word = new_word(c, type);
+	if (!word)
+		return (0);
 	word->index = split->cmds;
 	word->next = 0;
 	word->prev = split->last;

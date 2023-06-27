@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/24 12:35:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:56:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,6 @@ void	free_utils(t_utils *utils)
 	}
 	if (utils->input)
 		free(utils->input);
-/* 	if (utils->pwd)
-		free(utils->pwd);
-	if (utils->old_pwd)
-		free(utils->old_pwd); */
 	if (utils->pid)
 		free(utils->pid);
 }

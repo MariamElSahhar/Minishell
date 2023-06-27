@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:40:29 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:18:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:15:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 # include "minishell.h"
 # include "parsing.h"
 
-void	parser_error(int error, t_utils *utils);
-int		parser_token_error(t_utils *utils, int code);
-int		parser_double_token_error(t_utils *utils, int code);
+int		parser_error(t_word *ptr);
+int		invalid_token_error(char *c);
+int		token_error(t_utils *utils, int code);
+
 void	lexer_error(int error, t_utils *utils);
 int		cmd_not_found(char *str);
 int		export_error(char *c);
-
 //ft_error
 int		ft_error(int error, t_utils *utils);
 

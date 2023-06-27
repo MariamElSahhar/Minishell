@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 14:50:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:14:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ t_split	*split_input(char *input, t_utils *utils)
 
 	split = (t_split *)ft_calloc(1, sizeof(t_split));
 	if (!split || !input)
+	{
+		ft_error(1, utils);
 		return (0);
+	}
 	if (!split_words(input, split))
 		return (0);
 	if (!check_split(split))
