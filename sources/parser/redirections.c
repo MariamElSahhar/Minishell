@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_redirection.c                                :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:59 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 12:16:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:12:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 	t_redir	*redir;
 
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
+	if (!redir)
+	{
+		ft_error(1, 0);
+		return (0);
+	}
 	if (ptr->next->type == PATH)
 		redir->path = ptr->next->cont;
 	else
