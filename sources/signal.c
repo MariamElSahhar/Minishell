@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/24 13:37:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:16:47 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	sigint_handler(int sig)
 	if (g_global.in_cmd)
 	{
 		g_global.stop_heredoc = 1;
+		g_global.error_code = 130;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
