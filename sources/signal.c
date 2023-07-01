@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/27 15:20:23 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:59:16 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	event(void)
 {
 	return (EXIT_SUCCESS);
 }
+ 
 /*
 sigint_handler(int sig): This function is the signal handler for the SIGINT signal, which is typically sent
 to a process when the user presses Ctrl+C. It takes an integer argument sig representing the signal number.
@@ -54,9 +55,26 @@ b. It prints a newline character (\n) to STDERR_FILENO using ft_putchar_fd.
 */
 void	sigquit_handler(int sig)
 {
-	ft_putstr_fd("Quit: ", STDERR_FILENO);
-	ft_putnbr_fd(sig, STDERR_FILENO);
-	ft_putchar_fd('\n', STDERR_FILENO);
+	// if (!g_global.in_heredoc)
+	// 	ft_putstr_fd("\n", STDERR_FILENO);
+	if (g_global.in_cmd)
+	{
+		g_global.stop_heredoc = 1;
+		g_global.error_code = 131; 
+		rl_replace_line("", 0);
+		rl_redisplay();
+		rl_done = 1;
+		ft_putstr_fd("Quit: ", STDERR_FILENO);
+		ft_putnbr_fd(sig, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+		return ;
+	}
+	else 
+	{
+		rl_replace_line("", 0);
+		rl_redisplay();
+		rl_done = 1;
+	}
 }
 /*
 init_signals(void): This function initializes the signal handlers for the program.
@@ -71,5 +89,5 @@ void	init_signals(void)
 {
 	rl_event_hook = event;
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sigquit_handler);
 }
