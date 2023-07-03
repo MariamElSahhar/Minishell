@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 15:08:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 19:54:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_split	*split_input(char *input, t_utils *utils)
 	if (!expand_env(split, utils) || !expand_split(split))
 		return (0);
 	sort_split(split);
+	print_split(split);
 	return (split);
 }
 

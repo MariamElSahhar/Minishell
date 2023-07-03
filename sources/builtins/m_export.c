@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:59 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 18:08:03 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 19:10:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ char	**add_var(char **arr, char *str)
 		i++;
 	rtn = ft_calloc(sizeof(char *), i + 2);
 	if (!rtn)
+	{
+		ft_error(1, 0);
 		return (NULL);
+	}
 	i = 0;
 	whileloop_add_var(arr, rtn, str);
 	return (rtn);
@@ -119,8 +122,8 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 		// variable exist will check if str exist in env variable
 		while (cmds->args[i])
 		{
-			if (check_parameter(cmds->args[i]) == 0
-				&& variable_exist(utils, cmds->args[i]) == 0
+			if (!check_parameter(cmds->args[i])
+				&& !variable_exist(utils, cmds->args[i])
 				&& !invalid_identifier(cmds->args[i]))
 			{
 				tmp = add_var(utils->envp, cmds->args[i]);

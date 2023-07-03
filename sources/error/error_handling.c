@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/27 14:24:40 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 19:59:29 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	parser_error(t_word *ptr)
 		else if (ptr->cont[0] == '<')
 			token_error(0, ERR_LL);
 	}
+	else
+		token_error(0, ERR_NL);
 	return (EXIT_FAILURE);
 }
 

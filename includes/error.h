@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:40:29 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/27 14:15:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 19:59:09 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_err_code
 	ERR_GG,
 	ERR_L,
 	ERR_LL,
+	ERR_NL,
 }	t_err_code;
 
 #endif
