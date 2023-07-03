@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 18:00:06 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:10:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,14 @@ int	unset_error(t_cmds *cmds)
 		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	while (cmds->args[1][i])
+	if (invalid_identifier(cmds->args[1]))
 	{
-		if (cmds->args[1][i] == '/' || cmds->args[1][i] == '+'
-			 || cmds->args[1][i] == '-')
-		{
-			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
-			ft_putstr_fd(cmds->args[1], STDERR_FILENO);
-			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
-			return (EXIT_FAILURE);
-		}
-		i++;
+		ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
+		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+		return (EXIT_FAILURE);
 	}
+	i++;
 	if (equal_sign(cmds->args[1]) != 0)
 	{
 		ft_putendl_fd("minishell: unset: not a valid identifier",

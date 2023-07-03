@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/23 15:32:30 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:38:33 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	expand_quote(t_word *word)
 	char	*comb;
 
 	if (!ft_strchr(word->cont, '\'') && !ft_strchr(word->cont, '\"'))
-		return (0);
-	if (ft_strlen(word->cont) == 2)
 		return (0);
 	len = comb_quote_len(word->cont, 0);
 	comb = comb_quote_str(word, len);

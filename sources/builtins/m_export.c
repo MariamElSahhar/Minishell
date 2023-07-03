@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:59 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:46:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:08:03 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,12 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 		while (cmds->args[i])
 		{
 			if (check_parameter(cmds->args[i]) == 0
-				&& variable_exist(utils, cmds->args[i]) == 0)
+				&& variable_exist(utils, cmds->args[i]) == 0
+				&& !invalid_identifier(cmds->args[i]))
 			{
-				if (cmds->args[i])
-				{
-					tmp = add_var(utils->envp, cmds->args[i]);
-					free_arr(utils->envp);
-					utils->envp = tmp;
-				}
+				tmp = add_var(utils->envp, cmds->args[i]);
+				free_arr(utils->envp);
+				utils->envp = tmp;
 			}
 			i++;
 		}

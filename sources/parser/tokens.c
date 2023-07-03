@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 13:32:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:38:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ static int	add_quote(t_split *split, char *input, int *i)
 	char	*str;
 
 	start = (*i);
-	while (input[(*i)] && is_quote(input[(*i)]))
-		skip_quotes(i, input);
+	while (input[(*i)] && !is_space(input[(*i)]))
+	{
+		if (is_quote(input[(*i)]))
+			skip_quotes(i, input);
+		else
+			(*i)++;
+	}
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)

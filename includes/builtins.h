@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:18:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:09:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int		m_exit(t_utils *utils, t_cmds *cmds);
 // int		mini_continue(t_utils *utils, t_cmds *cmds);
 
 size_t	equal_sign(char *str);
-int		check_valid_identifier(char c);
+int		invalid_identifier(char *str);
 void	change_path(t_utils *utils);
+int	check_valid_identifier(char c);
 
 #endif
