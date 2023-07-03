@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:35:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:55:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ int	send_heredoc(t_utils *utils, t_cmds *cmd)
 			if (sl)
 			{
 				g_global.error_code = 1;
-				return (reset_utils(utils));
 			}
 		}
 		redir = redir->next;

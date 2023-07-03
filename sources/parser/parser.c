@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 15:13:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:14:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,40 +101,3 @@ void	print_utils(t_utils *utils)
 		c_ptr = c_ptr->next;
 	}
 }
-
-/* // reads line and updates history
-void	main_loop(void)
-{
-	t_utils	*utils;
-
-	// while (1)
-	// {
-		utils = (t_utils *)ft_calloc(1, sizeof(t_utils));
-		utils->input = ft_strdup(">>>");
-		if (!utils->input)
-			return ;
-		add_history((const char *) utils->input);
-		if (!parse_input(utils))
-			printf("parse error\n");
-		else
-			print_utils(utils);
-		free_utils(utils);
-	// }
-}
- */
-/*
-void	signal_handler(int sig)
-{
-	if ((sig == SIGQUIT && !rl_line_buffer[0])
-		|| (sig == SIGINT && rl_line_buffer[0]))
-	{
-		printf("\n");
-		rl_on_new_line();
-		// rl_replace_line(">", 0);
-		rl_redisplay();
-	}
-	else
-		exit(0);
-}
- */
-
