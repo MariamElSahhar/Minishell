@@ -6,43 +6,35 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 17:37:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:41:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // caculates length of string with combined quotes
-int	comb_quote_len(char *str, int i)
+int	comb_quote_len(char *str)
 {
-	int		len;
-	char	quote;
+	int		i;
+	size_t	len;
 
-	len = 0;
-	while (str[i])
+	len = ft_strlen(str);
+	i = 0;
+	while (str && str[i])
 	{
-		if (i == 0 && str[0] == '-')
+		if (is_quote(str[i]))
 		{
-			i++;
-			len++;
-		}
-		else if (is_quote(str[i]))
-		{
-			quote = str[i++];
-			while (str[i] && str[i++] != quote)
-				len++;
+			skip_quotes(&i, str);
+			len = len - 2;
 		}
 		while (str[i] && !is_quote(str[i]))
-		{
 			i++;
-			len++;
-		}
 	}
 	return (len);
 }
 
 // returns the combined-quote string
-char	*comb_quote_str(t_word *word, int len)
+char	*comb_quote_str(t_word *word, size_t len)
 {
 	char	*comb;
 	int		i;
@@ -54,16 +46,21 @@ char	*comb_quote_str(t_word *word, int len)
 		return (0);
 	i = 0;
 	j = 0;
-	if (word->cont[j] && word->cont[i] == '-')
-		comb[j++] = word->cont[i++];
-	while (word->cont[i])
+	while (word->cont && word->cont[i])
 	{
 		if (is_quote(word->cont[i]))
 		{
 			quote = word->cont[i++];
-			while (word->cont[i] && word->cont[i] != quote)
-				comb[j++] = word->cont[i++];
-			i++;
+			if (word->cont[i] == quote)
+				i++;
+			else
+			{
+				while (word->cont[i] && word->cont[i] != quote)
+				{
+					comb[j++] = word->cont[i++];
+				}
+				i++;
+			}
 		}
 		while (word->cont[i] && !is_quote(word->cont[i]))
 			comb[j++] = word->cont[i++];
@@ -74,12 +71,12 @@ char	*comb_quote_str(t_word *word, int len)
 // calls functions to combine quotes in words
 int	expand_quote(t_word *word)
 {
-	int		len;
+	size_t	len;
 	char	*comb;
 
 	if (!ft_strchr(word->cont, '\'') && !ft_strchr(word->cont, '\"'))
 		return (0);
-	len = comb_quote_len(word->cont, 0);
+	len = comb_quote_len(word->cont);
 	comb = comb_quote_str(word, len);
 	if (!comb)
 		return (0);

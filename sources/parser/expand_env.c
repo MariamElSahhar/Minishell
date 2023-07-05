@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 17:38:16 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 20:23:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	found_env(char *str, int *i, t_word *word, t_utils *utils)
 
 	len = 0;
 	j = (*i);
-	while (str[++j] && !is_space(str[j])
-		&& !is_quote(str[j]) && str[j] != '$')
+	while (str[++j] && !is_space(str[j]) && str[j] != '$'
+		&& !check_valid_identifier(str[j]))
 		len++;
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
@@ -82,7 +82,7 @@ int	expand_env_str(t_word *word, t_utils *utils)
 	i = 0;
 	while (word->cont[i])
 	{
-		if (word->cont[i] == '$' && word->cont[i + 1] == '?')
+		if (word->cont[i] == '$' && word->cont[i + 1] && word->cont[i + 1] == '?')
 		{
 			i = i + 2;
 			word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
@@ -90,9 +90,12 @@ int	expand_env_str(t_word *word, t_utils *utils)
 				return (0);
 			i = 0;
 		}
-		else if (word->cont[i] == '$'
+		else if (word->cont[i] == '$' && word->cont[i + 1]
+				&& check_valid_identifier(word->cont[i + 1]))
+			i = i + 2;
+		else if (word->cont[i] == '$' && word->cont[i + 1]
 				&& !found_env(word->cont, &i, word, utils))
-			return (0);
+				return (0);
 		else
 			i++;
 	}
@@ -109,17 +112,24 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 	i = 0;
 	while (word->cont[i])
 	{
-		if (word->cont[i] == '\"')
-			i++;
+		printf("start at %s\n", &word->cont[i]);
+		if (word->cont[i] == '$' && !found_env(word->cont, &i, word, utils))
+			return (0);
 		else if (word->cont[i] == '\'')
 			skip_quotes(&i, word->cont);
-		else if (word->cont[i] == '$')
+		else if (word->cont[i] == '\"')
 		{
-			if (!found_env(word->cont, &i, word, utils))
-				return (0);
+			while (word->cont[++i] && word->cont[i] != '\"')
+			{
+				if (word->cont[i] == '$')
+					found_env(word->cont, &i, word, utils);
+			}
+			i++;
 		}
 		else
 			i++;
+		printf("break at %s\n", &word->cont[i]);
+		printf("now: %s\n\n", word->cont);
 	}
 	return (1);
 }
