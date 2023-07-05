@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 14:14:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:34:29 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	print_split(t_split *split)
 		printf("%s", ptr->cont);
 		if (ptr->type == CMD)
 			printf(" - CMD\n");
-		else if (ptr->type == FLAG)
-			printf(" - FLAG\n");
 		else if (ptr->type == REDIR)
 			printf(" - REDIR\n");
 		else if (ptr->type == PATH)

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 15:04:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:38:16 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,6 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	return (full);
 }
 
-// returns value of the variable var in utils.envp
-char	*ft_getenv(char *var, t_utils *utils)
-{
-	int		i;
-	char	**value;
-	char	c;
-
-	i = -1;
-	c = '=';
-	while (utils->envp[++i])
-	{
-		value = ft_split(utils->envp[i], '=');
-		if (!value)
-		{
-			ft_error(1, 0);
-			return (0);
-		}
-		if (!ft_strncmp(var, value[0], ft_strlen(value[0]))
-			&& !ft_strncmp(var, value[0], ft_strlen(var)))
-		{
-			free(value[0]);
-			return (value[1]);
-		}
-		free_double_ptr((void **) value);
-	}
-	return ("");
-}
 
 // finds location of env and allocates memory for replacement
 int	found_env(char *str, int *i, t_word *word, t_utils *utils)
@@ -107,8 +80,6 @@ int	expand_env_str(t_word *word, t_utils *utils)
 	if (!ft_strchr(word->cont, '$'))
 		return (1);
 	i = 0;
-	if (word->type == FLAG)
-		i = 1;
 	while (word->cont[i])
 	{
 		if (word->cont[i] == '$' && word->cont[i + 1] == '?')
@@ -163,7 +134,7 @@ int	expand_env(t_split *split, t_utils *utils)
 	while (ptr)
 	{
 		if (ptr->type == STR || ptr->type == CMD
-			|| ptr->type == FLAG || ptr->type == PATH)
+			|| ptr->type == ARG || ptr->type == PATH)
 			success = expand_env_str(ptr, utils);
 		else if (ptr->type == QUOTE)
 			success = expand_var_quote(ptr, utils);

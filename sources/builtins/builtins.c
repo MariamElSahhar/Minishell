@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:44 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 16:29:44 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:22:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds)
 	int			i;
 
 	i = 0;
-	while (i < 7)
+	while (str && i < 7)
 	{
-		if (str)
-		{
-			if (!ft_strncmp(builtins[i][0], str, ft_strlen((builtins[i][0]))))
-				return (builtins[i][1]);
-		}
+		if (!ft_strncmp(builtins[i][0], str, ft_strlen((builtins[i][0])))
+			&& !ft_strncmp(builtins[i][0], str, ft_strlen(str)))
+			return (builtins[i][1]);
 		i++;
 	}
 	return (NULL);

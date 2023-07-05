@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 14:57:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:27:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		sort_tokens(t_split *split, t_utils *utils);
 void	end_of_flag(char *input, int *i);
 char	**init_args(t_word *start);
 int		parse_input(t_utils *utils);
+char	*ft_getenv(char *var, t_utils *utils);
 
 void	last_in_redir(t_cmds *cmd);
 void	last_out_redir(t_cmds *cmd);

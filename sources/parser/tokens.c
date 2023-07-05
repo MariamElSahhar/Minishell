@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/03 18:38:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:37:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,6 @@ static int	add_quote(t_split *split, char *input, int *i)
 	return (1);
 }
 
-// adds flag to list
-static int	add_flag(t_split *split, char *input, int *i)
-{
-	int		start;
-	int		len;
-	int		k;
-	char	*str;
-
-	start = (*i)++;
-	(*i)++;
-	end_of_flag(input, i);
-	len = (*i) - start;
-	str = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!str)
-		return (0);
-	k = 0;
-	while ((start + k) < (*i))
-	{
-		str[k] = input[start + k];
-		k++;
-	}
-	if (!push_word(split, str, FLAG))
-		return (0);
-	return (1);
-}
-
 // adds unspecified string to list
 static int	add_str(t_split *split, char *input, int *i)
 {
@@ -138,8 +112,6 @@ int	define_word(char *input, int *i, t_split *split)
 		success = add_redir(split, input, i);
 	else if (is_quote(input[(*i)]))
 		success = add_quote(split, input, i);
-	else if (input[(*i)] == '-')
-		success = add_flag(split, input, i);
 	else
 		success = add_str(split, input, i);
 	return (success);
