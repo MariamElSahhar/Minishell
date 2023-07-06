@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/05 17:44:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:10:47 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 
 	i = 0;
 	// cmd->str = resplit_str(cmd->str);
-	if (!access(cmd->command, F_OK))
-		execve(cmd->command, cmd->args, utils->envp);
 	while (utils->paths[i])
 	{
 		mycmd = ft_strjoin(utils->paths[i], cmd->command);

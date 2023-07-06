@@ -52,7 +52,7 @@ sources	=	sources/main.c \
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
-FLAGS	=	-Wall -Werror -Wextra -g -fsanitize=address
+FLAGS	=	-Wall -Werror -Wextra -g
 
 LIBFT	=	./libraries/libft/libft.a
 
@@ -65,10 +65,10 @@ HEADER	=	.includes/builtins.h \
 			.includes/lexer.h \
 			.includes/utils.h
 
-READLINE_DIR = $(shell brew --prefix readline)
+# READLINE_DIR = $(shell brew --prefix readline)
 
-READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L libraries/libft/ -lft
-# READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
+# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L libraries/libft/ -lft
+READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/27 13:56:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:51:40 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/minishell.h"
 
-void	minishell_loop(t_utils *utils);
+void	minishell_loop(t_utils *utils, char **envp);
 /*
 This function initializes the utils structure with default values and sets up the environment.
 It sets various variables and flags in the utils structure to their initial values.
@@ -46,12 +46,12 @@ void	free_cmd(t_cmds *cmd)
 	t_redir	*ptr;
 	t_redir	*del;
 
-/* 	if (cmd->command)
-		free(cmd->command); */
 	if (cmd->hd_file_name)
 		free(cmd->hd_file_name);
 	if (cmd->args)
 		free_double_ptr((void **) cmd->args);
+	// if (cmd->command)
+	// 	free(cmd->command);
 	ptr = cmd->redirections;
 	while (ptr)
 	{
@@ -80,13 +80,18 @@ void	free_utils(t_utils *utils)
 		free(utils->input);
 	if (utils->pid)
 		free(utils->pid);
+	if (utils->pwd)
+		free(utils->pwd);
+	if (utils->old_pwd)
+		free(utils->old_pwd);
+	free_double_ptr((void **)utils->envp);
 }
 
 int	reset_utils(t_utils *utils)
 {
 	free_utils(utils);
 	free_arr(utils->paths);
-	implement_utils(utils);
+	// implement_utils(utils);
 	utils->reset = true;
 	return (1);
 }
@@ -130,11 +135,17 @@ The prepare_executor function is called to execute the commands based on the par
 Finally, the reset_utils function is called to reset the minishell state and restart the loop.
 
 */
-void	minishell_loop(t_utils *utils)
+void	minishell_loop(t_utils *utils, char **envp)
 {
-	while (1)
-	{
-		utils->input = readline(READLINE_MSG);
+	// while (1)
+	// {
+		// utils->input = readline(READLINE_MSG);
+
+		utils->envp = ft_arrdup(envp);
+		find_pwd(utils);
+		implement_utils(utils);
+		utils->input = ft_strdup("echo hi");
+
 		if (!utils->input)
 		{
 			// ft_putendl_fd("exit", STDOUT_FILENO);
@@ -144,11 +155,11 @@ void	minishell_loop(t_utils *utils)
 		if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
-			continue ;
+			// continue ;
 		}
-		add_history(utils->input);
+		// add_history(utils->input);
 		if (parse_input(utils))
 			prepare_executor(utils);
 		reset_utils(utils);
-	}
+	// }
 }

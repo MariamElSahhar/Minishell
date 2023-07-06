@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 17:36:24 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:13:23 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ char	*ft_getenv(char *var, t_utils *utils)
 {
 	int		i;
 	char	**value;
-	char	c;
 
 	i = -1;
-	c = '=';
 	while (utils->envp[++i])
 	{
 		value = ft_split(utils->envp[i], '=');

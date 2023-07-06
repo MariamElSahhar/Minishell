@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/24 11:51:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:38:48 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(0);
 	}
 	init_signals();
-	utils.envp = ft_arrdup(envp);
-	find_pwd(&utils);
-	implement_utils(&utils);
 	printf("\n%s\n\n", WELCOME_MSG);
-	minishell_loop(&utils);
+	minishell_loop(&utils, envp);
 	return (0);
 }

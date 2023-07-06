@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:37 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 19:31:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:22:39 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				count_quotes(char *line);
 int				implement_utils(t_utils *utils);
 char			**ft_arrdup(char **arr);
 
-void				minishell_loop(t_utils *utils);
+void				minishell_loop(t_utils *utils, char **envp);
 void	free_double_ptr(void **ptr);
 
 /* //t_cmds_utils
