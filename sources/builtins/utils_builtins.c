@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:10 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 18:09:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:59:45 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	invalid_identifier(char *str)
 		|| str[i] == ':' || str[i] == '/' || str[i] == '{' || str[i] == '}' || str[i] == '+'
 		|| str[i] == '^' || str[i] == '%' || str[i] == '#' || str[i] == '@' || str[i] == '!'
 		|| str[i] == '~'
-		|| str[i] == '=' || str[i] == '-' || str[i] == '?' || str[i] == '&' || str[i] == '*')
-		return (1);
+		|| str[i] == '-' || str[i] == '?' || str[i] == '&' || str[i] == '*')
+			return (1);
 	}
 	return (0);
 }

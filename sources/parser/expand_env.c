@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 20:37:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:08:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,12 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 	i = 0;
 	while (word->cont[i])
 	{
-		// printf("start at %s\n", &word->cont[i]);
 		if (word->cont[i] == '$' && !found_env(word->cont, &i, word, utils))
 			return (0);
 		else if (word->cont[i] == '\'')
-		{
-			printf("1\n");
 			skip_quotes(&i, word->cont);
-		}
 		else if (word->cont[i] == '\"')
 		{
-			printf("2\n");
 			i++;
 			while (word->cont[i] && word->cont[i] != '\"')
 			{
@@ -138,12 +133,9 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 			}
 			if (word->cont[i] == '\"')
 				i++;
-			// i++;
 		}
 		else
 			i++;
-		// printf("break at %s\n", &word->cont[i]);
-		// printf("now: %s\n\n", word->cont);
 	}
 	return (1);
 }
