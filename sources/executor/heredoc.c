@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 17:55:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:14:21 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@
  (either when the user enters the same line as the here document or
  when the global flag g_global.stop_heredoc is set to true).
 */
-/* int	create_heredoc(t_redir *heredoc, char *file_name)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	line = readline(HEREDOC_MSG);
-	while (line && ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
-		&& !g_global.stop_heredoc)
-	{
-		// Here I am writing the line to the file opened using write function
-		write(fd, line, ft_strlen(line));
-		//passing newline to separate the input from the user.
-		write(fd, "\n", 1);
-		free(line);
-		line = readline(HEREDOC_MSG);
-	}
-	free(line);
-	if (g_global.stop_heredoc || !line)
-		return (EXIT_FAILURE);
-	close(fd);
-	return (EXIT_SUCCESS);
-} */
-
 int	create_heredoc(t_redir *heredoc, char *file_name)
 {
 	int		fd;
