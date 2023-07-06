@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 18:41:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:46:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	handle_cmd(t_cmds *cmd, t_utils *utils)
 
 	exit_code = 0;
 	if (cmd->redirections && check_redirections(cmd))
-		exit(1);
+	{
+		reset_utils(utils);
+		exit(1); //EXIT WITHOUT FREE
+	}
 	if (cmd->builtin != NULL)
 	{
 		exit_code = cmd->builtin(utils, cmd);
