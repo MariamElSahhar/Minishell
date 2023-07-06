@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 17:38:33 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:41:38 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	handle_cmd(t_cmds *cmd, t_utils *utils)
 	}
 	else if (cmd->command && cmd->command[0] != '\0')
 		exit_code = find_cmd(cmd, utils);
-	exit(exit_code);
+	reset_utils(utils);
+	exit(exit_code); //EXIT WITHOUT FREE
 	// return ;
 }
 

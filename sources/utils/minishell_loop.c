@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 18:34:47 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:40:37 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	minishell_loop(t_utils *utils, char **envp)
 		utils->envp = ft_arrdup(envp);
 		find_pwd(utils);
 		implement_utils(utils);
-		char input [] = "echo $?";
+		char input [] = "\"\"";
 		utils->input = ft_strdup(input);
 		if (!utils->input)
 		{
@@ -151,9 +151,10 @@ void	minishell_loop(t_utils *utils, char **envp)
 			// rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
-		if (utils->input[0] == '\0')
+		else if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
+			return ;
 			// continue ;
 		}
 		// add_history(utils->input);
