@@ -6,11 +6,11 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:28:04 by melsahha          #+#    #+#              #
-#    Updated: 2023/05/09 18:55:05 by melsahha         ###   ########.fr        #
+#    Updated: 2023/07/06 17:04:41 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 INCL = ./include/
 CC= cc
 CFLAGS = -Wall -Werror -Wextra
@@ -28,7 +28,6 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 $(NAME): $(OBJS) $(OBJ_DIR)
 	make -C $(LIBFT_DIR)
 	mv $(LIBFT_DIR)$(LIBFT) .
-	mv $(LIBFT) $(NAME)
 	ar -rcs $(NAME) $(OBJS)
 
 all: $(NAME)

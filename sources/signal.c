@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/01 19:59:16 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:04:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	event(void)
 {
 	return (EXIT_SUCCESS);
 }
- 
+
 /*
 sigint_handler(int sig): This function is the signal handler for the SIGINT signal, which is typically sent
 to a process when the user presses Ctrl+C. It takes an integer argument sig representing the signal number.
@@ -36,7 +36,7 @@ void	sigint_handler(int sig)
 	if (g_global.in_cmd)
 	{
 		g_global.stop_heredoc = 1;
-		g_global.error_code = 130; 
+		g_global.error_code = 130;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -60,7 +60,7 @@ void	sigquit_handler(int sig)
 	if (g_global.in_cmd)
 	{
 		g_global.stop_heredoc = 1;
-		g_global.error_code = 131; 
+		g_global.error_code = 131;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -69,7 +69,7 @@ void	sigquit_handler(int sig)
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
-	else 
+	else
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 17:53:36 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/05 11:14:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:18:07 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *src)
 	char	*str;
 	int		size;
 
-	str = (char *) malloc(ft_strlen(src) + 1);
+	str = (char *) ft_calloc(ft_strlen(src) + 1, sizeof(char));
 	if (!str)
 		return (0);
 	size = 0;

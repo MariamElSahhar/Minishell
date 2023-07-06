@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:37:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:22:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**ft_arrdup(char **arr)
 	i = 0;
 	while (arr[i] != NULL)
 		i++;
-	rtn = ft_calloc(sizeof(char *), i + 1);
+	rtn = ft_calloc(i + 1, sizeof(char *));
 	if (!rtn)
 		return (NULL);
 	i = 0;

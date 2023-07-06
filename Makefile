@@ -3,7 +3,7 @@ NAME = minishell
 # specifies the command used to create directories, which is "mkdir"
 CC = gcc
 
-LIBFTP = libraries/libft
+LIBFTP = libft/
 PATHB = build/
 PATHO = build/objs/
 PATHS = sources/
@@ -54,7 +54,7 @@ OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
 FLAGS	=	-Wall -Werror -Wextra -g
 
-LIBFT	=	./libraries/libft/libft.a
+LIBFT	=	./libft/libft.a
 
 HEADER	=	.includes/builtins.h \
 			.includes/color.h \
@@ -68,7 +68,7 @@ HEADER	=	.includes/builtins.h \
 # READLINE_DIR = $(shell brew --prefix readline)
 
 # READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L libraries/libft/ -lft
-READLINE_LIB = -lreadline -lhistory -lreadline -L libraries/libft/ -lft
+READLINE_LIB = -lreadline -lhistory -lreadline -Llibft/ -lft
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
@@ -113,7 +113,7 @@ $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
 	@echo "Success"
 
 $(LIBFT):
-	@$(MAKE) -C ./libraries/libft
+	@$(MAKE) -sC $(LIBFTP)
 
 $(PATHB):
 	@mkdir $(PATHB)
@@ -126,7 +126,7 @@ clean:
 	@rm -f $(OBJS)
 	@rm -f $(PATHB).tmp*
 	@rm -rf $(PATHO) $(PATHB)
-	@make fclean -C libraries/libft
+	@make fclean -C $(LIBFTP)
 
 fclean: clean
 	@rm -f $(NAME)

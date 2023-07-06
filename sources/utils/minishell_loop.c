@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 14:51:40 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:38:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	free_cmd(t_cmds *cmd)
 		free(cmd->hd_file_name);
 	if (cmd->args)
 		free_double_ptr((void **) cmd->args);
-	// if (cmd->command)
-	// 	free(cmd->command);
 	ptr = cmd->redirections;
 	while (ptr)
 	{
@@ -85,12 +83,13 @@ void	free_utils(t_utils *utils)
 	if (utils->old_pwd)
 		free(utils->old_pwd);
 	free_double_ptr((void **)utils->envp);
+	free_double_ptr((void **)utils->paths);
+	// free_arr(utils->paths);
 }
 
 int	reset_utils(t_utils *utils)
 {
 	free_utils(utils);
-	free_arr(utils->paths);
 	// implement_utils(utils);
 	utils->reset = true;
 	return (1);
@@ -114,7 +113,7 @@ int	prepare_executor(t_utils *utils)
 		single_cmd(utils->cmds, utils);
 	else
 	{
-		utils->pid = ft_calloc(sizeof(int), utils->pipes + 2);
+		utils->pid = ft_calloc(utils->pipes + 2, sizeof(int));
 		if (!utils->pid)
 			return (ft_error(1, utils));
 		executor(utils);
@@ -140,16 +139,16 @@ void	minishell_loop(t_utils *utils, char **envp)
 	// while (1)
 	// {
 		// utils->input = readline(READLINE_MSG);
-
 		utils->envp = ft_arrdup(envp);
 		find_pwd(utils);
 		implement_utils(utils);
-		utils->input = ft_strdup("echo hi");
-
+		char input [] = "echo hi";
+		utils->input = ft_strdup(input);
 		if (!utils->input)
 		{
 			// ft_putendl_fd("exit", STDOUT_FILENO);
-			rl_replace_line("exit", 0);
+			reset_utils(utils);
+			// rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
 		if (utils->input[0] == '\0')
@@ -158,8 +157,14 @@ void	minishell_loop(t_utils *utils, char **envp)
 			// continue ;
 		}
 		// add_history(utils->input);
+		// parse_input(utils);
 		if (parse_input(utils))
+		{
+			printf("execution:\n");
 			prepare_executor(utils);
+		}
 		reset_utils(utils);
+		printf("reset utils\n");
+		// free(input);
 	// }
 }

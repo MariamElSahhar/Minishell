@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 14:10:47 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:38:33 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ void	handle_cmd(t_cmds *cmd, t_utils *utils)
 	int	exit_code;
 
 	exit_code = 0;
-	if (cmd->redirections)
-		if (check_redirections(cmd))
-			exit(1);
+	if (cmd->redirections && check_redirections(cmd))
+		exit(1);
 	if (cmd->builtin != NULL)
 	{
 		exit_code = cmd->builtin(utils, cmd);
-		exit(exit_code);
+		reset_utils(utils);
+		exit(exit_code); //MEMORY ISSUE DUE TO EXIT WITHOUT FREE
 	}
 	else if (cmd->command && cmd->command[0] != '\0')
 		exit_code = find_cmd(cmd, utils);
 	exit(exit_code);
+	// return ;
 }
 
 void	dup_cmd(t_cmds *cmd, t_utils *utils, int end[2], int fd_in)
@@ -122,7 +123,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	pid = fork();
 	if (pid < 0)
 		ft_error(5, utils);
-	if (pid == 0)
+	else if (pid == 0)
 		handle_cmd(cmd, utils);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

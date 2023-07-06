@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 18:10:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:24:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**del_var(char **arr, char *str)
 	i = 0;
 	while (arr[i] != NULL)
 		i++;
-	rtn = ft_calloc(sizeof(char *), i + 1);
+	rtn = ft_calloc(i + 1, sizeof(char *));
 	if (!rtn)
 		return (NULL);
 	rtn = whileloop_del_var(arr, rtn, str);

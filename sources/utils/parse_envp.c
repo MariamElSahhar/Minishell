@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 14:48:37 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:27:44 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	find_pwd(t_utils *utils)
 		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
 			utils->pwd = ft_substr(utils->envp[i],
 					4, ft_strlen(utils->envp[i]) - 4);
-		if (!ft_strncmp(utils->envp[i], "OLDPWD=", 7))
+		else if (!ft_strncmp(utils->envp[i], "OLDPWD=", 7))
 			utils->old_pwd = ft_substr(utils->envp[i],
 					7, ft_strlen(utils->envp[i]) - 7);
 		i++;

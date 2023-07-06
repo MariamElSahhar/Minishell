@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:59 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 14:07:20 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:24:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**add_var(char **arr, char *str)
 		delete_quotes(str, '\'');
 	while (arr[i] != NULL)
 		i++;
-	rtn = ft_calloc(sizeof(char *), i + 2);
+	rtn = ft_calloc(i + 2, sizeof(char *));
 	if (!rtn)
 	{
 		ft_error(1, 0);

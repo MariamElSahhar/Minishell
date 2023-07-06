@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 14:38:48 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:22:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int	main(int argc, char **argv, char **envp)
 	init_signals();
 	printf("\n%s\n\n", WELCOME_MSG);
 	minishell_loop(&utils, envp);
+	printf("done\n");
 	return (0);
 }

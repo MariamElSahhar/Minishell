@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/24 11:43:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:46:09 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 	}
 	str = ft_arrdup(cmds->args);
 	// free before you determine the exit_code and exit
-	free_utils(utils);
+	reset_utils(utils);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
 }

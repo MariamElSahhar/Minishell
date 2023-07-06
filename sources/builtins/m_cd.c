@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 17:33:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:12:55 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	specific_path(t_utils *utils, char *str)
 	// if it didn't successfully change the directory it will go inside the if condition to print error
 	if (ret != 0)
 	{
+		tmp = str;
 		str = ft_substr(str, 0, ft_strlen(str) - 1);
 		ft_putstr_fd(str, STDERR_FILENO);
+		free(tmp);
 		free(str);
 		ft_putendl_fd(" not set", STDERR_FILENO);
 	}
