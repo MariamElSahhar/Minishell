@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 17:38:41 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:34:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	minishell_loop(t_utils *utils, char **envp)
 		utils->envp = ft_arrdup(envp);
 		find_pwd(utils);
 		implement_utils(utils);
-		char input [] = "echo hi";
+		char input [] = "echo $?";
 		utils->input = ft_strdup(input);
 		if (!utils->input)
 		{

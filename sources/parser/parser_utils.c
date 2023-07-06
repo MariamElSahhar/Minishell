@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/06 14:13:23 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:28:16 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	*ft_getenv(char *var, t_utils *utils)
 {
 	int		i;
 	char	**value;
+	char	*ret;
 
 	i = -1;
 	while (utils->envp[++i])
@@ -93,8 +94,9 @@ char	*ft_getenv(char *var, t_utils *utils)
 		if (!ft_strncmp(var, value[0], ft_strlen(value[0]))
 			&& !ft_strncmp(var, value[0], ft_strlen(var)))
 		{
-			free(value[0]);
-			return (value[1]);
+			ret = ft_strdup(value[1]);
+			free_double_ptr((void **) value);
+			return (ret);
 		}
 		free_double_ptr((void **) value);
 	}

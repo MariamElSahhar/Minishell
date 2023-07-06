@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/06 14:08:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:30:21 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	while (k < (int)ft_strlen(str))
 		full[j++] = str[k++];
 	free(str);
+	free(exp);
 	return (full);
 }
 
