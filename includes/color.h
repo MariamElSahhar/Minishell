@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/01 15:14:17 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:46:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _COLOR_H_
-#define _COLOR_H_
+#ifndef COLOR_H
+# define COLOR_H
 
 # define RESET_COLOR	"\033[0m"
 # define BLACK   		"\033[30m"

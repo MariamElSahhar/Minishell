@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 17:34:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:42:52 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,30 @@ void	print_split(t_split *split)
 			printf(" - STR\n");
 		ptr = ptr->next;
 	}
+}
+
+char	*expand_env_quotes (t_word *word, int *i, t_utils *utils)
+{
+	if (word->cont[(*i)] == '\'')
+		skip_quotes(i, word->cont);
+	else if (word->cont[(*i)] == '\"')
+	{
+		(*i)++;
+		while (word->cont[(*i)] && word->cont[(*i)] != '\"')
+		{
+			if (word->cont[(*i)] == '$')
+			{
+				if (word->cont[(*i) + 1] && word->cont[(*i) + 1] == '?')
+					word->cont = expand_err(word->cont, i);
+				else
+					found_env(word->cont, i, word, utils);
+				break ;
+			}
+			else
+				(*i)++;
+		}
+		if (word->cont[(*i)] == '\"')
+			(*i)++;
+	}
+	return (word->cont);
 }
