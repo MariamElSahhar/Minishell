@@ -1,7 +1,7 @@
 NAME = minishell
-# MKDIR = mkdir
-# specifies the command used to create directories, which is "mkdir"
+FLAGS = -Wall -Werror -Wextra -g 
 CC = gcc
+
 
 LIBFTP = libft/
 PATHB = build/
@@ -51,8 +51,6 @@ sources	=	sources/main.c \
 		sources/parser/tokens.c
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
-
-FLAGS	=	-Wall -Werror -Wextra -g
 
 LIBFT	=	./libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/06 15:23:27 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 10:58:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	add_redir(t_split *split, char *input, int *i)
 static int	add_quote(t_split *split, char *input, int *i)
 {
 	int		start;
-	int		j;
 	int		len;
 	char	*str;
 
@@ -55,12 +54,12 @@ static int	add_quote(t_split *split, char *input, int *i)
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
-		return (0);
-	j = 0;
-	while ((j + start) < (*i))
+		return (!ft_error(1, 0));
+	len = 0;
+	while ((len + start) < (*i))
 	{
-		str[j] = input[start + j];
-		j++;
+		str[len] = input[start + len];
+		len++;
 	}
 	if (!push_word(split, str, QUOTE))
 		return (0);

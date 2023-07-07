@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/07 09:51:11 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 10:52:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,12 @@ int	comb_quote_len(char *str)
 }
 
 // returns the combined-quote string
-char	*comb_quote_str(t_word *word, size_t len)
+char	*comb_quote_str(t_word *word, char *comb)
 {
-	char	*comb;
 	int		i;
 	int		j;
 	char	quote;
 
-	comb = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!comb)
-		return (0);
 	i = 0;
 	j = 0;
 	while (word->cont && word->cont[i])
@@ -75,7 +71,10 @@ int	expand_quote(t_word *word)
 	if (!ft_strchr(word->cont, '\'') && !ft_strchr(word->cont, '\"'))
 		return (0);
 	len = comb_quote_len(word->cont);
-	comb = comb_quote_str(word, len);
+	comb = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!comb)
+		return (0);
+	comb = comb_quote_str(word, comb);
 	if (!comb)
 		return (0);
 	free(word->cont);

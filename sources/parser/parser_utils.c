@@ -6,11 +6,26 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/06 18:28:16 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:01:48 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd)
+{
+	new_cmd->args = init_args(ptr);
+	while (ptr && ptr->type != PIPE)
+	{
+		if (ptr->type == CMD)
+			new_cmd->command = ptr->cont;
+		else if (ptr->type == REDIR)
+			new_cmd = push_redir(new_cmd, ptr);
+		ptr = ptr->next;
+	}
+	new_cmd->args[0] = new_cmd->command;
+	return (ptr);
+}
 
 // ints the argument list
 char	**init_args(t_word *start)
@@ -61,20 +76,6 @@ void	push_cmd(t_utils *utils, t_cmds *cmd)
 	}
 }
 
-// changes i to the index of the end of the flag
-void	end_of_flag(char *input, int *i)
-{
-	while (input[(*i)] && !is_space(input[(*i)]) && !is_symbol(input[(*i)]))
-	{
-		while (input[(*i)] && !(is_space(input[(*i)])
-				|| is_symbol(input[(*i)]) || is_quote(input[(*i)])))
-			(*i)++;
-		while (input[(*i)] && is_quote(input[(*i)]))
-			skip_quotes(i, input);
-	}
-}
-
-
 // returns value of the variable var in utils.envp
 char	*ft_getenv(char *var, t_utils *utils)
 {
@@ -101,4 +102,15 @@ char	*ft_getenv(char *var, t_utils *utils)
 		free_double_ptr((void **) value);
 	}
 	return ("");
+}
+
+char	*expand_err(char *cont, int *i)
+{
+	(*i) = (*i) + 2;
+	cont = replace_env(cont, i,
+			ft_itoa(g_global.error_code), 1);
+	if (!cont)
+		return (0);
+	(*i) = 0;
+	return (cont);
 }

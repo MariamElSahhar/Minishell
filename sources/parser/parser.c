@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 15:14:51 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:22:58 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,10 @@ int	sort_tokens(t_split *split, t_utils *utils)
 	{
 		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
 		if (!new_cmd)
-			return(!ft_error(1, 0));
-		new_cmd->args = init_args(ptr);
-		if (!new_cmd->args)
+			return (!ft_error(1, 0));
+		ptr = init_cmd(ptr, new_cmd);
+		if (!new_cmd || !new_cmd->args)
 			return (0);
-		while (ptr && ptr->type != PIPE && new_cmd)
-		{
-			if (ptr->type == CMD)
-				new_cmd->command = ptr->cont;
-			else if (ptr->type == REDIR)
-				new_cmd = push_redir(new_cmd, ptr);
-			ptr = ptr->next;
-		}
-		if (!new_cmd)
-			return (0);
-		new_cmd->args[0] = new_cmd->command;
 		push_cmd(utils, new_cmd);
 		if (ptr && ptr->type == PIPE)
 			ptr = ptr->next;
@@ -74,7 +63,6 @@ int	parse_input(t_utils *utils)
 	sorted = sort_tokens(split, utils);
 	free_split(split);
 	utils->pipes = count_pipes(utils);
-	// write(STDOUT_FILENO, CLEAR_SCREEN_SEQ, ft_strlen(CLEAR_SCREEN_SEQ));
 	return (sorted);
 }
 

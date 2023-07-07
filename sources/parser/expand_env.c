@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/06 18:30:21 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:06:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	k = (*i);
 	while (k < (int)ft_strlen(str))
 		full[j++] = str[k++];
-	free(str);
-	free(exp);
+	if (str)
+		free(str);
 	return (full);
 }
-
 
 // finds location of env and allocates memory for replacement
 int	found_env(char *old, int *i, t_word *word, t_utils *utils)
@@ -50,7 +49,6 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	int		j;
 	char	*env;
 
-	// printf("old: %s\n", old);
 	len = 0;
 	j = (*i);
 	while (old[++j] && !is_space(old[j]) && old[j] != '$'
@@ -67,7 +65,6 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	if (!env)
 		return (0);
 	word->cont = replace_env(old, i, env, len);
-	// printf("new: %s\n", word->cont);
 	free(var);
 	if (!word->cont)
 		return (0);
@@ -80,25 +77,18 @@ int	expand_env_str(t_word *word, t_utils *utils)
 {
 	int		i;
 
-	if (!ft_strchr(word->cont, '$'))
-		return (1);
 	i = 0;
-	while (word->cont[i])
+	while (word->cont && word->cont[i])
 	{
-		if (word->cont[i] == '$' && word->cont[i + 1] && word->cont[i + 1] == '?')
-		{
-			i = i + 2;
-			word->cont = replace_env(word->cont, &i, ft_itoa(g_global.error_code), 1);
-			if (!word->cont)
-				return (0);
-			i = 0;
-		}
+		if (word->cont[i] == '$' && word->cont[i + 1]
+			&& word->cont[i + 1] == '?')
+			word->cont = expand_err(word->cont, &i);
 		else if (word->cont[i] == '$' && word->cont[i + 1]
-				&& check_valid_identifier(word->cont[i + 1]))
+			&& check_valid_identifier(word->cont[i + 1]))
 			i = i + 2;
 		else if (word->cont[i] == '$' && word->cont[i + 1]
-				&& !found_env(word->cont, &i, word, utils))
-				return (0);
+			&& !found_env(word->cont, &i, word, utils))
+			return (0);
 		else
 			i++;
 	}
@@ -115,7 +105,11 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 	i = 0;
 	while (word->cont[i])
 	{
-		if (word->cont[i] == '$' && !found_env(word->cont, &i, word, utils))
+		if (word->cont[i] == '$' && word->cont[i + 1]
+			&& word->cont[i + 1] == '?')
+			word->cont = expand_err(word->cont, &i);
+		else if (word->cont[i] == '$'
+			&& !found_env(word->cont, &i, word, utils))
 			return (0);
 		else if (word->cont[i] == '\'')
 			skip_quotes(&i, word->cont);
@@ -126,8 +120,11 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 			{
 				if (word->cont[i] == '$')
 				{
-					found_env(word->cont, &i, word, utils);
-					break;
+					if (word->cont[i + 1] && word->cont[i + 1] == '?')
+						word->cont = expand_err(word->cont, &i);
+					else
+						found_env(word->cont, &i, word, utils);
+					break ;
 				}
 				else
 					i++;

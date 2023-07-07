@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 09:28:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:39:52 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,32 +136,30 @@ Finally, the reset_utils function is called to reset the minishell state and res
 */
 void	minishell_loop(t_utils *utils, char **envp)
 {
-	// while (1)
-	// {
-		// utils->input = readline(READLINE_MSG);
+	while (1)
+	{
+		// char input [] = "echo \"hi\"\'$?\'";
+		// utils->input = ft_strdup(input);
+		utils->input = readline(READLINE_MSG);
 		utils->envp = ft_arrdup(envp);
 		find_pwd(utils);
 		implement_utils(utils);
-		char input [] = "\"\"";
-		utils->input = ft_strdup(input);
 		if (!utils->input)
 		{
 			// ft_putendl_fd("exit", STDOUT_FILENO);
 			reset_utils(utils);
-			// rl_replace_line("exit", 0);
+			rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
 		else if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
-			return ;
-			// continue ;
+			// return ;
+			continue ;
 		}
-		// add_history(utils->input);
-		// parse_input(utils);
+		add_history(utils->input);
 		if (parse_input(utils))
 			prepare_executor(utils);
 		reset_utils(utils);
-		// free(input);
-	// }
+	}
 }
