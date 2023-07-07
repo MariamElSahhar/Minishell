@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:59 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 17:24:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:55:40 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ int	variable_exist(t_utils *utils, char *str)
 	return (0);
 }
 
+/*verifies that a variable is not a digit. 
+if it is, returns an error not valid identifier.*/
 int	check_parameter(char *str)
 {
 	int	i;
 
 	i = 0;
-	//verifies that a variable is not a digit. if it is, returns an error not valid identifier.
 	if (ft_isdigit(str[0]))
 		return (EXIT_FAILURE);
 	if (equal_sign(str) == 0)
@@ -55,7 +56,9 @@ int	check_parameter(char *str)
 	}
 	return (EXIT_SUCCESS);
 }
-/* copies the existing environment variables (arr) and adding a new variable (str) at the end of the copied list */
+
+/* copies the existing environment variables (arr) and
+ adding a new variable (str) at the end of the copied list */
 char	**whileloop_add_var(char **arr, char **rtn, char *str)
 {
 	int	i;
@@ -107,19 +110,20 @@ char	**add_var(char **arr, char *str)
 	return (rtn);
 }
 
+/* if the command export is passed without any 
+arguments we just return env (acts as env)
+if there is a second argument it will go inside the while loop
+variable exist will check if str exist in env variable */
 int	m_export(t_utils *utils, t_cmds *cmds)
 {
 	char	**tmp;
 	int		i;
 
 	i = 1;
-	// if the command export is passed without any arguments we just return env (acts as env)
 	if (!cmds->args[1] || cmds->args[1][0] == '\0')
 		m_env(utils, cmds);
 	else
 	{
-		// if there is a second argument it will go inside the while loop
-		// variable exist will check if str exist in env variable
 		while (cmds->args[i])
 		{
 			if (!check_parameter(cmds->args[i])
@@ -137,10 +141,11 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 }
 
 /*
-the function calls ft_strlcpy to copy the remaining part of the string str (after the consecutive occurrences of c)
+the function calls ft_strlcpy to copy the remaining
+part of the string str (after the consecutive 
+occurrences of c)
+Supposed to be added in utils file in parser folder
 */
-// Supposed to be added in utils file in parser folder
-
 char	*delete_quotes(char *str, char c)
 {
 	int	i;

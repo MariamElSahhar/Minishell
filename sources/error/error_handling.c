@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 19:59:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:38:19 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief
- * Finds corresponding error and frees args;
- * @param error
- * Number of related error:
- * 0 = If there is no string following a redirection or a pipe.
- * @param utils
- */
 int	ft_error(int error, t_utils *utils)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

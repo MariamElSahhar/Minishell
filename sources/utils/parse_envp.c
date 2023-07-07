@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 17:27:44 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:36:33 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 // get's hold of the present working directory and old pwd from the copied envp (utils->envp)
-/*
-This function takes a t_utils structure (which likely holds some utility variables) as a parameter.
-It iterates through the utils->envp array, which is assumed to be an array of strings containing environment variables.
-Inside the loop, it checks each element of utils->envp to find the environment variables for "PWD" and "OLDPWD" (present working directory and old working directory, respectively).
-If a matching environment variable is found, it extracts the value part (after the equals sign) using ft_substr and assigns it to utils->pwd or utils->old_pwd.
-Finally, the function returns 1, indicating success.
-*/
+
 int	find_pwd(t_utils *utils)
 {
 	int	i;
@@ -36,6 +30,7 @@ int	find_pwd(t_utils *utils)
 	}
 	return (1);
 }
+
 /*
 This function takes a char** parameter called envp, which is assumed to be an array of strings containing
 environment variables. It iterates through the envp array, similar to the previous function.
@@ -57,6 +52,7 @@ char	*find_path(char **envp)
 	}
 	return (ft_strdup("\0"));
 }
+
 /*
 This function takes a t_utils structure (likely containing utility variables) as a parameter.
 It calls the find_path function, passing utils->envp as an argument, to obtain the "PATH" environment variable value.

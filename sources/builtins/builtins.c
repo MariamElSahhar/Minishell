@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:44 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/05 17:22:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:48:24 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// it accepts *str, and returns function pointer if there is no much it returns null.
+// it accepts *str, and returns function pointer
+// if there is no much it returns null.
 
 int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds)
 {

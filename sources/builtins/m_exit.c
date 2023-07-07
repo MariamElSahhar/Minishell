@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 15:46:09 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:52:34 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* void	free_utils(t_utils *utils)
-{
-	// free_arr function will free the double pointer array
-	free_arr(utils->paths);
-	free_arr(utils->envp);
-	free(utils->input);
-	ft_cmdsclear(&utils->cmds);
-	free(utils->pwd);
-	free(utils->old_pwd);
-	if (utils->pipes)
-		free(utils->pid);
-} */
 
 int	is_str_digit(char *str)
 {
@@ -39,14 +26,16 @@ int	is_str_digit(char *str)
 	return (1);
 }
 
+/*if exit is passed without any argument it returns 0
+checks if the second argument (str[1]) after the
+ "exit" command is a valid numeric value.
+*/
 void	determine_exit_code(char **str)
 {
 	int	exit_code;
 
-	// if exit is passed without any argument it returns 0
 	if (!str[1])
 		exit_code = 0;
-	// checks if the second argument (str[1]) after the "exit" command is a valid numeric value.
 	else if (is_str_digit(str[1]))
 		exit_code = ft_atoi(str[1]);
 	else
@@ -60,19 +49,19 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
+// This check if the exit function has more that two arguments
+// free before you determine the exit_code and exit
 int	m_exit(t_utils *utils, t_cmds *cmds)
 {
 	char	**str;
 
 	ft_putendl_fd("exit", STDERR_FILENO);
-	// This check if the exit function has more that two arguments
 	if (cmds->args[1] && cmds->args[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	str = ft_arrdup(cmds->args);
-	// free before you determine the exit_code and exit
 	reset_utils(utils);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
