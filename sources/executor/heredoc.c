@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:36:58 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/07 18:50:25 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,16 @@ It starts by saving the initial value of
 "start". This is doen to ensure that the 
 'cmd->redirection' pionter is reset
 to the beginning of the list.
-/*
+ 
 Initializes the variable sl to EXIT_SUCCESS. 
 This variable will store the success or
 failure status of the ft_heredoc function, 
 which is called for each here document.
-*/
-/*
+ 
 Inside the loop, it checks if the current 
 redirection token
 is LESS_LESS, indicating a here document.
-*/
-/*
+ 
 It frees the previously stored 
 'cmd->hd_file_name' (if any)
 to avoid memory leaks
