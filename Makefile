@@ -1,7 +1,6 @@
 NAME = minishell
-FLAGS = -Wall -Werror -Wextra -g 
+FLAGS = -Wall -Werror -Wextra -g
 CC = gcc
-
 
 LIBFTP = libft/
 PATHB = build/
@@ -43,8 +42,8 @@ sources	=	sources/main.c \
 		sources/lexer/lexer_utils.c \
 		sources/lexer/lexer_validation.c \
 		sources/lexer/symbol_utils.c \
-		sources/parser/expand_env.c \
-		sources/parser/combine_quotes.c \
+		sources/lexer/expand_env.c \
+		sources/lexer/combine_quotes.c \
 		sources/parser/parser.c \
 		sources/parser/parser_utils.c \
 		sources/parser/redirections.c \
@@ -63,10 +62,10 @@ HEADER	=	.includes/builtins.h \
 			.includes/lexer.h \
 			.includes/utils.h
 
-# READLINE_DIR = $(shell brew --prefix readline)
+READLINE_DIR = $(shell brew --prefix readline)
 
-# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L libraries/libft/ -lft
-READLINE_LIB = -lreadline -lhistory -lreadline -Llibft/ -lft
+READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L$(LIBFTP) -lft
+# READLINE_LIB = -lreadline -lhistory -lreadline -Llibft/ -lft
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
