@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 18:46:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 09:52:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	handle_cmd(t_cmds *cmd, t_utils *utils)
 		reset_utils(utils);
 		exit(exit_code); //MEMORY ISSUE DUE TO EXIT WITHOUT FREE
 	}
-	else if (cmd->command && cmd->command[0] != '\0')
+	else if (cmd->command)
 		exit_code = find_cmd(cmd, utils);
 	reset_utils(utils);
 	exit(exit_code); //EXIT WITHOUT FREE

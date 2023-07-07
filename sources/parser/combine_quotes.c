@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_quotes.c                                    :+:      :+:    :+:   */
+/*   combine_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 19:41:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 09:51:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ char	*comb_quote_str(t_word *word, size_t len)
 			else
 			{
 				while (word->cont[i] && word->cont[i] != quote)
-				{
 					comb[j++] = word->cont[i++];
-				}
 				i++;
 			}
 		}
@@ -86,7 +84,7 @@ int	expand_quote(t_word *word)
 }
 
 // finds quotes, calls expander, and replaces with correct type
-int	expand_split(t_split *split)
+int	combine_quotes(t_split *split)
 {
 	t_word	*ptr;
 

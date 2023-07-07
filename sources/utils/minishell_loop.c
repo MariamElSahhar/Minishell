@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 18:40:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 09:28:38 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,8 @@ void	minishell_loop(t_utils *utils, char **envp)
 		// add_history(utils->input);
 		// parse_input(utils);
 		if (parse_input(utils))
-		{
-			printf("execution:\n");
 			prepare_executor(utils);
-		}
 		reset_utils(utils);
-		printf("reset utils\n");
 		// free(input);
 	// }
 }

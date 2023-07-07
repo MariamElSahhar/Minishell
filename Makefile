@@ -44,7 +44,7 @@ sources	=	sources/main.c \
 		sources/lexer/lexer_validation.c \
 		sources/lexer/symbol_utils.c \
 		sources/parser/expand_env.c \
-		sources/parser/expand_quotes.c \
+		sources/parser/combine_quotes.c \
 		sources/parser/parser.c \
 		sources/parser/parser_utils.c \
 		sources/parser/redirections.c \

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:14:20 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/24 14:57:12 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 09:47:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		push_word(t_split *split, char *c, int type);
 void	free_split(t_split *split);
 int		define_word(char *input, int *i, t_split *split);
 void	print_split(t_split *split);
-int		expand_split(t_split *split);
+int		combine_quotes(t_split *split);
 t_word	*new_word(char *c, int type);
 int		expand_env(t_split *split, t_utils *utils);
 void	sort_split(t_split *split);
