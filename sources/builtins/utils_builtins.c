@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:10 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 13:59:45 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:51:06 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ int	invalid_identifier(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '|' || str[i] == '<' || str[i] == '>' || str[i] == '[' || str[i] == ']'
-		|| str[i] == '\'' || str[i] == '\"' || str[i] == ' ' || str[i] == ',' || str[i] == '.'
-		|| str[i] == ':' || str[i] == '/' || str[i] == '{' || str[i] == '}' || str[i] == '+'
-		|| str[i] == '^' || str[i] == '%' || str[i] == '#' || str[i] == '@' || str[i] == '!'
-		|| str[i] == '~'
-		|| str[i] == '-' || str[i] == '?' || str[i] == '&' || str[i] == '*')
+		if (str[i] == '|' || str[i] == '<' || str[i] == '>'
+			|| str[i] == '[' || str[i] == ']'
+			|| str[i] == '\'' || str[i] == '\"' || str[i] == ' '
+			|| str[i] == ',' || str[i] == '.'
+			|| str[i] == ':' || str[i] == '/' || str[i] == '{'
+			|| str[i] == '}' || str[i] == '+'
+			|| str[i] == '^' || str[i] == '%' || str[i] == '#'
+			|| str[i] == '@' || str[i] == '!' || str[i] == '~'
+			|| str[i] == '-' || str[i] == '?' || str[i] == '&' || str[i] == '*')
 			return (1);
 	}
 	return (0);
