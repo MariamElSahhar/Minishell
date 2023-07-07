@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/07 13:06:18 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:45:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 		full[j++] = str[k++];
 	if (str)
 		free(str);
+	*i = 0;
 	return (full);
 }
 
@@ -68,7 +69,6 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	free(var);
 	if (!word->cont)
 		return (0);
-	*i = 0;
 	return (1);
 }
 
@@ -111,27 +111,8 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 		else if (word->cont[i] == '$'
 			&& !found_env(word->cont, &i, word, utils))
 			return (0);
-		else if (word->cont[i] == '\'')
-			skip_quotes(&i, word->cont);
-		else if (word->cont[i] == '\"')
-		{
-			i++;
-			while (word->cont[i] && word->cont[i] != '\"')
-			{
-				if (word->cont[i] == '$')
-				{
-					if (word->cont[i + 1] && word->cont[i + 1] == '?')
-						word->cont = expand_err(word->cont, &i);
-					else
-						found_env(word->cont, &i, word, utils);
-					break ;
-				}
-				else
-					i++;
-			}
-			if (word->cont[i] == '\"')
-				i++;
-		}
+		else if (word->cont[i] == '\"' || word->cont[i] == '\'')
+			word->cont = expand_env_quotes(word, &i, utils);
 		else
 			i++;
 	}

@@ -6,12 +6,11 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:03:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 17:37:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:38:45 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 //checks for issues in input structure
 int	check_split(t_split *split)
