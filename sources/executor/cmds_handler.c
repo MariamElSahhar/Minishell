@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:41:13 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:04:17 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ command substitution in the command string.
 If the command is a built-in command (specifically mini_cd, 
 mini_exit, mini_export, or mini_unset), it calls the 
 corresponding built-in command
+
+WIFEXITED is a macro that checks whether a child 
+process has exited normally.
+status is a variable that likely holds
+the status information of a child process.
+The WEXITSTATUS macro retrieves the exit 
+status of a child process.
 */
 void	single_cmd(t_cmds *cmd, t_utils *utils)
 {

@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 18:50:25 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:57:56 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ condition of the here document loop in the
 create_heredoc function. When this flag is 
 set to a non-zero value,
 the loop in create_heredoc will exit,
- stopping the creation of the here document.
+stopping the creation of the here document.
 
 g_global.in_heredoc = 1;
 This flag is used to control the termination 
