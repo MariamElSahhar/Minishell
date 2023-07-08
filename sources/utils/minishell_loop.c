@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/08 17:44:21 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:19:26 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	free_utils(t_utils *utils)
 int	reset_utils(t_utils *utils)
 {
 	free_utils(utils);
-	// implement_utils(utils);
 	utils->reset = true;
 	return (1);
 }
@@ -147,44 +146,17 @@ int	prepare_executor(t_utils *utils)
 	g_global.in_cmd = 0;
 	return (EXIT_SUCCESS);
 }
-/*
-This function represents the main loop
-of the minishell program.
-It reads user input using the readline 
-function and stores it in utils->args.
-It trims any leading or trailing whitespace
-from the input using ft_strtrim.
-If the input is empty (only contains whitespace),
-it returns to the reset_utils function to reset
-the minishell state and restart the loop.
-The input is added to the command history using
-add_history from the readline library.
-The count_quotes function is called to check if 
-the quotes in the input are balanced. If they are
-unbalanced, an error is returned.
-The token_reader function is called to tokenize 
-the input string into individual tokens and create
-a linked list of tokens (utils->lexer_list).
-The parser function is called to parse the tokens
-and build a syntax tree.
-The prepare_executor function is called to
-execute the commands based on the parsed input.
-Finally, the reset_utils function is called 
-to reset the minishell state and restart the loop.
-*/
+
 void	minishell_loop(t_utils *utils, char **envp)
 {
 	while (1)
 	{
-		// char input [] = "echo \"hi\"\'$?\'";
-		// utils->input = ft_strdup(input);
 		utils->input = readline(READLINE_MSG);
 		utils->envp = ft_arrdup(envp);
 		find_pwd(utils);
 		implement_utils(utils);
 		if (!utils->input)
 		{
-			// ft_putendl_fd("exit", STDOUT_FILENO);
 			reset_utils(utils);
 			rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
