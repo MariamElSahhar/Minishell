@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 13:36:58 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:58:29 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 /*
 find_matching_quote function:
 
-Parameters: line (char array), i (int), num_del (pointer to int), del (int)
-Returns: The number of characters between the current position i and the matching closing quote.
-This function is used to find the matching closing quote (either single quote ' or double quote ")
+Parameters: line (char array), i (int), 
+num_del (pointer to int), del (int)
+Returns: The number of characters between
+ the current position i and the matching closing quote.
+This function is used to find the matching closing 
+quote (either single quote ' or double quote ")
 in a given line of text.
-It starts from the position i and iterates through the characters until it finds the closing quote del.
-While iterating, it also counts the number of delimiter characters encountered (num_del).
-If the closing quote is found, it increments num_del by 1 and returns the number of characters between
+It starts from the position i and iterates through 
+the characters until it finds the closing quote del.
+While iterating, it also counts the number of 
+delimiter characters encountered (num_del).
+If the closing quote is found, it increments 
+num_del by 1 and returns the number of characters between
 the opening and closing quotes.
-This function is likely used in the count_quotes function to handle quoted strings properly.
+This function is likely used in the count_quotes 
+function to handle quoted strings properly.
 */
 int	find_matching_quote(char *line, int i, int *num_del, int del)
 {
@@ -41,12 +48,20 @@ int	find_matching_quote(char *line, int i, int *num_del, int del)
 count_quotes function:
 ----------------------
 Parameter: line (char array)
-Returns: 1 if the number of single quotes ' and double quotes " is even and balanced, 0 otherwise.
-This function counts the number of single quotes and double quotes in the given line.
-It iterates through the characters of the line and whenever it encounters a single quote or
-double quote, it uses the find_matching_quote function to find the matching closing quote.
-If the count of either single quotes or double quotes is odd, indicating an imbalance, the function returns 0.
-If both counts are even, it returns 1 to indicate that the quotes are balanced.
+Returns: 1 if the number of single quotes 
+' and double quotes " is even and balanced,
+ 0 otherwise.
+This function counts the number of single 
+quotes and double quotes in the given line.
+It iterates through the characters of the 
+line and whenever it encounters a single quote or
+double quote, it uses the find_matching_quote
+ function to find the matching closing quote.
+If the count of either single quotes or double
+ quotes is odd, indicating an imbalance, 
+ the function returns 0.
+If both counts are even, it returns 1 to 
+indicate that the quotes are balanced.
 */
 int	count_quotes(char *line)
 {
@@ -68,18 +83,28 @@ int	count_quotes(char *line)
 		return (0);
 	return (1);
 }
+
 /*
 ft_arrdup function:
 
 Parameter: arr (array of char pointers)
 Returns: A duplicated array of strings.
-This function creates a duplicate of an array of strings.
-It first calculates the number of strings in the array by iterating until it encounters a NULL pointer.
-Then it allocates memory for a new array rtn of size i + 1, where i is the number of strings in the original array.
-Next, it iterates through each string in the original array, duplicates it using ft_strdup, and stores
+This function creates a duplicate of an array 
+of strings.
+It first calculates the number of strings in 
+the array by iterating until it encounters a 
+NULL pointer.
+Then it allocates memory for a new array rtn 
+of size i + 1, where i is the number of strings
+ in the original array.
+Next, it iterates through each string in the 
+original array, duplicates it using ft_strdup,
+ and stores
 the duplicated string in the new array rtn.
-If any allocation fails during the process, it frees the partially allocated memory and returns NULL.
-If the duplication is successful for all strings, it returns the duplicated array rtn.
+If any allocation fails during the process, 
+it frees the partially allocated memory and returns NULL.
+If the duplication is successful for all 
+strings, it returns the duplicated array rtn.
 */
 char	**ft_arrdup(char **arr)
 {

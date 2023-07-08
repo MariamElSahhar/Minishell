@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 18:50:11 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:24:32 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_arr(char **split_arr)
 	}
 	free(split_arr);
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {
