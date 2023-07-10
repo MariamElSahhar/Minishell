@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.h                                         :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/06/23 18:18:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:12:58 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTER_H
-# define EXECUTER_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 # include "parsing.h"
 # include "minishell.h"
 
