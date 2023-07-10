@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:24:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:26:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,8 @@ int	implement_utils(t_utils *utils)
 	parse_envp(utils);
 	return (1);
 }
-/*
-The reset_utils function is called to reset
- the utils structure and restart the minishell
- loop if needed.
-This function resets the utils structure and
-restarts the minishell loop if needed.
-It frees the memory allocated for the command
- list (cmdss), arguments (args), process IDs
- (pid), and paths (paths).
-It calls the implement_utils function to
-re-initialize the utils structure with
-default values and set up the environment.
-Finally, it calls the minishell_loop
-function to restart the minishell loop.
-*/
 
+// frees memory associated with a cmd
 void	free_cmd(t_cmds *cmd)
 {
 	t_redir	*ptr;
@@ -73,6 +59,7 @@ void	free_cmd(t_cmds *cmd)
 	free(cmd);
 }
 
+// resets utils variables
 int	reset_utils(t_utils *utils)
 {
 	t_cmds	*ptr;
