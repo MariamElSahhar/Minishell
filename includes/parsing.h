@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/07 13:01:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:22:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "lexer.h"
 
 # define CLEAR_SCREEN_SEQ "\033[2J\033[H"
-
 
 typedef struct s_cmds	t_cmds;
 typedef struct s_redir	t_redir;

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:42:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:22:20 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-
 int		parse_envp(t_utils *utils);
 int		find_pwd(t_utils *utils);
 int		reset_utils(t_utils *utils);
@@ -45,7 +44,6 @@ void	init_signals(void);
 char	*delete_quotes_value(char *str);
 char	*delete_quotes(char *str, char c);
 char	*delete_quotes_export(char *str, char c);
-
 
 //builtins
 int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);

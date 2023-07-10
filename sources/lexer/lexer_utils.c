@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/10 18:20:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:20:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_split(t_split *split)
 	}
 }
 
-char	*expand_env_quotes (t_word *word, int *i, t_utils *utils)
+char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
 {
 	if (word->cont[(*i)] == '\'')
 		skip_quotes(i, word->cont);

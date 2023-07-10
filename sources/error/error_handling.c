@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 13:38:19 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:20:44 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	ft_error(int error, t_utils *utils)
 	else if (error == 2)
 		ft_putstr_fd("syntax error: unable to locate closing quotation\n",
 			STDERR_FILENO);
-	else if (error == 3)
-		ft_putstr_fd("Parser problem\n", STDERR_FILENO);
 	else if (error == 4)
 		ft_putstr_fd("Failed to create pipe\n", STDERR_FILENO);
 	else if (error == 5)

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:05:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:21:58 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	minishell_loop(t_utils *utils)
 	while (1)
 	{
 		utils->input = readline(READLINE_MSG);
-		// utils->input = ft_strdup("");
 		implement_utils(utils);
 		if (!utils->input)
 		{
@@ -29,7 +28,6 @@ void	minishell_loop(t_utils *utils)
 		else if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
-			// return ;
 			continue ;
 		}
 		add_history(utils->input);
