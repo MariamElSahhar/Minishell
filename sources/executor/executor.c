@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 15:20:38 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:21:24 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// pipe_wait: This function waits for child processes to complete execution 
+// pipe_wait: This function waits for child processes to complete execution
 // when multiple pipes are used. It takes an
-// array of process IDs (pid) and the number of 
+// array of process IDs (pid) and the number of
 // processes (amount) as arguments. It iterates over the array of process
 // IDs and waits for each child process to exit using waitpid.
 //  After all child processes have exited, it checks the exit
-// status using WIFEXITED and sets the global g_global.error_num 
+// status using WIFEXITED and sets the global g_global.error_num
 // to the exit status of the last child process. It returns EXIT_SUCCESS.
 
 int	pipe_wait(int *pid, int amount)
@@ -38,12 +38,12 @@ int	pipe_wait(int *pid, int amount)
 	return (EXIT_SUCCESS);
 }
 
-// ft_fork: This function is responsible for forking a 
-// child process and executing the command. It takes a t_utils pointer, 
+// ft_fork: This function is responsible for forking a
+// child process and executing the command. It takes a t_utils pointer,
 // an array of
 // pipe file descriptors (end), the input file descriptor (fd_in),
 // and a t_cmds pointer as arguments. It first checks if the utils->reset
-// flag is set and resets the static variable i if necessary. 
+// flag is set and resets the static variable i if necessary.
 // Then, it forks a child process using fork and assigns the process ID to
 // utils->pid[i]. If the fork fails, it calls ft_error to handle the error.
 //  In the child process, it calls the dup_cmd function to
@@ -71,9 +71,9 @@ check_fd_heredoc: This function checks the file
 descriptor for input redirection. It takes a t_utils pointer,
 an array of pipe file descriptors (end), and a t_cmds pointer
 as arguments. If the utils->heredoc flag is set,
-indicating the use of a here document, it closes 
+indicating the use of a here document, it closes
 the read end of the pipe (end[0]), opens the here document
-file in read-only mode, and returns the file descriptor. 
+file in read-only mode, and returns the file descriptor.
 Otherwise, it returns end[0], which represents the
 standard input file descriptor.
 */
@@ -92,8 +92,8 @@ int	check_fd_heredoc(t_utils *utils, int end[2], t_cmds *cmd)
 	return (fd_in);
 }
 /*
-Initializes fd_in to STDIN_FILENO, representing the 
-standard input file descriptor. Enters a loop to 
+Initializes fd_in to STDIN_FILENO, representing the
+standard input file descriptor. Enters a loop to
 iterate over the command structures (t_cmds) in utils->cmds.
 Calls the call_expander function to expand the command and redirections.
 If there is a next command (utils->cmds->next), it creates
@@ -128,26 +128,44 @@ int	executor(t_utils *utils)
 	pipe_wait(utils->pid, utils->pipes);
 	return (0);
 }
+
 /*
-This function returns the first node of the t_cmds linked list.
-It takes the head of the list (map) as the argument.
-It iterates through the list by following the prev 
-pointers until it reaches the first node (where map->prev is NULL).
-If the list is empty, it returns NULL.
-Otherwise, it returns the pointer to the first node.
+The prepare_executor function is responsible for setting
+ up the executor to execute commands entered by the user.
+It sets up signal handling and calls the appropriate
+functions depending on whether there are pipes or not.
+This function sets up the executor to execute commands
+entered by the user.
+It sets up the signal handling for the execution
+ of commands, specifically handling the SIGQUIT
+ signal (usually triggered by pressing Ctrl+).
+It sets the in_cmd flag in the g_global structure
+ to indicate that the minishell is currently
+  executing a command.
+If there are no pipes in the command, it
+calls the single_cmd function to execute
+the single command stored in the command list (cmdss).
+If there are pipes in the command, it
+allocates memory for an array of process IDs
+ (pid) to track the child processes.
+It calls the executor function to execute the
+commands with pipes, which handles the creation
+of pipes, forking child processes, and connecting
+them with pipes for communication.
 */
-
-t_cmds	*ft_cmdsfirst(t_cmds *map)
+int	prepare_executor(t_utils *utils)
 {
-	int	i;
-
-	i = 0;
-	if (!map)
-		return (NULL);
-	while (map->prev != NULL)
+	signal(SIGQUIT, sigquit_handler);
+	g_global.in_cmd = 1;
+	if (utils->pipes == 0)
+		single_cmd(utils->cmds, utils);
+	else
 	{
-		map = map->prev;
-		i++;
+		utils->pid = ft_calloc(utils->pipes + 2, sizeof(int));
+		if (!utils->pid)
+			return (ft_error(1, utils));
+		executor(utils);
 	}
-	return (map);
+	g_global.in_cmd = 0;
+	return (EXIT_SUCCESS);
 }

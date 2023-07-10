@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:09 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/08 19:19:26 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:21:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	minishell_loop(t_utils *utils, char **envp);
 
 /*
 This function initializes the utils
- structure with default values and 
+ structure with default values and
  sets up the environment.
 It sets various variables and flags
  in the utils structure to their initial values.
 It calls the parse_envp function to
- parse the environment variables and 
+ parse the environment variables and
  store them in the utils structure.
 It calls the init_signals function to
  set up signal handling for the minishell.
@@ -40,17 +40,17 @@ int	implement_utils(t_utils *utils)
 }
 /*
 The reset_utils function is called to reset
- the utils structure and restart the minishell 
+ the utils structure and restart the minishell
  loop if needed.
-This function resets the utils structure and 
+This function resets the utils structure and
 restarts the minishell loop if needed.
 It frees the memory allocated for the command
- list (cmdss), arguments (args), process IDs 
+ list (cmdss), arguments (args), process IDs
  (pid), and paths (paths).
-It calls the implement_utils function to 
-re-initialize the utils structure with 
+It calls the implement_utils function to
+re-initialize the utils structure with
 default values and set up the environment.
-Finally, it calls the minishell_loop 
+Finally, it calls the minishell_loop
 function to restart the minishell loop.
 */
 
@@ -104,47 +104,6 @@ int	reset_utils(t_utils *utils)
 	free_utils(utils);
 	utils->reset = true;
 	return (1);
-}
-
-/*
-The prepare_executor function is responsible for setting
- up the executor to execute commands entered by the user.
-It sets up signal handling and calls the appropriate 
-functions depending on whether there are pipes or not.
-This function sets up the executor to execute commands 
-entered by the user.
-It sets up the signal handling for the execution
- of commands, specifically handling the SIGQUIT 
- signal (usually triggered by pressing Ctrl+).
-It sets the in_cmd flag in the g_global structure
- to indicate that the minishell is currently
-  executing a command.
-If there are no pipes in the command, it 
-calls the single_cmd function to execute 
-the single command stored in the command list (cmdss).
-If there are pipes in the command, it 
-allocates memory for an array of process IDs
- (pid) to track the child processes.
-It calls the executor function to execute the 
-commands with pipes, which handles the creation 
-of pipes, forking child processes, and connecting
-them with pipes for communication.
-*/
-int	prepare_executor(t_utils *utils)
-{
-	signal(SIGQUIT, sigquit_handler);
-	g_global.in_cmd = 1;
-	if (utils->pipes == 0)
-		single_cmd(utils->cmds, utils);
-	else
-	{
-		utils->pid = ft_calloc(utils->pipes + 2, sizeof(int));
-		if (!utils->pid)
-			return (ft_error(1, utils));
-		executor(utils);
-	}
-	g_global.in_cmd = 0;
-	return (EXIT_SUCCESS);
 }
 
 void	minishell_loop(t_utils *utils, char **envp)

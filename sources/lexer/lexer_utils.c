@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/07 15:42:52 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:20:31 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// creates new workd
+// creates new word
 t_word	*new_word(char *c, int type)
 {
 	t_word	*word;

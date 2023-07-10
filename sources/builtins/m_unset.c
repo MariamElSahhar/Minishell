@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:19:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 	j = 0;
 	while (arr[i] != NULL)
 	{
-		// This compares str with the whole array (by iterating one by one) if it finds it doesn't go inside the if condition
-		// and that means doesn't copy the str.
 		if (!(ft_strncmp(arr[i], str, equal_sign(arr[i]) - 1) == 0
 				&& str[equal_sign(arr[i])] == '\0'
 				&& arr[i][ft_strlen(str)] == '='))

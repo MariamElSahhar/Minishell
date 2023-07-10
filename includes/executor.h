@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:19:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:21:38 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int				check_redirections(t_cmds *cmd);
 
 // executor
+int		prepare_executor(t_utils *utils);
 int				executor(t_utils *utils);
 int				pipe_wait(int *pid, int amount);
 

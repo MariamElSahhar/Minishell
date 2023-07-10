@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:10 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:20:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	change_path(t_utils *utils)
 	free(utils->old_pwd);
 	utils->old_pwd = tmp;
 	free(utils->pwd);
-	// This will get the current working directory. It is an inbuilt function from unistd.h
 	utils->pwd = getcwd(NULL, sizeof(NULL));
 }
 
