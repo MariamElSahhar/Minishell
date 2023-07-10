@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 17:12:51 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	variable_exist(t_utils *utils, char *str)
 	return (0);
 }
 
-/*verifies that a variable is not a digit. 
+/*verifies that a variable is not a digit.
 if it is, returns an error not valid identifier.*/
 int	check_parameter(char *str)
 {
@@ -75,7 +75,7 @@ char	**whileloop_add_var(char **arr, char **rtn, char *str)
 			rtn[i] = ft_strdup(arr[i]);
 		if (rtn[i] == NULL)
 		{
-			free_arr(rtn);
+			free_double_ptr((void **) rtn);
 			return (rtn);
 		}
 		i++;
@@ -110,7 +110,7 @@ char	**add_var(char **arr, char *str)
 	return (rtn);
 }
 
-/* if the command export is passed without any 
+/* if the command export is passed without any
 arguments we just return env (acts as env)
 if there is a second argument it will go inside the while loop
 variable exist will check if str exist in env variable */
@@ -131,7 +131,7 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 				&& !invalid_identifier(cmds->args[i]))
 			{
 				tmp = add_var(utils->envp, cmds->args[i]);
-				free_arr(utils->envp);
+				free_double_ptr((void **) utils->envp);
 				utils->envp = tmp;
 			}
 			i++;
@@ -142,7 +142,7 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 
 /*
 the function calls ft_strlcpy to copy the remaining
-part of the string str (after the consecutive 
+part of the string str (after the consecutive
 occurrences of c)
 Supposed to be added in utils file in parser folder
 */

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 15:51:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 			rtn[j] = ft_strdup(arr[i]);
 			if (rtn[j] == NULL)
 			{
-				free_arr(rtn);
+				free_double_ptr((void **) rtn);
 				return (rtn);
 			}
 			j++;
@@ -91,7 +91,7 @@ int	m_unset(t_utils *utils, t_cmds *cmds)
 	else
 	{
 		tmp = del_var(utils->envp, cmds->args[1]);
-		free_arr(utils->envp);
+		free_double_ptr((void **) utils->envp);
 		utils->envp = tmp;
 	}
 	return (EXIT_SUCCESS);

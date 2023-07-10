@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:52:34 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	determine_exit_code(char **str)
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit_code = 255;
 	}
-	free_arr(str);
+	free_double_ptr((void **) str);
 	exit(exit_code);
 }
 

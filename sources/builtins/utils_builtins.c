@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:10 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 15:51:06 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	*delete_quotes_value(char *str)
 	split_quotes = ft_split(str, '"');
 	if (!split_quotes[1])
 	{
-		free_arr(split_quotes);
+		free_double_ptr((void **) split_quotes);
 		split_quotes = ft_split(str, '\'');
 	}
 	free(str);
 	str = ft_strjoin(split_quotes[0], split_quotes[1]);
-	free_arr(split_quotes);
+	free_double_ptr((void **) split_quotes);
 	return (str);
 }
 

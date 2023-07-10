@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:12:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**ft_arrdup(char **arr)
 		rtn[i] = ft_strdup(arr[i]);
 		if (rtn[i] == NULL)
 		{
-			free_arr(rtn);
+			free_double_ptr((void **) rtn);
 			return (rtn);
 		}
 		i++;
