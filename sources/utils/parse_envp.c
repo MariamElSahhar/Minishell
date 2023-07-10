@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:27:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:42:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,11 @@ int	parse_envp(t_utils *utils)
 		i++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	init_utils(t_utils *utils, char **envp)
+{
+	utils->envp = ft_arrdup(envp);
+	parse_envp(utils);
+	find_pwd(utils);
 }
