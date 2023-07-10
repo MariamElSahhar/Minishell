@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:14:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:24:45 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ int	variable_exist(t_utils *utils, char *str)
 	int	i;
 
 	i = 0;
-	if (str[equal_sign(str)] == '\"')
-		delete_quotes(str, '\"');
-	if (str[equal_sign(str)] == '\'')
-		delete_quotes(str, '\'');
 	while (utils->envp[i])
 	{
 		if (ft_strncmp(utils->envp[i],
@@ -93,10 +89,6 @@ char	**add_var(char **arr, char *str)
 	size_t	i;
 
 	i = 0;
-	if (str[equal_sign(str)] == '\"')
-		delete_quotes(str, '\"');
-	if (str[equal_sign(str)] == '\'')
-		delete_quotes(str, '\'');
 	while (arr[i] != NULL)
 		i++;
 	rtn = ft_calloc(i + 2, sizeof(char *));
@@ -138,31 +130,4 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 		}
 	}
 	return (EXIT_SUCCESS);
-}
-
-/*
-the function calls ft_strlcpy to copy the remaining
-part of the string str (after the consecutive
-occurrences of c)
-Supposed to be added in utils file in parser folder
-*/
-char	*delete_quotes(char *str, char c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-		{
-			j = 0;
-			while (str[i + j] == c)
-				j++;
-			ft_strlcpy(&str[i], &str[i + j], strlen(str) - i);
-		}
-		i++;
-	}
-	return (str);
 }
