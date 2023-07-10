@@ -6,39 +6,40 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:59:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 19:05:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
+// accepts input from user for parsing and execution
 void	minishell_loop(t_utils *utils)
 {
-	// while (1)
-	// {
-	// 	utils->input = readline(READLINE_MSG);
-		utils->input = ft_strdup("exit");
+	while (1)
+	{
+		utils->input = readline(READLINE_MSG);
+		// utils->input = ft_strdup("");
 		implement_utils(utils);
 		if (!utils->input)
 		{
 			free_utils(utils);
-			// rl_replace_line("exit", 0);
+			rl_replace_line("exit", 0);
 			exit(EXIT_SUCCESS);
 		}
 		else if (utils->input[0] == '\0')
 		{
 			reset_utils(utils);
-			return ;
-			// continue ;
+			// return ;
+			continue ;
 		}
-		// add_history(utils->input);
+		add_history(utils->input);
 		if (parse_input(utils))
 			prepare_executor(utils);
 		reset_utils(utils);
-	// }
+	}
 }
 
+// initialization of minishell
 int	main(int argc, char **argv, char **envp)
 {
 	t_utils	utils;
