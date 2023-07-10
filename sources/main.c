@@ -6,20 +6,18 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:23:02 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:39:40 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 
-void	minishell_loop(t_utils *utils, char **envp)
+void	minishell_loop(t_utils *utils)
 {
 	while (1)
 	{
 		utils->input = readline(READLINE_MSG);
-		utils->envp = ft_arrdup(envp);
-		find_pwd(utils);
 		implement_utils(utils);
 		if (!utils->input)
 		{
@@ -50,6 +48,10 @@ int	main(int argc, char **argv, char **envp)
 	}
 	init_signals();
 	printf("\n%s\n\n", WELCOME_MSG);
-	minishell_loop(&utils, envp);
+	utils.envp = ft_arrdup(envp);
+	parse_envp(&utils);
+	find_pwd(&utils);
+	minishell_loop(&utils);
+	free_utils(&utils);
 	return (0);
 }

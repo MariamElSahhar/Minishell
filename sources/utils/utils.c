@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:26:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:36:23 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	implement_utils(t_utils *utils)
 	g_global.stop_heredoc = 0;
 	g_global.in_cmd = 0;
 	g_global.in_heredoc = 0;
-	parse_envp(utils);
 	return (1);
 }
 
@@ -76,14 +75,18 @@ int	reset_utils(t_utils *utils)
 		free(utils->input);
 	if (utils->pid)
 		free(utils->pid);
+	utils->reset = true;
+	return (1);
+}
+
+void	free_utils(t_utils *utils)
+{
 	if (utils->pwd)
 		free(utils->pwd);
 	if (utils->old_pwd)
 		free(utils->old_pwd);
 	free_double_ptr((void **)utils->envp);
 	free_double_ptr((void **)utils->paths);
-	utils->reset = true;
-	return (1);
 }
 
 /*

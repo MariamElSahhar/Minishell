@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_envp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/08 16:59:48 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:27:23 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-/* get's hold of the present working directory 
+
+/* gets hold of the present working directory
 and old pwd from the copied envp (utils->envp)
 */
 int	find_pwd(t_utils *utils)
@@ -44,7 +45,7 @@ Inside the loop, it looks for the environment
   it returns
 an empty string obtained by duplicating the
  null terminator character.
-Note: It assumes that ft_substr is a custom 
+Note: It assumes that ft_substr is a custom
 function to extract substrings.
 */
 char	*find_path(char **envp)
@@ -68,18 +69,18 @@ It calls the find_path function, passing utils->envp
  as an argument, to obtain the "PATH" environment
   variable value.
 The returned value is stored in path_from_envp.
-It then splits path_from_envp using ':' as the 
-delimiter to obtain individual paths, and 
+It then splits path_from_envp using ':' as the
+delimiter to obtain individual paths, and
 stores them in utils->paths
-using ft_split. After storing the paths, it frees 
+using ft_split. After storing the paths, it frees
 the memory allocated for path_from_envp.
 It then iterates through each path in utils->paths.
-For each path, it checks if the last character 
+For each path, it checks if the last character
 is not a slash ('/').
-If it's not a slash, it appends a slash to the 
-path using ft_strjoin and assigns the updated 
+If it's not a slash, it appends a slash to the
+path using ft_strjoin and assigns the updated
 path to utils->paths[i].
-Finally, the function returns EXIT_SUCCESS, 
+Finally, the function returns EXIT_SUCCESS,
 indicating successful parsing of the environment variables.
 */
 int	parse_envp(t_utils *utils)
