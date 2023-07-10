@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:12:58 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:19:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 # include "minishell.h"
 
 // check_redirections
-// int				check_outfile(t_lexer *redirections);
-// int				check_infile(t_lexer *redirections);
-// int				handle_redirections(t_cmds *cmd, t_utils *utils);
 int				check_redirections(t_cmds *cmd);
 
 // executor
 int				executor(t_utils *utils);
-t_cmds	*call_expander(t_utils *utils, t_cmds *cmd);
 int				pipe_wait(int *pid, int amount);
 
 // handle_cmd

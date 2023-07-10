@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:15:32 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:18:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,14 @@
 int		parse_envp(t_utils *utils);
 int		find_pwd(t_utils *utils);
 int		reset_utils(t_utils *utils);
-void	init_stri(int i, int j, t_utils *utils);
-char	**expander(t_utils *utils, char **str);
-char	*expander_str(t_utils *utils, char *str);
-size_t	dollar_sign(char *str);
-char	*char_to_str(char c);
-void	print_parser(t_cmds cmdss);
-char	*delete_quotes_value(char *str);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 void	init_signals(void);
+void	free_utils(t_utils *utils);
+
+char	*delete_quotes_value(char *str);
 char	*delete_quotes(char *str, char c);
 char	*delete_quotes_export(char *str, char c);
-void	free_utils(t_utils *utils);
 
 
 //builtins
