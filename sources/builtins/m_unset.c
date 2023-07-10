@@ -55,9 +55,6 @@ char	**del_var(char **arr, char *str)
 
 int	unset_error(t_cmds *cmds)
 {
-	int		i;
-
-	i = 0;
 	if (!cmds->args[1])
 	{
 		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
