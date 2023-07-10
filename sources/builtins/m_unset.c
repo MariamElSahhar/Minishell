@@ -67,7 +67,6 @@ int	unset_error(t_cmds *cmds)
 		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	i++;
 	if (equal_sign(cmds->args[1]) != 0)
 	{
 		ft_putendl_fd("minishell: unset: not a valid identifier",
