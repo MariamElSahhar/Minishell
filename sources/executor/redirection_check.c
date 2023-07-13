@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/06 15:25:07 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:58:55 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /*
-The function check_append_outfile takes a t_lexer 
-pointer named redirections as input and checks 
+The function check_append_outfile takes a t_lexer
+pointer named redirections as input and checks
 the type of output redirection (> or >>). If the
 redirection is >> (GREAT_GREAT), it opens the file
-in append mode (O_APPEND) using open. Otherwise, 
-it opens the file in write mode (O_TRUNC). The 
-function returns the file descriptor (fd) 
+in append mode (O_APPEND) using open. Otherwise,
+it opens the file in write mode (O_TRUNC). The
+function returns the file descriptor (fd)
 corresponding to the opened file.
 */
 int	check_append_outfile(t_redir *redir)
@@ -35,13 +35,13 @@ int	check_append_outfile(t_redir *redir)
 	return (fd);
 }
 /*
-The function handle_infile takes a char pointer 
+The function handle_infile takes a char pointer
 named file as input and handles input file redirection.
-It opens the file in read-only mode (O_RDONLY) 
+It opens the file in read-only mode (O_RDONLY)
 using open. If the file opening fails, it prints an error
 message and returns EXIT_FAILURE. If the file is
 successfully opened, it duplicates the file descriptor
-(fd) to the standard input file descriptor (STDIN_FILENO) 
+(fd) to the standard input file descriptor (STDIN_FILENO)
 using dup2. Finally, it closes the file descriptor
 if it's greater than zero and returns EXIT_SUCCESS.
 */
@@ -67,14 +67,29 @@ int	handle_infile(char *file)
 	return (EXIT_SUCCESS);
 }
 
+int	handle_open(t_redir *redir)
+{
+	int	fd;
+
+	fd = open(redir->path, O_CREAT, 0644);
+	if (fd < 0)
+	{
+		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	if (fd > 0)
+		close(fd);
+	return (EXIT_SUCCESS);
+}
+
 /*
-The function handle_outfile takes a t_lexer pointer 
+The function handle_outfile takes a t_lexer pointer
 named redirection as input and handles output file redirection. It calls
-the check_append_outfile function to open the file 
+the check_append_outfile function to open the file
 with the appropriate mode. If the file opening fails, it prints an
-error message and returns EXIT_FAILURE. If the file 
+error message and returns EXIT_FAILURE. If the file
 is successfully opened, it duplicates the file descriptor to the
-standard output file descriptor (STDOUT_FILENO) using 
+standard output file descriptor (STDOUT_FILENO) using
 dup2. Finally, it closes the file descriptor if it's greater
 */
 
@@ -99,24 +114,24 @@ int	handle_outfile(t_redir *redir)
 }
 /*
 This function checks for redirections
-If the redirection is LESS (<), it calls the 
+If the redirection is LESS (<), it calls the
 handle_infile() function with
 the file name specified in cmd->redirections->str.
  This function handles the input
-file redirection by opening the 
+file redirection by opening the
 file in read-only mode, duplicating the file descriptor
-to the standard input file descriptor (STDIN_FILENO) 
+to the standard input file descriptor (STDIN_FILENO)
 using dup2(), and closing the file descriptor.
 
-If the redirection is GREAT (>) or GREAT_GREAT (>>), 
+If the redirection is GREAT (>) or GREAT_GREAT (>>),
 it calls the handle_outfile() function
-with the current redirections element. This 
+with the current redirections element. This
 function handles the output file redirection by
-opening the file in either truncate or append mode, 
+opening the file in either truncate or append mode,
 duplicating the file descriptor to the standard
 output file descriptor (STDOUT_FILENO) using dup2(),
  and closing the file descriptor.
-if the redirection is LESS_LESS (<<), it calls the 
+if the redirection is LESS_LESS (<<), it calls the
 handle_infile() function with the here document file
 name specified in cmd->hd_file_name.
 This function handles the here document redirection
@@ -133,6 +148,11 @@ int	check_redirections(t_cmds *cmd)
 		if (redir->type == INPUT)
 		{
 			if (handle_infile(redir->path))
+				return (EXIT_FAILURE);
+		}
+		else if (redir->type == OPEN)
+		{
+			if (handle_open(redir))
 				return (EXIT_FAILURE);
 		}
 		else if (redir->type == WRITE

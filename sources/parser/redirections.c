@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:59 by melsahha          #+#    #+#             */
-/*   Updated: 2023/06/27 15:12:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:52:29 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	last_in_redir(t_cmds *cmd)
 	ptr = cmd->redirections;
 	while (ptr)
 	{
-		if (ptr->type == INPUT || ptr->type == HEREDOC)
+		if (ptr->type == INPUT)
 		{
 			type = ptr->type;
 			ptr->type = IGNORE;
