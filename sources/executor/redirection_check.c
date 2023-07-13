@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 18:58:55 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 19:02:32 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	handle_infile(char *file)
 	return (EXIT_SUCCESS);
 }
 
+// handles opening and creating file without writing
 int	handle_open(t_redir *redir)
 {
 	int	fd;
