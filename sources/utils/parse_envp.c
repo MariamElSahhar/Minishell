@@ -6,11 +6,39 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:58:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:36:52 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	check_pwd(t_utils *utils)
+{
+	char	**tmp;
+	char	*var;
+
+	if (!utils->envp)
+	{
+		utils->envp = (char **) ft_calloc(3, sizeof(char *));
+		utils->pwd = getcwd(NULL, 0);
+		utils->envp[0] = ft_strjoin("PWD=", utils->pwd);
+		utils->old_pwd = getcwd(NULL, 0);
+		utils->envp[1] = ft_strjoin("OLDPWD=", utils->old_pwd);
+	}
+	if (!utils->pwd || !utils->old_pwd)
+	{
+		utils->pwd = getcwd(NULL, 0);
+		tmp = utils->envp;
+		var = ft_strjoin("PWD=", utils->pwd);
+		utils->envp = add_var(utils->envp, var);
+		free(var);
+		utils->old_pwd = getcwd(NULL, 0);
+		var = ft_strjoin("OLDPWD=", utils->old_pwd);
+		utils->envp = add_var(utils->envp, var);
+		free_double_ptr((void **) tmp);
+		free(var);
+	}
+}
 
 /* gets hold of the present working directory
 and old pwd from the copied envp (utils->envp)
@@ -32,14 +60,7 @@ int	find_pwd(t_utils *utils)
 					7, ft_strlen(utils->envp[i]) - 7);
 		i++;
 	}
-	if (!utils->envp)
-	{
-		utils->pwd = getcwd(NULL, 0);
-		utils->old_pwd = getcwd(NULL, 0);
-		utils->envp = (char **) ft_calloc(3, sizeof(char *));
-		utils->envp[0] = ft_strjoin("PWD=", utils->pwd);
-		utils->envp[1] = ft_strjoin("OLDPWD=", utils->old_pwd);
-	}
+	check_pwd(utils);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 16:16:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:37:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,16 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	full = (char *)ft_calloc((ft_strlen(str) - len)
 			+ ft_strlen(exp) + 2, sizeof(char));
 	if (!full)
-	{
 		ft_error(1, 0);
-		return (0);
-	}
 	j = -1;
 	k = (*i) - len - 1;
-	while (++j < k)
+	while (full && ++j < k)
 		full[j] = str[j];
 	k = 0;
-	while (k < (int)ft_strlen(exp))
+	while (full && k < (int)ft_strlen(exp))
 		full[j++] = exp[k++];
 	k = (*i);
-	while (k < (int)ft_strlen(str))
+	while (full && k < (int)ft_strlen(str))
 		full[j++] = str[k++];
 	if (str)
 		free(str);
