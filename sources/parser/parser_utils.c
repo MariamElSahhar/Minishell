@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 14:34:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:41:16 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,5 @@ char	*expand_err(char *cont, int *i)
 	if (!cont)
 		return (0);
 	(*i) = 0;
-	free(err);
 	return (cont);
 }

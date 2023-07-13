@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 16:36:52 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:55:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	check_pwd(t_utils *utils)
 	if (!utils->pwd || !utils->old_pwd)
 	{
 		utils->pwd = getcwd(NULL, 0);
+		utils->old_pwd = getcwd(NULL, 0);
 		tmp = utils->envp;
 		var = ft_strjoin("PWD=", utils->pwd);
 		utils->envp = add_var(utils->envp, var);
+		free_double_ptr((void **) tmp);
 		free(var);
-		utils->old_pwd = getcwd(NULL, 0);
 		var = ft_strjoin("OLDPWD=", utils->old_pwd);
+		tmp = utils->envp;
 		utils->envp = add_var(utils->envp, var);
 		free_double_ptr((void **) tmp);
 		free(var);
