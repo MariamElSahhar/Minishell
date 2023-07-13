@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 14:35:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:54:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*find_path_ret(char *str, t_utils *utils)
 	int	i;
 
 	i = 0;
-	while (utils->envp[i])
+	while (utils->envp && utils->envp[i])
 	{
 		if (!ft_strncmp(utils->envp[i], str, ft_strlen(str)))
 			return (ft_substr(utils->envp[i], ft_strlen(str),
@@ -39,8 +39,11 @@ int	specific_path(t_utils *utils, char *str)
 	int		ret;
 
 	tmp = find_path_ret(str, utils);
-	ret = chdir(tmp);
-	free(tmp);
+	if (tmp)
+	{
+		ret = chdir(tmp);
+		free(tmp);
+	}
 	if (ret != 0)
 	{
 		tmp = str;
@@ -68,7 +71,7 @@ void	update_path_to_env(t_utils *utils)
 	char	*tmp;
 
 	i = 0;
-	while (utils->envp[i])
+	while (utils->envp && utils->envp[i])
 	{
 		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
 		{

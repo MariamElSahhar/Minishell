@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:24:45 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:02:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ int	check_parameter(char *str)
 
 /* copies the existing environment variables (arr) and
  adding a new variable (str) at the end of the copied list */
-char	**whileloop_add_var(char **arr, char **rtn, char *str)
+char	**whileloop_add_var(char **env, char **rtn, char *str)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (env[i] != NULL)
 	{
-		if (arr[i + 1] == NULL)
+		if (env[i + 1] == NULL)
 		{
 			rtn[i] = ft_strdup(str);
-			rtn[i + 1] = ft_strdup(arr[i]);
+			rtn[i + 1] = ft_strdup(env[i]);
 		}
 		else
-			rtn[i] = ft_strdup(arr[i]);
+			rtn[i] = ft_strdup(env[i]);
 		if (rtn[i] == NULL)
 		{
 			free_double_ptr((void **) rtn);

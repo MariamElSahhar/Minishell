@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:09:25 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:37:07 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	reset_utils(t_utils *utils)
 	return (1);
 }
 
-// final free of paths and env on exit
+// free memory on exit
 void	free_utils(t_utils *utils)
 {
 	if (utils->pwd)

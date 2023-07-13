@@ -11,7 +11,7 @@ PURPLE=$'\x1b[35m
 CYAN=$'\x1b[36m
 WHITE=$'\x1b[37m
 NAME = minishell
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 CC = gcc
 
 LIBFTP = libft/

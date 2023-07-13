@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:01:09 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:04:03 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 	reset_utils(utils);
 	free_utils(utils);
 	determine_exit_code(str);
-	printf("exiting..\n");
 	return (EXIT_SUCCESS);
 }

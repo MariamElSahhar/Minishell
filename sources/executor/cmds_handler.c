@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:58:51 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:54:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	char	*mycmd;
 
 	i = 0;
-	while (utils->paths[i])
+	while (utils->paths && utils->paths[i])
 	{
 		mycmd = ft_strjoin(utils->paths[i], cmd->command);
 		if (!access(mycmd, F_OK))

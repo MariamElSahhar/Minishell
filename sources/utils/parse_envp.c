@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:19:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:58:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	find_pwd(t_utils *utils)
 	i = 0;
 	utils->pwd = 0;
 	utils->old_pwd = 0;
-	while (utils->envp[i])
+	while (utils->envp && utils->envp[i])
 	{
 		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
 			utils->pwd = ft_substr(utils->envp[i],
@@ -31,6 +31,14 @@ int	find_pwd(t_utils *utils)
 			utils->old_pwd = ft_substr(utils->envp[i],
 					7, ft_strlen(utils->envp[i]) - 7);
 		i++;
+	}
+	if (!utils->envp)
+	{
+		utils->pwd = getcwd(NULL, 0);
+		utils->old_pwd = getcwd(NULL, 0);
+		utils->envp = (char **) ft_calloc(3, sizeof(char *));
+		utils->envp[0] = ft_strjoin("PWD=", utils->pwd);
+		utils->envp[1] = ft_strjoin("OLDPWD=", utils->old_pwd);
 	}
 	return (1);
 }
@@ -85,7 +93,7 @@ path to utils->paths[i].
 Finally, the function returns EXIT_SUCCESS,
 indicating successful parsing of the environment variables.
 */
-int	parse_envp(t_utils *utils)
+int	parse_paths(t_utils *utils)
 {
 	char	*path_from_envp;
 	int		i;
@@ -117,7 +125,11 @@ void	init_utils(t_utils *utils, char **envp)
 	utils->old_pwd = 0;
 	utils->pipes = 0;
 	utils->pid = 0;
-	utils->envp = ft_arrdup(envp);
-	parse_envp(utils);
+	utils->envp = 0;
+	if (*envp != 0)
+	{
+		utils->envp = ft_arrdup(envp);
+		parse_paths(utils);
+	}
 	find_pwd(utils);
 }
