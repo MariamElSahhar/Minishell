@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:21:24 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:18:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	ft_fork(t_utils *utils, int end[2], int fd_in, t_cmds *cmd)
 		i = 0;
 		utils->reset = false;
 	}
+	if (!utils->pid[i])
+		return (ft_error(5, 0));
 	utils->pid[i] = fork();
 	if (utils->pid[i] < 0)
 		ft_error(5, utils);
@@ -113,9 +115,13 @@ int	executor(t_utils *utils)
 	while (curr_cmd)
 	{
 		if (curr_cmd->next)
-			pipe(end);
+		{
+			if (pipe(end) < 0)
+				return (!ft_error(4, 0));
+		}
 		send_heredoc(utils, curr_cmd);
-		ft_fork(utils, end, fd_in, curr_cmd);
+		if (ft_fork(utils, end, fd_in, curr_cmd) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		close(end[1]);
 		if (curr_cmd->prev)
 			close(fd_in);

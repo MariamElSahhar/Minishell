@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 16:32:41 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:02:23 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
+# include <limits.h>
 # include "utils.h"
 # include "error.h"
 # include "color.h"
