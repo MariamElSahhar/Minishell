@@ -6,24 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:05:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:09:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*
-This function initializes the utils
- structure with default values and
- sets up the environment.
-It sets various variables and flags
- in the utils structure to their initial values.
-It calls the parse_envp function to
- parse the environment variables and
- store them in the utils structure.
-It calls the init_signals function to
- set up signal handling for the minishell.
-*/
+// initializes utils values
 int	implement_utils(t_utils *utils)
 {
 	utils->cmds = NULL;
@@ -55,7 +44,8 @@ void	free_cmd(t_cmds *cmd)
 			free(del->path);
 		free(del);
 	}
-	free(cmd);
+	if (cmd)
+		free(cmd);
 }
 
 // resets utils variables
@@ -90,28 +80,7 @@ void	free_utils(t_utils *utils)
 	free_double_ptr((void **)utils->paths);
 }
 
-/*
-ft_arrdup function:
-
-Parameter: arr (array of char pointers)
-Returns: A duplicated array of strings.
-This function creates a duplicate of an array
-of strings.
-It first calculates the number of strings in
-the array by iterating until it encounters a
-NULL pointer.
-Then it allocates memory for a new array rtn
-of size i + 1, where i is the number of strings
- in the original array.
-Next, it iterates through each string in the
-original array, duplicates it using ft_strdup,
- and stores
-the duplicated string in the new array rtn.
-If any allocation fails during the process,
-it frees the partially allocated memory and returns NULL.
-If the duplication is successful for all
-strings, it returns the duplicated array rtn.
-*/
+// duplicates the passed string
 char	**ft_arrdup(char **arr)
 {
 	char	**rtn;

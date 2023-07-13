@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 14:06:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:40:38 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	minishell_loop(t_utils *utils)
 		if (!utils->input)
 		{
 			free_utils(utils);
-			rl_replace_line("exit", 0);
+			// rl_replace_line("exit\n", 0);
+			// rl_redisplay();
+			printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
 		else if (utils->input[0] == '\0')

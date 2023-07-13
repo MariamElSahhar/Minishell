@@ -6,12 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/07 13:01:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:34:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+// initializes a cmd struct
 t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd)
 {
 	new_cmd->args = init_args(ptr);
@@ -104,13 +105,17 @@ char	*ft_getenv(char *var, t_utils *utils)
 	return ("");
 }
 
+// replace $? with the error code
 char	*expand_err(char *cont, int *i)
 {
+	char	*err;
+
+	err = ft_itoa(g_global.error_code);
 	(*i) = (*i) + 2;
-	cont = replace_env(cont, i,
-			ft_itoa(g_global.error_code), 1);
+	cont = replace_env(cont, i, err, 1);
 	if (!cont)
 		return (0);
 	(*i) = 0;
+	free(err);
 	return (cont);
 }

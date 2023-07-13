@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/08 19:15:29 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/13 14:16:13 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int	event(void)
 /*
 sigint_handler(int sig): This function is the signal
  handler for the SIGINT signal, which is typically sent
-to a process when the user presses Ctrl+C. It takes an 
+to a process when the user presses Ctrl+C. It takes an
 integer argument sig representing the signal number.
 a. If the global variable g_global.in_heredoc is false,
  it means the program is not currently inside a heredoc.
-In this case, it prints a newline character (\n) 
+In this case, it prints a newline character (\n)
 to STDERR_FILENO (standard error) using ft_putstr_fd.
-b. If the global variable g_global.in_cmd is true, it 
+b. If the global variable g_global.in_cmd is true, it
 means the program is inside a command. In this case, it sets
- g_global.stop_heredoc to 1 to indicate that the heredoc 
+ g_global.stop_heredoc to 1 to indicate that the heredoc
  should stop, replaces the current Readline line
- with an empty string using rl_replace_line, redisplays 
+ with an empty string using rl_replace_line, redisplays
  the prompt and line using rl_redisplay, and sets rl_done
   to 1 to exit the Readline loop.
-c. If none of the above conditions are met, it means the 
+c. If none of the above conditions are met, it means the
 program is outside a heredoc and not in a command.
 It calls rl_on_new_line to move the cursor to a new line,
  replaces the current Readline line with an empty
@@ -61,17 +61,17 @@ void	sigint_handler(int sig)
 
 /*
 sigquit_handler(int sig): This function
-is the signal handler 
+is the signal handler
 for the SIGQUIT signal, which is typically sent
- to a process when the user presses 
- Ctrl+\ (backslash). 
- It takes an integer argument sig 
+ to a process when the user presses
+ Ctrl+\ (backslash).
+ It takes an integer argument sig
  representing the signal number.
 a. It prints the message "Quit: "
- followed by the value 
+ followed by the value
 of sig to STDERR_FILENO (standard error)
  using ft_putstr_fd and ft_putnbr_fd.
-b. It prints a newline character (\n) 
+b. It prints a newline character (\n)
 to STDERR_FILENO using ft_putchar_fd.
 */
 void	sigquit_handler(int sig)
@@ -97,14 +97,14 @@ void	sigquit_handler(int sig)
 }
 
 /*
-init_signals(void): This function initializes the 
+init_signals(void): This function initializes the
 signal handlers for the program.
 
-a. It sets the Readline event hook (rl_event_hook) 
+a. It sets the Readline event hook (rl_event_hook)
 to the event function. The purpose and functionality of
 this event hook are not provided in the given code s
 nippet.
-b. It sets the signal handler for the SIGINT signal 
+b. It sets the signal handler for the SIGINT signal
 (Ctrl+C) to sigint_handler using signal.
 c. It sets the signal handler for the SIGQUIT signal (
 Ctrl+) to SIG_IGN, which ignores the signal and does not perform

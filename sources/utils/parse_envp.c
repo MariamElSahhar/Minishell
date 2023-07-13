@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:42:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/13 15:19:17 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	find_pwd(t_utils *utils)
 	int	i;
 
 	i = 0;
+	utils->pwd = 0;
+	utils->old_pwd = 0;
 	while (utils->envp[i])
 	{
 		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
@@ -109,6 +111,12 @@ int	parse_envp(t_utils *utils)
 
 void	init_utils(t_utils *utils, char **envp)
 {
+	utils->cmds = 0;
+	utils->paths = 0;
+	utils->pwd = 0;
+	utils->old_pwd = 0;
+	utils->pipes = 0;
+	utils->pid = 0;
 	utils->envp = ft_arrdup(envp);
 	parse_envp(utils);
 	find_pwd(utils);
