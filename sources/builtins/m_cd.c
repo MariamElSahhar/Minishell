@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:54:51 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:35:15 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	specific_path(t_utils *utils, char *str)
 	char	*tmp;
 	int		ret;
 
+	ret = -1;
 	tmp = find_path_ret(str, utils);
 	if (tmp)
 	{
@@ -46,10 +47,8 @@ int	specific_path(t_utils *utils, char *str)
 	}
 	if (ret != 0)
 	{
-		tmp = str;
 		str = ft_substr(str, 0, ft_strlen(str) - 1);
 		ft_putstr_fd(str, STDERR_FILENO);
-		free(tmp);
 		free(str);
 		ft_putendl_fd(" not set", STDERR_FILENO);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 19:02:32 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:53:09 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,22 +151,11 @@ int	check_redirections(t_cmds *cmd)
 			if (handle_infile(redir->path))
 				return (EXIT_FAILURE);
 		}
-		else if (redir->type == OPEN)
-		{
-			if (handle_open(redir))
-				return (EXIT_FAILURE);
-		}
-		else if (redir->type == WRITE
-			|| redir->type == APPEND)
-		{
-			if (handle_outfile(redir))
-				return (EXIT_FAILURE);
-		}
 		else if (redir->type == HEREDOC)
-		{
 			if (handle_infile(cmd->hd_file_name))
 				return (EXIT_FAILURE);
-		}
+		if (check_redir_helper(redir->type, redir) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		redir = redir->next;
 	}
 	return (EXIT_SUCCESS);

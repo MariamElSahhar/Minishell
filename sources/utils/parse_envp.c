@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 16:55:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:16:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@ void	check_pwd(t_utils *utils)
 	char	*var;
 
 	if (!utils->envp)
-	{
-		utils->envp = (char **) ft_calloc(3, sizeof(char *));
-		utils->pwd = getcwd(NULL, 0);
-		utils->envp[0] = ft_strjoin("PWD=", utils->pwd);
-		utils->old_pwd = getcwd(NULL, 0);
-		utils->envp[1] = ft_strjoin("OLDPWD=", utils->old_pwd);
-	}
+		utils->envp = (char **) ft_calloc(2, sizeof(char *));
 	if (!utils->pwd || !utils->old_pwd)
 	{
+		printf("hi");
 		utils->pwd = getcwd(NULL, 0);
-		utils->old_pwd = getcwd(NULL, 0);
+		utils->old_pwd = NULL;
 		tmp = utils->envp;
 		var = ft_strjoin("PWD=", utils->pwd);
 		utils->envp = add_var(utils->envp, var);
@@ -150,9 +145,6 @@ void	init_utils(t_utils *utils, char **envp)
 	utils->pid = 0;
 	utils->envp = 0;
 	if (*envp != 0)
-	{
 		utils->envp = ft_arrdup(envp);
-		parse_paths(utils);
-	}
 	find_pwd(utils);
 }

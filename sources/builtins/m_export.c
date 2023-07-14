@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 16:44:58 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:22:51 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	**whileloop_add_var(char **env, char **rtn, char *str)
 		}
 		i++;
 	}
+	if (env[0] == NULL)
+		rtn[0] = ft_strdup(str);
 	return (rtn);
 }
 

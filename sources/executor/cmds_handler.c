@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:54:18 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:55:31 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,20 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	char	*mycmd;
 
 	i = 0;
+	if (!access(cmd->command, F_OK))
+	{
+		execve(cmd->command, cmd->args, utils->envp);
+		return (EXIT_SUCCESS);
+	}
 	while (utils->paths && utils->paths[i])
 	{
 		mycmd = ft_strjoin(utils->paths[i], cmd->command);
 		if (!access(mycmd, F_OK))
+		{
 			execve(mycmd, cmd->args, utils->envp);
+			free(mycmd);
+			return (EXIT_SUCCESS);
+		}
 		free(mycmd);
 		i++;
 	}
@@ -47,11 +56,12 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 /*Additional Function command not found is added in error_handling.c*/
 int	cmd_not_found(char *str)
 {
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	write(STDERR_FILENO, "minishell: ", 12);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	write(STDERR_FILENO, ": command not found\n", 21);
 	return (127);
 }
+
 /*
 The function handle_cmd is responsible for handling
  a command. It takes two parameters: a t_cmds struct
@@ -68,7 +78,6 @@ find and execute the command.
 Finally, it exits with the exit code returned by find_cmd
 or 0 if no command was executed.
 */
-
 void	handle_cmd(t_cmds *cmd, t_utils *utils)
 {
 	int	exit_code;

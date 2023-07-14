@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 18:02:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:55:59 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	**add_var(char **arr, char *str);
 char	*delete_quotes_value(char *str);
 char	*delete_quotes(char *str, char c);
 char	*delete_quotes_export(char *str, char c);
+
+int		parse_paths(t_utils *utils);
 
 //builtins
 int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);

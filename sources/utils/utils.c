@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:37:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:46:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // initializes utils values
 int	implement_utils(t_utils *utils)
 {
+	parse_paths(utils);
 	utils->cmds = NULL;
-	utils->reset = false;
 	utils->pid = NULL;
 	utils->heredoc = false;
 	g_global.stop_heredoc = 0;
@@ -66,6 +66,7 @@ int	reset_utils(t_utils *utils)
 	if (utils->pid)
 		free(utils->pid);
 	utils->reset = true;
+	free_double_ptr((void **)utils->paths);
 	return (1);
 }
 
@@ -77,7 +78,6 @@ void	free_utils(t_utils *utils)
 	if (utils->old_pwd)
 		free(utils->old_pwd);
 	free_double_ptr((void **)utils->envp);
-	free_double_ptr((void **)utils->paths);
 }
 
 // duplicates the passed string
