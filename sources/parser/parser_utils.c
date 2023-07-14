@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 16:41:16 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:53:05 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ char	*ft_getenv(char *var, t_utils *utils)
 		if (!ft_strncmp(var, value[0], ft_strlen(value[0]))
 			&& !ft_strncmp(var, value[0], ft_strlen(var)))
 		{
-			ret = ft_strdup(value[1]);
+			if (value[1])
+				ret = ft_strdup(value[1]);
+			else
+				ret = ft_calloc(1, sizeof(char));
 			free_double_ptr((void **) value);
 			return (ret);
 		}
