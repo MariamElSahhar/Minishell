@@ -11,7 +11,7 @@ PURPLE=$'\x1b[35m
 CYAN=$'\x1b[36m
 WHITE=$'\x1b[37m
 NAME = minishell
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 CC = cc
 
 LIBFTP = libft/
@@ -72,10 +72,10 @@ HEADER	=	.includes/builtins.h \
 			.includes/lexer.h \
 			.includes/utils.h
 
-READLINE_DIR = $(shell brew --prefix readline)
+# READLINE_DIR = $(shell brew --prefix readline)
 
-READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L$(LIBFTP) -lft
-# READLINE_LIB = -lreadline -lhistory -lreadline -Llibft/ -lft
+# READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib -lreadline -L$(LIBFTP) -lft
+READLINE_LIB = -lreadline -lhistory -lreadline -Llibft/ -lft
 
 INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 

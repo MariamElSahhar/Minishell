@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/05 18:48:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:48:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 static int	invalid_char(char *input, char c)
 {
 	int		i;
+	int		len;
 
+	len = (int) ft_strlen(input);
 	if (!ft_strchr(input, c))
 		return (0);
 	i = 0;
-	while (input[i])
+	while (i < len)
 	{
 		skip_space(input, &i);
 		if (input[i] && is_quote(input[i]))

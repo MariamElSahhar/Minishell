@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 16:38:05 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:28:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	minishell_loop(t_utils *utils)
 		implement_utils(utils);
 		if (!utils->input)
 		{
+			reset_utils(utils);
 			free_utils(utils);
 			printf("exit\n");
 			exit(EXIT_SUCCESS);
@@ -41,6 +42,7 @@ void	minishell_loop(t_utils *utils)
 int	main(int argc, char **argv, char **envp)
 {
 	t_utils	utils;
+
 
 	if (argc != 1 || argv[1])
 	{

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:08:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 18:42:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:23:28 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	check_pwd(t_utils *utils)
 		utils->envp = (char **) ft_calloc(2, sizeof(char *));
 	if (!utils->pwd || !utils->old_pwd)
 	{
+		printf("hi");
 		utils->pwd = getcwd(NULL, 0);
 		utils->old_pwd = NULL;
 		tmp = utils->envp;
@@ -143,6 +144,7 @@ void	init_utils(t_utils *utils, char **envp)
 	utils->pipes = 0;
 	utils->pid = 0;
 	utils->envp = 0;
+	utils->reset = false;
 	if (*envp != 0)
 		utils->envp = ft_arrdup(envp);
 	find_pwd(utils);

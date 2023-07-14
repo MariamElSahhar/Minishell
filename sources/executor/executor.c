@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 18:41:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:44:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	pipe_wait(int *pid, int amount)
 	int	status;
 
 	i = 0;
+	status = 0;
 	while (i < amount)
 	{
 		waitpid(pid[i], &status, 0);

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 16:37:47 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:45:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	expand_env(t_split *split, t_utils *utils)
 	t_word	*ptr;
 	int		success;
 
+	success = 1;
 	ptr = split->first;
 	while (ptr)
 	{
