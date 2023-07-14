@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/10 19:20:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:43:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_word	*new_word(char *c, int type)
 		return (0);
 	}
 	word->type = type;
-	word->cont = c;
+	word->cont = ft_strdup(c);
 	return (word);
 }
 

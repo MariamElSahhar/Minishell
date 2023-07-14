@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 15:01:06 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:46:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // frees split structure
-void	free_split(t_split *split)
+void	free_split(t_split *split, int f)
 {
 	t_word	*del;
 	t_word	*ptr;
@@ -23,6 +23,8 @@ void	free_split(t_split *split)
 	ptr = split->first;
 	while (ptr)
 	{
+		if (f)
+			free(ptr->cont);
 		del = ptr;
 		ptr = ptr->next;
 		free(del);
@@ -62,11 +64,14 @@ t_split	*split_input(char *input, t_utils *utils)
 	}
 	if (!split_words(input, split) || !check_split(split))
 	{
-		free_split(split);
+		free_split(split, 1);
 		return (0);
 	}
 	if (!expand_env(split, utils) || !combine_quotes(split))
+	{
+		free_split(split, 1);
 		return (0);
+	}
 	sort_split(split);
 	return (split);
 }

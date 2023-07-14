@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 18:26:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:44:35 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	add_str(t_split *split, char *input, int *i)
 	while (input[(*i)] && !(is_symbol(input[(*i)]) || is_space(input[(*i)])))
 		(*i)++;
 	len = (*i) - start;
-	str = (char *)ft_calloc(len + 2, sizeof(char));
+	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (!ft_error(1, 0));
 	k = 0;
@@ -93,6 +93,7 @@ static int	add_str(t_split *split, char *input, int *i)
 		len = push_word(split, str, STR);
 	if (!len)
 		return (0);
+	free(str);
 	return (1);
 }
 

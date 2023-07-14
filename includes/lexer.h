@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:14:20 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/10 19:17:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:45:48 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef enum e_word_type
 t_split	*split_input(char *input, t_utils *utils);
 int		check_split(t_split *split);
 int		push_word(t_split *split, char *c, int type);
-void	free_split(t_split *split);
+void	free_split(t_split *split, int f);
 int		define_word(char *input, int *i, t_split *split);
 void	print_split(t_split *split);
 int		combine_quotes(t_split *split);
