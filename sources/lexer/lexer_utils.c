@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 20:43:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:53:02 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ void	print_split(t_split *split)
 
 char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
 {
-	if (word->cont[(*i)] == '\'')
-		skip_quotes(i, word->cont);
-	else if (word->cont[(*i)] == '\"')
+	if (word->cont[(*i)] == '\"')
 	{
 		(*i)++;
 		while (word->cont[(*i)] && word->cont[(*i)] != '\"')
@@ -91,7 +89,7 @@ char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
 					word->cont = expand_err(word->cont, i);
 				else
 					found_env(word->cont, i, word, utils);
-				break ;
+				return (word->cont);
 			}
 			else
 				(*i)++;

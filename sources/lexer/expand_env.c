@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 21:08:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:51:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	while (old[++j] && !is_space(old[j]) && old[j] != '$'
 		&& !check_valid_identifier(old[j]))
 		len++;
+	if (!len)
+	{
+		(*i) = (*i) + 2;
+		return (1);
+	}
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
 		return (!ft_error(1, 0));
@@ -110,7 +115,9 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 		else if (word->cont[i] == '$'
 			&& !found_env(word->cont, &i, word, utils))
 			return (0);
-		else if (word->cont[i] == '\"' || word->cont[i] == '\'')
+		else if (word->cont[i] == '\'')
+			skip_quotes(&i, word->cont);
+		else if (word->cont[i] == '\"')
 			word->cont = expand_env_quotes(word, &i, utils);
 		else
 			i++;
