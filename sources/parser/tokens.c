@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 20:44:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:09:37 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	add_quote(t_split *split, char *input, int *i)
 	}
 	if (!push_word(split, str, QUOTE))
 		return (0);
+	free(str);
 	return (1);
 }
 
