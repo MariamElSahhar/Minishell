@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 16:31:05 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:58:20 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	line = readline(HEREDOC_MSG);
-	while (line && ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
+	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
+		|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
 		&& !g_global.stop_heredoc)
 	{
 		write(fd, line, ft_strlen(line));
