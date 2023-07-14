@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 15:37:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:46:56 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int	reset_utils(t_utils *utils)
 // free memory on exit
 void	free_utils(t_utils *utils)
 {
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+	close(STDIN_FILENO);
 	if (utils->pwd)
 		free(utils->pwd);
 	if (utils->old_pwd)

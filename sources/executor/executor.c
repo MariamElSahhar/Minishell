@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 18:18:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:00:39 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,8 @@ int	executor(t_utils *utils)
 	while (curr_cmd)
 	{
 		if (curr_cmd->next)
-		{
 			if (pipe(end) < 0)
 				return (!ft_error(4, 0));
-		}
 		send_heredoc(utils, curr_cmd);
 		if (ft_fork(utils, end, fd_in, curr_cmd) == EXIT_FAILURE)
 			return (EXIT_FAILURE);

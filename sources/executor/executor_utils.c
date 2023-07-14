@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:41:45 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:43:00 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,19 @@ char	*join_split_str(char **split_str, char *new_str)
 	}
 	new_str = tmp;
 	return (new_str);
+}
+
+int	check_redir_helper(int type, t_redir *dir)
+{
+	if (type == OPEN)
+	{
+		if (handle_open(dir))
+			return (EXIT_FAILURE);
+	}
+	else if (type == WRITE || type == APPEND)
+	{
+		if (handle_outfile(dir))
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
