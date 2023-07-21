@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 13:35:04 by melsahha          #+#    #+#             */
-/*   Updated: 2023/05/27 12:58:25 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:28:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 
 void	free_double_ptr(void **ptr);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

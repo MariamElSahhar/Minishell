@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 20:46:10 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:24:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	free_split(t_split *split, int f)
 	while (ptr)
 	{
 		if (f)
+			free(ptr->cont);
+		if (ptr->type == REDIR || ptr->type == PIPE)
 			free(ptr->cont);
 		del = ptr;
 		ptr = ptr->next;

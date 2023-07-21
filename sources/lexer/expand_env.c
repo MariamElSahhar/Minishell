@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 21:51:41 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:15:37 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,9 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	int		j;
 	char	*env;
 
-	len = 0;
-	j = (*i);
-	while (old[++j] && !is_space(old[j]) && old[j] != '$'
-		&& !check_valid_identifier(old[j]))
-		len++;
-	if (!len)
-	{
-		(*i) = (*i) + 2;
+	len = found_env_helper(old, i);
+	if (len < 0)
 		return (1);
-	}
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
 		return (!ft_error(1, 0));

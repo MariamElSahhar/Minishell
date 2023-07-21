@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 19:28:10 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:04:12 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	minishell_loop(t_utils *utils)
 int	main(int argc, char **argv, char **envp)
 {
 	t_utils	utils;
-
 
 	if (argc != 1 || argv[1])
 	{

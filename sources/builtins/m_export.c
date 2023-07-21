@@ -6,7 +6,7 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 15:22:51 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:20:04 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**whileloop_add_var(char **env, char **rtn, char *str)
 			rtn[i] = ft_strdup(env[i]);
 		if (rtn[i] == NULL)
 		{
-			free_double_ptr((void **) rtn);
+			free_double_ptr((void **)rtn);
 			return (rtn);
 		}
 		i++;
@@ -120,14 +120,16 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 	{
 		while (cmds->args[i])
 		{
-			if (!check_parameter(cmds->args[i])
+			if (!check_parameter(cmds->args[i]) 
 				&& !variable_exist(utils, cmds->args[i])
 				&& !invalid_identifier(cmds->args[i]))
 			{
 				tmp = add_var(utils->envp, cmds->args[i]);
-				free_double_ptr((void **) utils->envp);
+				free_double_ptr((void **)utils->envp);
 				utils->envp = tmp;
 			}
+			else if (invalid_identifier(cmds->args[i]))
+				error_invalid_identifier(cmds->args[i]);
 			i++;
 		}
 	}

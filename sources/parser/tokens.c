@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 21:09:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:28:35 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,9 @@ static int	add_quote(t_split *split, char *input, int *i)
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (!ft_error(1, 0));
-	len = 0;
-	while ((len + start) < (*i))
-	{
+	len = -1;
+	while ((++len + start) < (*i))
 		str[len] = input[start + len];
-		len++;
-	}
 	if (!push_word(split, str, QUOTE))
 		return (0);
 	free(str);
@@ -82,12 +79,9 @@ static int	add_str(t_split *split, char *input, int *i)
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (!ft_error(1, 0));
-	k = 0;
-	while ((start + k) < (*i))
-	{
+	k = -1;
+	while ((start + (++k)) < (*i))
 		str[k] = input[start + k];
-		k++;
-	}
 	if (ft_strchr(str, '\'') || ft_strchr(str, '\"'))
 		len = push_word(split, str, QUOTE);
 	else

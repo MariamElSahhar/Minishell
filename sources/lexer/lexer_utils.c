@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 21:53:02 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:26:06 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,22 @@ char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
 			(*i)++;
 	}
 	return (word->cont);
+}
+
+int	found_env_helper(char *old, int *i)
+{
+	int		j;
+	int		len;
+
+	len = 0;
+	j = (*i);
+	while (old[++j] && !is_space(old[j]) && old[j] != '$'
+		&& !check_valid_identifier(old[j]))
+		len++;
+	if (!len)
+	{
+		(*i) = (*i) + 2;
+		return (-1);
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 #    By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 15:04:40 by melsahha          #+#    #+#              #
-#    Updated: 2023/05/27 12:59:14 by melsahha         ###   ########.fr        #
+#    Updated: 2023/07/21 15:23:29 by melsahha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft
 	ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
 	ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_lstnew.c \
 	ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
-	ft_lstiter.c ft_lstmap.c free_double_ptr.c
+	ft_lstiter.c ft_lstmap.c free_double_ptr.c ft_strcmp.c
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ_DIR = obj
 CFLAGS = -Wall -Werror -Wextra

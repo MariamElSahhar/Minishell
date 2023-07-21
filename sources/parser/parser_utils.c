@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 20:53:05 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:59:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ char	*ft_getenv(char *var, t_utils *utils)
 			ft_error(1, 0);
 			return (0);
 		}
-		if (!ft_strncmp(var, value[0], ft_strlen(value[0]))
-			&& !ft_strncmp(var, value[0], ft_strlen(var)))
+		if (!ft_strcmp(var, value[0]))
 		{
 			if (value[1])
 				ret = ft_strdup(value[1]);

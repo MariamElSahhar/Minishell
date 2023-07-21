@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:06:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:22:03 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ size_t	equal_sign(char *str);
 int		invalid_identifier(char *str);
 void	change_path(t_utils *utils);
 int		check_valid_identifier(char c);
+int		error_invalid_identifier(char *identifier);
 
 #endif
