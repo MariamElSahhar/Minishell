@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:10 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 14:06:45 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:12:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,24 @@ char	*delete_quotes_value(char *str)
 	return (str);
 }
 
-int	invalid_identifier(char *str)
+int	invalid_identifier(char *str, int f)
 {
 	int	i;
 
 	i = -1;
 	while (str[++i])
 	{
+		if (f && i == (int) equal_sign(str) - 1)
+			break ;
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>'
-			|| str[i] == '[' || str[i] == ']'
+			|| str[i] == '[' || str[i] == ']' || str[i] == '='
 			|| str[i] == '\'' || str[i] == '\"' || str[i] == ' '
-			|| str[i] == ',' || str[i] == '.'
+			|| str[i] == ',' || str[i] == '.' || str[i] == '*'
 			|| str[i] == ':' || str[i] == '/' || str[i] == '{'
-			|| str[i] == '}' || str[i] == '+'
 			|| str[i] == '^' || str[i] == '%' || str[i] == '#'
 			|| str[i] == '@' || str[i] == '!' || str[i] == '~'
-			|| str[i] == '-' || str[i] == '?' || str[i] == '&' || str[i] == '*')
+			|| str[i] == '-' || str[i] == '?' || str[i] == '&'
+			|| str[i] == '}' || str[i] == '+' )
 			return (1);
 	}
 	return (0);

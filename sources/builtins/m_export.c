@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/21 17:20:04 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:06:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,15 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 	{
 		while (cmds->args[i])
 		{
-			if (!check_parameter(cmds->args[i]) 
+			if (!check_parameter(cmds->args[i])
 				&& !variable_exist(utils, cmds->args[i])
-				&& !invalid_identifier(cmds->args[i]))
+				&& !invalid_identifier(cmds->args[i], 1))
 			{
 				tmp = add_var(utils->envp, cmds->args[i]);
 				free_double_ptr((void **)utils->envp);
 				utils->envp = tmp;
 			}
-			else if (invalid_identifier(cmds->args[i]))
+			else if (invalid_identifier(cmds->args[i], 1))
 				error_invalid_identifier(cmds->args[i]);
 			i++;
 		}

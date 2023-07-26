@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 18:54:40 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:04:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	unset_error(t_cmds *cmds)
 		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (invalid_identifier(cmds->args[1]))
+	if (invalid_identifier(cmds->args[1], 0))
 	{
 		ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
