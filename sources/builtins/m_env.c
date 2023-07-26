@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 20:11:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:24:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,19 @@ void	sorted_env(t_utils *utils)
 {
 	int		i;
 	char	**sorted;
+	char	*temp;
 
 	sorted = sort_env(utils->envp);
 	i = 0;
 	while (sorted && sorted[i])
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putendl_fd(sorted[i], STDOUT_FILENO);
+		temp = ft_substr(sorted[i], 0, equal_sign(sorted[i]));
+		ft_putstr_fd(temp, STDOUT_FILENO);
+		free(temp);
+		ft_putstr_fd("\"", STDOUT_FILENO);
+		ft_putstr_fd(&sorted[i][equal_sign(sorted[i])], STDOUT_FILENO);
+		ft_putendl_fd("\"", STDOUT_FILENO);
 		i++;
 	}
 	free_double_ptr((void **) sorted);

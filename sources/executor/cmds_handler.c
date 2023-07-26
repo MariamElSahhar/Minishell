@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 17:55:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:16:32 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	int	status;
 
 	if (cmd->builtin == m_cd || cmd->builtin == m_exit
-		|| cmd->builtin == m_export || cmd->builtin == m_unset)
+		|| cmd->builtin == m_unset)
 	{
 		g_global.error_code = cmd->builtin(utils, cmd);
 		return ;
