@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 21:04:27 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:11:04 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,14 @@ char	**init_args(t_word *start, char *command)
 	int		count;
 	char	**args;
 
-	ptr = start;
-	count = 0;
-	while (ptr && ptr->type != PIPE)
-	{
-		if (ptr->type == ARG)
-			count ++;
-		ptr = ptr->next;
-	}
-	if (!command)
-		count --;
-	ptr = start;
+	count = count_args(start, command);
 	args = (char **)ft_calloc(count + 2, sizeof(char *));
 	if (!args)
 		ft_error(1, 0);
 	count = 1;
 	if (!command)
 		count = 0;
+	ptr = start;
 	while (args && ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == ARG)

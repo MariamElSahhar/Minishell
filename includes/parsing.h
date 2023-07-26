@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:08:15 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 20:52:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:10:01 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ char	*replace_env(char *str, int *i, char *exp, int len);
 void	last_in_redir(t_cmds *cmd);
 void	last_out_redir(t_cmds *cmd);
 t_cmds	*push_redir(t_cmds *cmd, t_word *ptr);
+int		count_args(t_word *start, char *command);
 
 #endif

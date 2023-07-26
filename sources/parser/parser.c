@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 18:02:06 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:10:37 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,22 @@ void	print_utils(t_utils *utils)
 		}
 		c_ptr = c_ptr->next;
 	}
+}
+
+int	count_args(t_word *start, char *command)
+{
+	t_word	*ptr;
+	int		count;
+
+	ptr = start;
+	count = 0;
+	while (ptr && ptr->type != PIPE)
+	{
+		if (ptr->type == ARG)
+			count ++;
+		ptr = ptr->next;
+	}
+	if (!command)
+		count --;
+	return (count);
 }

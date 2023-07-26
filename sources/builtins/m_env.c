@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 20:24:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:11:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	**bubble_sort(char **arr, int n)
 		j = 0;
 		while (j < n - i - 1)
 		{
-			if (ft_strncmp(arr[j], arr[j + 1], ft_strlen(arr[j]) + ft_strlen(arr[j + 1])) > 0)
+			if (ft_strncmp(arr[j], arr[j + 1],
+					ft_strlen(arr[j]) + ft_strlen(arr[j + 1])) > 0)
 			{
 				temp = arr[j];
 				arr[j] = arr[j + 1];
