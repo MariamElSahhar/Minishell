@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 18:58:39 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/21 15:28:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:48:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	define_word(char *input, int *i, t_split *split)
 	success = 0;
 	if (input[(*i)] == '|')
 	{
-		success = push_word(split, "|", PIPE);
+		success = push_word(split, ft_strdup("|"), PIPE);
 		(*i)++;
 	}
 	else if (input[(*i)] == '>' || input[(*i)] == '<')

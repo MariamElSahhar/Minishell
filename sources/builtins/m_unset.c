@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:06 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 18:19:41 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:54:40 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 	while (arr[i] != NULL)
 	{
 		if (!(ft_strncmp(arr[i], str, equal_sign(arr[i]) - 1) == 0
-				&& str[equal_sign(arr[i])] == '\0'
+				&& equal_sign(arr[i]) == ft_strlen(str) + 1
 				&& arr[i][ft_strlen(str)] == '='))
 		{
 			rtn[j] = ft_strdup(arr[i]);
