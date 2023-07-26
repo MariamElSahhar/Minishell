@@ -24,12 +24,18 @@ O_CREAT, O_RDWR, and O_TRUNC flags,
  opened using write function
  passing newline to separate the input from the user.
 */
-int	create_heredoc(t_redir *heredoc, char *file_name)
+int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 {
 	int		fd;
 	char	*line;
 
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd < 0)
+	{
+		close(fd);
+		ft_error(7, utils);
+		free_utils(utils);
+	}
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
 			|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
@@ -77,7 +83,7 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 	sl = EXIT_SUCCESS;
 	g_global.stop_heredoc = 0;
 	g_global.in_heredoc = 1;
-	sl = create_heredoc(heredoc, file_name);
+	sl = create_heredoc(heredoc, file_name, utils);
 	g_global.in_heredoc = 0;
 	utils->heredoc = true;
 	return (sl);
