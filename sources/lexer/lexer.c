@@ -6,14 +6,14 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:58:27 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/21 16:24:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:01:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // frees split structure
-void	free_split(t_split *split, int f)
+void	free_split(t_split *split)
 {
 	t_word	*del;
 	t_word	*ptr;
@@ -23,10 +23,7 @@ void	free_split(t_split *split, int f)
 	ptr = split->first;
 	while (ptr)
 	{
-		if (f)
-			free(ptr->cont);
-		if (ptr->type == REDIR || ptr->type == PIPE)
-			free(ptr->cont);
+		free(ptr->cont);
 		del = ptr;
 		ptr = ptr->next;
 		free(del);
@@ -66,12 +63,12 @@ t_split	*split_input(char *input, t_utils *utils)
 	}
 	if (!split_words(input, split) || !check_split(split))
 	{
-		free_split(split, 1);
+		free_split(split);
 		return (0);
 	}
 	if (!expand_env(split, utils) || !combine_quotes(split))
 	{
-		free_split(split, 1);
+		free_split(split);
 		return (0);
 	}
 	sort_split(split);

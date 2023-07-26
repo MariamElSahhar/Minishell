@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 20:45:52 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:02:06 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_input(t_utils *utils)
 	if (!split)
 		return (0);
 	sorted = sort_tokens(split, utils);
-	free_split(split, 0);
+	free_split(split);
 	utils->pipes = count_pipes(utils);
 	return (sorted);
 }

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/21 15:59:18 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:02:53 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd)
 	while (ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == CMD)
-			new_cmd->command = ptr->cont;
+			new_cmd->command = ft_strdup(ptr->cont);
 		else if (ptr->type == REDIR)
 			new_cmd = push_redir(new_cmd, ptr);
 		ptr = ptr->next;
@@ -51,7 +51,7 @@ char	**init_args(t_word *start)
 	while (args && ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == ARG)
-			args[count++] = ptr->cont;
+			args[count++] = ft_strdup(ptr->cont);
 		ptr = ptr->next;
 	}
 	return (args);

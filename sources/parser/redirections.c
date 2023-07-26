@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:59 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 18:52:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:03:07 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 		return (0);
 	}
 	if (ptr->next->type == PATH)
-		redir->path = ptr->next->cont;
+		redir->path = ft_strdup(ptr->next->cont);
 	else
 		return (0);
 	sort_redir(ptr, redir);
