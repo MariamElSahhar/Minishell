@@ -6,16 +6,18 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 18:02:53 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:04:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 // initializes a cmd struct
-t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd)
+t_word	*init_cmd(t_word *start, t_cmds *new_cmd)
 {
-	new_cmd->args = init_args(ptr);
+	t_word	*ptr;
+
+	ptr = start;
 	while (ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == CMD)
@@ -24,12 +26,16 @@ t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd)
 			new_cmd = push_redir(new_cmd, ptr);
 		ptr = ptr->next;
 	}
-	new_cmd->args[0] = new_cmd->command;
+	new_cmd->args = init_args(start, new_cmd->command);
+	if (!new_cmd->command)
+		new_cmd->command = new_cmd->args[0];
+	else
+		new_cmd->args[0] = new_cmd->command;
 	return (ptr);
 }
 
 // ints the argument list
-char	**init_args(t_word *start)
+char	**init_args(t_word *start, char *command)
 {
 	t_word	*ptr;
 	int		count;
@@ -43,11 +49,15 @@ char	**init_args(t_word *start)
 			count ++;
 		ptr = ptr->next;
 	}
+	if (!command)
+		count --;
 	ptr = start;
 	args = (char **)ft_calloc(count + 2, sizeof(char *));
 	if (!args)
 		ft_error(1, 0);
 	count = 1;
+	if (!command)
+		count = 0;
 	while (args && ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == ARG)

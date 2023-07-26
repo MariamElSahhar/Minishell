@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 13:06:07 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 19:29:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:27:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	expand_quote(t_word *word)
 
 	if (!ft_strchr(word->cont, '\'') && !ft_strchr(word->cont, '\"'))
 		return (0);
-	printf("%s\n", word->cont);
 	len = comb_quote_len(word->cont);
 	comb = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!comb)
