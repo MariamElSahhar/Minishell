@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 19:06:42 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:17:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ int	m_export(t_utils *utils, t_cmds *cmds)
 				free_double_ptr((void **)utils->envp);
 				utils->envp = tmp;
 			}
-			else if (invalid_identifier(cmds->args[i], 1))
+			else if (invalid_identifier(cmds->args[i], 1)
+				|| check_parameter(cmds->args[i]))
 				error_invalid_identifier(cmds->args[i]);
 			i++;
 		}
