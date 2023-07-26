@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 19:04:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:55:35 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		m_unset(t_utils *utils, t_cmds *cmds);
 int		m_env(t_utils *utils, t_cmds *cmds);
 int		m_exit(t_utils *utils, t_cmds *cmds);
 
+void	sorted_env(t_utils *utils);
 size_t	equal_sign(char *str);
 int		invalid_identifier(char *str, int f);
 void	change_path(t_utils *utils);

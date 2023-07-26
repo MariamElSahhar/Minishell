@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:15:15 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 19:27:48 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:08:59 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	free_utils(t_utils *utils)
 		free(utils->pwd);
 	if (utils->old_pwd)
 		free(utils->old_pwd);
-	free_double_ptr((void **)utils->envp);
+	free_double_ptr((void **) utils->envp);
 }
 
 // duplicates the passed string
