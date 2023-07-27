@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_pwd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:43:03 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/21 17:22:26 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:38:32 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	m_pwd(t_utils *utils, t_cmds *cmds)
 
 int	error_invalid_identifier(char *identifier)
 {
-	ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(identifier, STDERR_FILENO);
 	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 	return (EXIT_FAILURE);

@@ -6,14 +6,11 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 21:26:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:10:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-char	*join_split_str(char **split_str, char *new_str);
-char	**resplit_str(char **double_arr);
 
 /*
 The function find_cmd is responsible for finding
@@ -158,7 +155,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	int	status;
 
 	if (cmd->builtin == m_cd || cmd->builtin == m_exit
-		|| cmd->builtin == m_unset || cmd->builtin == m_export)
+		|| cmd->builtin == m_unset)
 	{
 		g_global.error_code = cmd->builtin(utils, cmd);
 		return ;
@@ -169,6 +166,8 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 		ft_error(5, utils);
 	else if (pid == 0)
 		handle_cmd(cmd, utils);
+	if (cmd->builtin == m_export)
+		parent_export(utils, cmd);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_global.error_code = WEXITSTATUS(status);

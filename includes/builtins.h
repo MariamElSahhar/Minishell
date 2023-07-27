@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 19:55:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:14:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@ int		invalid_identifier(char *str, int f);
 void	change_path(t_utils *utils);
 int		check_valid_identifier(char c);
 int		error_invalid_identifier(char *identifier);
+
+void	parent_export(t_utils *utils, t_cmds *cmds);
+char	**add_var(char **arr, char *str);
+int		check_parameter(char *str);
+int		variable_exist(t_utils *utils, char *str);
 
 #endif
