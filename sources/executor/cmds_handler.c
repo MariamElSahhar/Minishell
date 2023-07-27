@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 14:15:54 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:23:59 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,24 @@
 
 int	find_exec_error(char *cmd, int code)
 {
-	if (code == 1)
+	char	*temp;
+
+	if (code == 1 && !access(cmd, X_OK))
 	{
-		if (!access(cmd, X_OK))
-		{
-			exec_error(cmd, 4);
-			free(cmd);
-			return (126);
-		}
+		exec_error(cmd, 4);
+		free(cmd);
+		return (126);
 	}
 	if (code == 2)
 	{
+		temp = ft_substr(cmd, 0, ft_strlen(cmd) - 2);
 		if (cmd[ft_strlen(cmd) - 1] == '/'
-			&& access(ft_substr(cmd, 0, ft_strlen(cmd) - 2), F_OK))
+			&& access(temp, F_OK))
+		{
+			free (temp);
 			return (exec_error(cmd, 2));
+		}
+		free (temp);
 		if (cmd[ft_strlen(cmd) - 1] == '/'
 			&& access(cmd, F_OK))
 			return (exec_error(cmd, 1));
