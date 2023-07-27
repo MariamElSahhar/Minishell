@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 15:54:39 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:16:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int				handle_open(t_redir *redir);
 int				prepare_executor(t_utils *utils);
 int				executor(t_utils *utils);
 int				pipe_wait(int *pid, int amount);
+int				double_slash(char *s);
+int				exec_error(char *str, int code);
 
 // handle_cmd
 int				find_cmd(t_cmds *cmd, t_utils *utils);

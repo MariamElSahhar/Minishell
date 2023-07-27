@@ -6,11 +6,34 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:10:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:15:54 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	find_exec_error(char *cmd, int code)
+{
+	if (code == 1)
+	{
+		if (!access(cmd, X_OK))
+		{
+			exec_error(cmd, 4);
+			free(cmd);
+			return (126);
+		}
+	}
+	if (code == 2)
+	{
+		if (cmd[ft_strlen(cmd) - 1] == '/'
+			&& access(ft_substr(cmd, 0, ft_strlen(cmd) - 2), F_OK))
+			return (exec_error(cmd, 2));
+		if (cmd[ft_strlen(cmd) - 1] == '/'
+			&& access(cmd, F_OK))
+			return (exec_error(cmd, 1));
+	}
+	return (exec_error(cmd, 0));
+}
 
 /*
 The function find_cmd is responsible for finding
@@ -30,33 +53,27 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	char	*mycmd;
 
 	i = 0;
-	if (!access(cmd->command, F_OK))
+	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
+		&& !access(cmd->command, F_OK))
+		return (exec_error(cmd->command, 3));
+	if (!access(cmd->command, F_OK) && !double_slash(cmd->command))
 	{
 		execve(cmd->command, cmd->args, utils->envp);
-		return (EXIT_SUCCESS);
+		if (!access(cmd->command, X_OK))
+			return (exec_error(cmd->command, 4));
 	}
 	while (utils->paths && utils->paths[i])
 	{
 		mycmd = ft_strjoin(utils->paths[i], cmd->command);
-		if (!access(mycmd, F_OK))
+		if (!access(mycmd, F_OK) && !double_slash(mycmd))
 		{
 			execve(mycmd, cmd->args, utils->envp);
-			free(mycmd);
-			return (EXIT_SUCCESS);
+			return (find_exec_error(mycmd, 1));
 		}
 		free(mycmd);
 		i++;
 	}
-	return (cmd_not_found(cmd->command));
-}
-
-/*Additional Function command not found is added in error_handling.c*/
-int	cmd_not_found(char *str)
-{
-	write(STDERR_FILENO, "minishell: ", 12);
-	write(STDERR_FILENO, str, ft_strlen(str));
-	write(STDERR_FILENO, ": command not found\n", 21);
-	return (127);
+	return (find_exec_error(cmd->command, 2));
 }
 
 /*

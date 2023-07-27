@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:14:12 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:26:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "parsing.h"
 
 //builtins
-int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
+int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
 int		m_echo(t_utils *utils, t_cmds *cmds);
 int		m_cd(t_utils *utils, t_cmds *cmds);
 int		m_pwd(t_utils *utils, t_cmds *cmds);

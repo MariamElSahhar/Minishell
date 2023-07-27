@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:17:04 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:11:39 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,40 @@ void	parent_export(t_utils *utils, t_cmds *cmds)
 		}
 	}
 	return ;
+}
+
+int	double_slash(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i] && s[i] == '/')
+		i++;
+	while (s && s[i + 1])
+	{
+		if (s[i] == '/' && s[i + 1] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+/*Additional Function command not found is added in error_handling.c*/
+int	exec_error(char *str, int code)
+{
+	write(STDERR_FILENO, "minishell: ", 12);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	if (code == 0)
+		write(STDERR_FILENO, ": command not found\n", 21);
+	else if (code == 1)
+		write(STDERR_FILENO, ": No such file or directory\n", 29);
+	else if (code == 2)
+		write(STDERR_FILENO, ": Not a directory\n", 19);
+	else if (code == 3)
+		write(STDERR_FILENO, ": is a directory\n", 18);
+	else if (code == 4)
+		write(STDERR_FILENO, ": Permission denied\n", 21);
+	if (code == 1 || code == 0)
+		return (127);
+	return (126);
 }
