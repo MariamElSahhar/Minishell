@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/28 15:02:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:06:56 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	expand_env_str(t_word *word, t_utils *utils)
 			i = i + 2;
 		else if (word->cont[i] == '$' && word->cont[i + 1])
 		{
-			if(!found_env(word->cont, &i, word, utils))
+			if (!found_env(word->cont, &i, word, utils))
 				return (0);
 		}
 		else
