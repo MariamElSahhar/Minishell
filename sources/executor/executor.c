@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:27:27 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:49:53 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	pipe_wait(int *pid, int amount)
 		i++;
 	}
 	waitpid(pid[i], &status, 0);
-	printf("The status code is: %d", status_code);
 	if (WIFEXITED(status))
 		status_code = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
@@ -168,7 +167,8 @@ int	prepare_executor(t_utils *utils)
 		utils->pid = ft_calloc(utils->pipes + 2, sizeof(int));
 		if (!utils->pid)
 			return (ft_error(1, utils));
-		executor(utils);
+		if (executor(utils))
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

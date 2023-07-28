@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 18:30:05 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:58:51 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 {
 	int	pid;
 	int	status;
+	int	exit_status;
 
 	if (cmd->builtin == m_cd || cmd->builtin == m_exit
 		|| cmd->builtin == m_unset)
@@ -191,5 +192,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 		parent_export(utils, cmd);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		status_code = WEXITSTATUS(status);
+		exit_status = WEXITSTATUS(status);
+	if (status_code != STOP_HEREDOC)
+		status_code = exit_status;
 }

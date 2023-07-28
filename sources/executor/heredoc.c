@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:00:34 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:55:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
 			|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
-		&& !(status_code == CTRL_C))
+		&& !(status_code == STOP_HEREDOC))
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -48,8 +48,8 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	}
 	free(line);
 	close(fd);
-	if ((status_code == CTRL_C) || !line)
-		return (CTRL_C);
+	if ((status_code == STOP_HEREDOC) || !line)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 18:56:22 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:54:17 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,22 @@ It calls rl_on_new_line to move the cursor to a new line,
 string using rl_replace_line, redisplays the prompt and
  line using rl_redisplay, and ignores the sig parameter.
 */
+// handles ctl + C
 void	sigint_handler(int sig)
 {
-	if (!(status_code == IN_HEREDOC))
+	if (status_code != IN_HEREDOC)
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (status_code == IN_CMD || status_code == IN_HEREDOC)
+	if (status_code == IN_CMD)
 	{
-		status_code = 130;
+		status_code = CTRL_C;
+		rl_replace_line("", 0);
+		rl_redisplay();
+		rl_done = 1;
+		return ;
+	}
+	else if (status_code == IN_HEREDOC)
+	{
+		status_code = STOP_HEREDOC;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -77,7 +86,7 @@ void	sigquit_handler(int sig)
 {
 	if (status_code == IN_CMD)
 	{
-		status_code = 131;
+		status_code = CTRL_BS;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;

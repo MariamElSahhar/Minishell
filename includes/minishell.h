@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 18:56:22 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:52:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ int	status_code;
 typedef enum e_status
 {
 	IN_CMD = 20,
-	IN_HEREDOC = 40, 
+	IN_HEREDOC = 40,
 	CTRL_C = 130,
+	CTRL_BS = 131,
+	STOP_HEREDOC = 1,
 }	t_status_code;
 
 
