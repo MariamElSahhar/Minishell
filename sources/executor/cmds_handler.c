@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 14:23:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:30:05 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	if (cmd->builtin == m_cd || cmd->builtin == m_exit
 		|| cmd->builtin == m_unset)
 	{
-		g_global.error_code = cmd->builtin(utils, cmd);
+		status_code = cmd->builtin(utils, cmd);
 		return ;
 	}
 	send_heredoc(utils, cmd);
@@ -191,5 +191,5 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 		parent_export(utils, cmd);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_global.error_code = WEXITSTATUS(status);
+		status_code = WEXITSTATUS(status);
 }

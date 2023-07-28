@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 19:44:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:27:27 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	pipe_wait(int *pid, int amount)
 		i++;
 	}
 	waitpid(pid[i], &status, 0);
+	printf("The status code is: %d", status_code);
 	if (WIFEXITED(status))
-		g_global.error_code = WEXITSTATUS(status);
+		status_code = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 
@@ -159,7 +160,7 @@ them with pipes for communication.
 int	prepare_executor(t_utils *utils)
 {
 	signal(SIGQUIT, sigquit_handler);
-	g_global.in_cmd = 1;
+	status_code = IN_CMD;
 	if (utils->pipes == 0)
 		single_cmd(utils->cmds, utils);
 	else
@@ -169,6 +170,5 @@ int	prepare_executor(t_utils *utils)
 			return (ft_error(1, utils));
 		executor(utils);
 	}
-	g_global.in_cmd = 0;
 	return (EXIT_SUCCESS);
 }

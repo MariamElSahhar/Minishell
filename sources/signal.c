@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/13 14:16:13 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:56:22 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ In this case, it prints a newline character (\n)
 to STDERR_FILENO (standard error) using ft_putstr_fd.
 b. If the global variable g_global.in_cmd is true, it
 means the program is inside a command. In this case, it sets
- g_global.stop_heredoc to 1 to indicate that the heredoc
+ g_global.CTRL_C to 1 to indicate that the heredoc
  should stop, replaces the current Readline line
  with an empty string using rl_replace_line, redisplays
  the prompt and line using rl_redisplay, and sets rl_done
@@ -42,12 +42,11 @@ string using rl_replace_line, redisplays the prompt and
 */
 void	sigint_handler(int sig)
 {
-	if (!g_global.in_heredoc)
+	if (!(status_code == IN_HEREDOC))
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (g_global.in_cmd)
+	if (status_code == IN_CMD || status_code == IN_HEREDOC)
 	{
-		g_global.stop_heredoc = 1;
-		g_global.error_code = 130;
+		status_code = 130;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -76,10 +75,9 @@ to STDERR_FILENO using ft_putchar_fd.
 */
 void	sigquit_handler(int sig)
 {
-	if (g_global.in_cmd)
+	if (status_code == IN_CMD)
 	{
-		g_global.stop_heredoc = 1;
-		g_global.error_code = 131;
+		status_code = 131;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 17:55:59 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:56:22 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,23 @@ int		parse_paths(t_utils *utils);
 
 //builtins
 int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
-typedef struct s_gvar
-{
-	int	error_code;
-	int	stop_heredoc;
-	int	in_cmd;
-	int	in_heredoc;
-}	t_gvar;
+// typedef struct s_gvar
+// {
+// 	int	error_code;
+// 	int	CTRL_C;
+// 	int	in_cmd;
+// 	int	in_heredoc;
+// }	t_gvar;
 
-t_gvar	g_global;
+int	status_code;
+
+typedef enum e_status
+{
+	IN_CMD = 20,
+	IN_HEREDOC = 40, 
+	CTRL_C = 130,
+}	t_status_code;
+
+
 
 #endif

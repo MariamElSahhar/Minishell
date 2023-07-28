@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/21 15:07:38 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:00:34 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ O_CREAT, O_RDWR, and O_TRUNC flags,
  until the here document's end condition is met
  (either when the user enters the same line
  as the here document or
- when the global flag g_global.stop_heredoc
+ when the global flag g_global.CTRL_C
  is set to true).
  Here I am writing the line to the file
  opened using write function
@@ -39,7 +39,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
 			|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
-		&& !g_global.stop_heredoc)
+		&& !(status_code == CTRL_C))
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -48,13 +48,13 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	}
 	free(line);
 	close(fd);
-	if (g_global.stop_heredoc || !line)
-		return (EXIT_FAILURE);
+	if ((status_code == CTRL_C) || !line)
+		return (CTRL_C);
 	return (EXIT_SUCCESS);
 }
 
 /*
-g_global.stop_heredoc = 0;
+g_global.CTRL_C = 0;
 This flag is used to control the termination
 condition of the here document loop in the
 create_heredoc function. When this flag is
@@ -81,10 +81,9 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 	int		sl;
 
 	sl = EXIT_SUCCESS;
-	g_global.stop_heredoc = 0;
-	g_global.in_heredoc = 1;
+	status_code= IN_HEREDOC;
 	sl = create_heredoc(heredoc, file_name, utils);
-	g_global.in_heredoc = 0;
+	status_code = sl;
 	utils->heredoc = true;
 	return (sl);
 }
@@ -168,9 +167,7 @@ int	send_heredoc(t_utils *utils, t_cmds *cmd)
 			cmd->hd_file_name = generate_heredoc_filename();
 			sl = ft_heredoc(utils, redir, cmd->hd_file_name);
 			if (sl)
-			{
-				g_global.error_code = 1;
-			}
+				return (EXIT_FAILURE);
 		}
 		redir = redir->next;
 	}
