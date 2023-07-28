@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:49:53 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:07:04 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	pipe_wait(int *pid, int amount)
 {
 	int	i;
 	int	status;
+	int	exit_status;
 
 	i = 0;
 	status = 0;
@@ -35,7 +36,9 @@ int	pipe_wait(int *pid, int amount)
 	}
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-		status_code = WEXITSTATUS(status);
+		exit_status = WEXITSTATUS(status);
+	if (status_code != STOP_HEREDOC)
+		status_code = exit_status;
 	return (EXIT_SUCCESS);
 }
 
