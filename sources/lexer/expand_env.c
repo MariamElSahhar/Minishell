@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/21 15:15:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:02:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	int		j;
 	char	*env;
 
-	len = found_env_helper(old, i);
+	len = found_env_helper(word, old, i);
 	if (len < 0)
 		return (1);
 	var = (char *)ft_calloc(len + 1, sizeof(char));
@@ -83,9 +83,11 @@ int	expand_env_str(t_word *word, t_utils *utils)
 		else if (word->cont[i] == '$' && word->cont[i + 1]
 			&& check_valid_identifier(word->cont[i + 1]))
 			i = i + 2;
-		else if (word->cont[i] == '$' && word->cont[i + 1]
-			&& !found_env(word->cont, &i, word, utils))
-			return (0);
+		else if (word->cont[i] == '$' && word->cont[i + 1])
+		{
+			if(!found_env(word->cont, &i, word, utils))
+				return (0);
+		}
 		else
 			i++;
 	}

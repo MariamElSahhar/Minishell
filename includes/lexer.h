@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:14:20 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 18:01:06 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:02:50 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int		expand_env(t_split *split, t_utils *utils);
 void	sort_split(t_split *split);
 char	*expand_env_quotes(t_word *word, int *i, t_utils *utils);
 int		found_env(char *old, int *i, t_word *word, t_utils *utils);
-int		found_env_helper(char *old, int *i);
+int		found_env_helper(t_word *word, char *old, int *i);
 
 #endif
