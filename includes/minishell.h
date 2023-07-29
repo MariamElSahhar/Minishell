@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:52:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:42:06 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,9 @@ char	*delete_quotes_export(char *str, char c);
 
 int		parse_paths(t_utils *utils);
 
-//builtins
 int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
-// typedef struct s_gvar
-// {
-// 	int	error_code;
-// 	int	CTRL_C;
-// 	int	in_cmd;
-// 	int	in_heredoc;
-// }	t_gvar;
 
-int	status_code;
+int		g_g_status_code;
 
 typedef enum e_status
 {
@@ -67,8 +59,6 @@ typedef enum e_status
 	CTRL_C = 130,
 	CTRL_BS = 131,
 	STOP_HEREDOC = 1,
-}	t_status_code;
-
-
+}	t_g_status_code;
 
 #endif

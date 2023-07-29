@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 14:18:22 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:40:06 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ string using rl_replace_line, redisplays the prompt and
 // handles ctl + C
 void	sigint_handler(int sig)
 {
-	if (status_code != IN_HEREDOC)
+	if (g_status_code != IN_HEREDOC)
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (status_code == IN_CMD)
+	if (g_status_code == IN_CMD)
 	{
-		status_code = CTRL_C;
+		g_status_code = CTRL_C;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
 		return ;
 	}
-	else if (status_code == IN_HEREDOC)
+	else if (g_status_code == IN_HEREDOC)
 	{
-		status_code = STOP_HEREDOC;
+		g_status_code = STOP_HEREDOC;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -84,9 +84,9 @@ to STDERR_FILENO using ft_putchar_fd.
 */
 void	sigquit_handler(int sig)
 {
-	if (status_code == IN_CMD)
+	if (g_status_code == IN_CMD)
 	{
-		status_code = CTRL_BS;
+		g_status_code = CTRL_BS;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
@@ -95,7 +95,7 @@ void	sigquit_handler(int sig)
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
-	else if (status_code != IN_HEREDOC)
+	else if (g_status_code != IN_HEREDOC)
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();

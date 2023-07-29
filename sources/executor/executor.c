@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:21:53 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:40:06 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	pipe_wait(int *pid, int amount)
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
-	if (status_code != STOP_HEREDOC)
-		status_code = exit_status;
+	if (g_status_code != STOP_HEREDOC)
+		g_status_code = exit_status;
 	return (EXIT_SUCCESS);
 }
 
@@ -162,7 +162,7 @@ them with pipes for communication.
 int	prepare_executor(t_utils *utils)
 {
 	signal(SIGQUIT, sigquit_handler);
-	status_code = IN_CMD;
+	g_status_code = IN_CMD;
 	if (utils->pipes == 0)
 		single_cmd(utils->cmds, utils);
 	else
