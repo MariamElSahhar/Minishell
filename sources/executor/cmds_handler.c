@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 14:38:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:57:27 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,8 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	int	exit_status;
 
 	exit_status = -1;
-	send_heredoc(utils, cmd);
+	if (send_heredoc(utils, cmd) == EXIT_FAILURE)
+		return ;
 	pid = fork();
 	if (pid < 0)
 		ft_error(5, utils);

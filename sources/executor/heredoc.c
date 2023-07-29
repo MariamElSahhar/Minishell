@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 14:34:46 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:04:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	if (fd < 0)
 	{
 		close(fd);
-		printf("Error is from here");
 		ft_error(7, utils);
-		free_utils(utils);
+		return (EXIT_FAILURE);
 	}
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
@@ -85,7 +84,8 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 	status_code= IN_HEREDOC;
 	sl = create_heredoc(heredoc, file_name, utils);
 	status_code = sl;
-	utils->heredoc = true;
+	if (sl == EXIT_SUCCESS)
+		utils->heredoc = true;
 	return (sl);
 }
 
@@ -102,7 +102,7 @@ char	*generate_heredoc_filename(void)
 	char		*file_name;
 
 	num = ft_itoa(i++);
-	file_name = ft_strjoin("build/.tmp_heredoc_file_", num);
+	file_name = ft_strjoin(".tmp_heredoc_file_", num);
 	free(num);
 	return (file_name);
 }

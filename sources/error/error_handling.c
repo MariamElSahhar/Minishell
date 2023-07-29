@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/10 19:20:44 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:02:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	ft_error(int error, t_utils *utils)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
 	else if (error == 9)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	if (utils)
-		reset_utils(utils);
+	(void) utils;
 	return (EXIT_FAILURE);
 }
 

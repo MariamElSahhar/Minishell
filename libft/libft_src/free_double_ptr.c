@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:57:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/13 15:34:00 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:59:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	free_double_ptr(void **ptr)
 	int	i;
 
 	i = 0;
-	while (ptr && ptr[i])
+	while (*ptr && ptr && ptr[i])
 	{
 		free(ptr[i]);
 		i++;
 	}
-	if (ptr)
+	if (*ptr && ptr)
 		free(ptr);
 }

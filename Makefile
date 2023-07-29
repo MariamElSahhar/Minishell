@@ -127,7 +127,7 @@ $(PATHO):
 clean:
 	@echo "Cleaning"
 	@rm -f $(OBJS)
-	@rm -f $(PATHB).tmp*
+	@rm -f .tmp*
 	@rm -rf $(PATHO) $(PATHB)
 	@make fclean -C $(LIBFTP)
 
