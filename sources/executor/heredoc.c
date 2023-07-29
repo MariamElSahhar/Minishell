@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:22:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:53:56 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	display_error(int errorCode)
+{
+	ft_error(7);
+	return (EXIT_FAILURE);
+}
 
 /*It opens the file using open with the
 O_CREAT, O_RDWR, and O_TRUNC flags,
@@ -24,23 +30,21 @@ O_CREAT, O_RDWR, and O_TRUNC flags,
  opened using write function
  passing newline to separate the input from the user.
 */
-int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
+int	create_heredoc(t_redir *heredoc, char *file_name)
 {
 	int		fd;
 	char	*line;
 
-	(void) utils;
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		close(fd);
-		ft_error(7);
-		return (EXIT_FAILURE);
+		display_error(7);
 	}
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
 			|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
-		&& !(status_code == STOP_HEREDOC) )
+		&&!(g_status_code == STOP_HEREDOC))
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -49,7 +53,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	}
 	close(fd);
 	free(line);
-	if ((status_code == STOP_HEREDOC) || !line)
+	if ((g_status_code == STOP_HEREDOC) || !line)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -82,9 +86,9 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 	int		sl;
 
 	sl = EXIT_SUCCESS;
-	status_code= IN_HEREDOC;
+	g_status_code = IN_HEREDOC;
 	sl = create_heredoc(heredoc, file_name, utils);
-	status_code = sl;
+	g_status_code = sl;
 	if (sl == EXIT_SUCCESS)
 		utils->heredoc = true;
 	return (sl);

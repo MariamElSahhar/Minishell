@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:44:34 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/29 13:02:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:43:08 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	p_export(t_utils *utils, t_cmds *cmds)
 	return ;
 }
 
-void	p_exit(t_utils *utils, t_cmds* cmds)
+void	p_exit(t_utils *utils, t_cmds *cmds)
 {
 	int		exit_code;
 
@@ -58,7 +58,7 @@ void	p_exit(t_utils *utils, t_cmds* cmds)
 	exit(exit_code);
 }
 
-void	p_unset(t_utils *utils, t_cmds* cmds)
+void	p_unset(t_utils *utils, t_cmds *cmds)
 {
 	char	**temp;
 
@@ -70,7 +70,7 @@ void	p_unset(t_utils *utils, t_cmds* cmds)
 	utils->envp = temp;
 }
 
-void	p_cd(t_utils *utils, t_cmds* cmds)
+void	p_cd(t_utils *utils, t_cmds *cmds)
 {
 	int	ret;
 
@@ -86,7 +86,7 @@ void	p_cd(t_utils *utils, t_cmds* cmds)
 	update_path_to_env(utils);
 }
 
-void	p_builtins(t_utils *utils, t_cmds* cmd)
+void	p_builtins(t_utils *utils, t_cmds *cmd)
 {
 	if (cmd->builtin == m_export)
 		p_export(utils, cmd);
@@ -97,4 +97,3 @@ void	p_builtins(t_utils *utils, t_cmds* cmd)
 	if (cmd->builtin == m_unset)
 		p_unset(utils, cmd);
 }
-

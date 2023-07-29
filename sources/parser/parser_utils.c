@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:40:06 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	*expand_err(char *cont, int *i)
 {
 	char	*err;
 
-	err = ft_itoa(status_code);
+	err = ft_itoa(g_status_code);
 	(*i) = (*i) + 2;
 	cont = replace_env(cont, i, err, 1);
 	if (!cont)

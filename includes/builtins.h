@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:49:12 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 13:04:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:40:42 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sorted_env(t_utils *utils);
 size_t	equal_sign(char *str);
 int		invalid_identifier(char *str, int f);
 void	change_path(t_utils *utils);
-void	update_path_to_env(t_utils* utils);
+void	update_path_to_env(t_utils *utils);
 int		check_valid_identifier(char c);
 int		error_invalid_identifier(char *identifier);
 char	**del_var(char **arr, char *str);
@@ -41,6 +41,6 @@ int		variable_exist(t_utils *utils, char *str);
 int		is_str_digit(char *str);
 int		p_specific_path(t_utils *utils, char *str);
 char	*find_path_ret(char *str, t_utils *utils);
-void	p_builtins(t_utils *utils, t_cmds* cmd);
+void	p_builtins(t_utils *utils, t_cmds *cmd);
 
 #endif
