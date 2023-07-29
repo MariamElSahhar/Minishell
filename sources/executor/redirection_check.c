@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 11:40:35 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:59:17 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ if it's greater than zero and returns EXIT_SUCCESS.
 int	handle_infile(char *file)
 {
 	int	fd;
+	int	fd1;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -57,13 +58,17 @@ int	handle_infile(char *file)
 			STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
+	fd1 = dup(STDIN_FILENO);
 	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)
+	{
 		close(fd);
+		close(fd1);
+	}
 	return (EXIT_SUCCESS);
 }
 

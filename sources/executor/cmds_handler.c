@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:58:51 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:20:14 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	int	status;
 	int	exit_status;
 
+	exit_status = -1;
 	if (cmd->builtin == m_cd || cmd->builtin == m_exit
 		|| cmd->builtin == m_unset)
 	{
@@ -193,6 +194,6 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
-	if (status_code != STOP_HEREDOC)
+	if (status_code != STOP_HEREDOC && exit_status != -1)
 		status_code = exit_status;
 }
