@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 12:39:13 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:49:45 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	char	*line;
 
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	printf("open fd: %i", fd);
 	if (fd < 0)
 	{
 		close(fd);
