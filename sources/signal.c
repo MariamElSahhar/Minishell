@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:40:06 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:31:47 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ of sig to STDERR_FILENO (standard error)
 b. It prints a newline character (\n)
 to STDERR_FILENO using ft_putchar_fd.
 */
+// ctl+backslash
 void	sigquit_handler(int sig)
 {
 	if (g_status_code == IN_CMD)
@@ -94,12 +95,6 @@ void	sigquit_handler(int sig)
 		ft_putnbr_fd(sig, STDERR_FILENO);
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
-	}
-	else if (g_status_code != IN_HEREDOC)
-	{
-		rl_replace_line("", 0);
-		rl_redisplay();
-		rl_done = 1;
 	}
 }
 

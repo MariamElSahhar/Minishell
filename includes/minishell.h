@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:27 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:42:06 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 17:01:08 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		parse_paths(t_utils *utils);
 
 int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
 
-int		g_g_status_code;
+int		g_status_code;
 
 typedef enum e_status
 {

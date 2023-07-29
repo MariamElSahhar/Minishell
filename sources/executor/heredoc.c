@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:53:56 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 17:06:06 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	display_error(int errorCode)
+int	display_error(int errorCode)
 {
-	ft_error(7);
+	ft_error(errorCode);
 	return (EXIT_FAILURE);
 }
 
@@ -39,12 +39,11 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 	if (fd < 0)
 	{
 		close(fd);
-		display_error(7);
+		return (display_error(7));
 	}
 	line = readline(HEREDOC_MSG);
-	while (line && (ft_strncmp(heredoc->path, line, ft_strlen(heredoc->path))
-			|| ft_strncmp(heredoc->path, line, ft_strlen(line)))
-		&&!(g_status_code == STOP_HEREDOC))
+	while (line && (ft_strcmp(heredoc->path, line)
+			&& g_status_code != STOP_HEREDOC))
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -87,7 +86,7 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 
 	sl = EXIT_SUCCESS;
 	g_status_code = IN_HEREDOC;
-	sl = create_heredoc(heredoc, file_name, utils);
+	sl = create_heredoc(heredoc, file_name);
 	g_status_code = sl;
 	if (sl == EXIT_SUCCESS)
 		utils->heredoc = true;
