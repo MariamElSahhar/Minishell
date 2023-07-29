@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:44 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:48:24 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:12:03 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds)
 		i++;
 	}
 	return (NULL);
+}
+
+int	p_specific_path(t_utils *utils, char *str)
+{
+	char	*tmp;
+	int		ret;
+
+	ret = -1;
+	tmp = find_path_ret(str, utils);
+	if (tmp)
+	{
+		ret = chdir(tmp);
+		free(tmp);
+	}
+	return (ret);
 }

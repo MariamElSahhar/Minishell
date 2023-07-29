@@ -39,6 +39,7 @@ sources	=	sources/main.c \
 		sources/builtins/m_pwd.c \
 		sources/builtins/m_unset.c \
 		sources/builtins/utils_builtins.c \
+		sources/builtins/p_builtins.c \
 		sources/utils/parse_envp.c \
 		sources/utils/utils.c \
 		sources/error/error_handling.c \

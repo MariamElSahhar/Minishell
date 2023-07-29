@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:55:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:39:13 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	char	*line;
 
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	printf("open fd: %i", fd);
 	if (fd < 0)
 	{
 		close(fd);
@@ -46,8 +47,8 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 		free(line);
 		line = readline(HEREDOC_MSG);
 	}
-	free(line);
 	close(fd);
+	free(line);
 	if ((status_code == STOP_HEREDOC) || !line)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -164,6 +165,8 @@ int	send_heredoc(t_utils *utils, t_cmds *cmd)
 	{
 		if (redir->type == HEREDOC)
 		{
+			if (cmd->hd_file_name)
+				free (cmd->hd_file_name);
 			cmd->hd_file_name = generate_heredoc_filename();
 			sl = ft_heredoc(utils, redir, cmd->hd_file_name);
 			if (sl)

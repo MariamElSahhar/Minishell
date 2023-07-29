@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 12:20:14 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:30:46 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 		if (!access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));
 	}
-	while (utils->paths && utils->paths[i])
+	while (utils->paths && utils->paths[i] && !double_slash(cmd->command))
 	{
 		mycmd = ft_strjoin(utils->paths[i], cmd->command);
-		if (!access(mycmd, F_OK) && !double_slash(mycmd))
+		if (!access(mycmd, F_OK))
 		{
 			execve(mycmd, cmd->args, utils->envp);
 			return (find_exec_error(mycmd, 1));
@@ -177,20 +177,15 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 	int	exit_status;
 
 	exit_status = -1;
-	if (cmd->builtin == m_cd || cmd->builtin == m_exit
-		|| cmd->builtin == m_unset)
-	{
-		status_code = cmd->builtin(utils, cmd);
-		return ;
-	}
 	send_heredoc(utils, cmd);
 	pid = fork();
 	if (pid < 0)
 		ft_error(5, utils);
 	else if (pid == 0)
 		handle_cmd(cmd, utils);
-	if (cmd->builtin == m_export)
-		parent_export(utils, cmd);
+	if (cmd->builtin == m_export || cmd->builtin == m_cd || cmd->builtin == m_exit
+		|| cmd->builtin == m_unset)
+		p_builtins(utils, cmd);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);

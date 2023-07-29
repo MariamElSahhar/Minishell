@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 11:59:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:35:32 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ int	handle_infile(char *file)
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
+	printf("fd: %i\n fd1: %i\n", fd, fd1);
 	if (fd > 0)
 	{
-		close(fd);
 		close(fd1);
+		close(fd);
 	}
 	return (EXIT_SUCCESS);
 }

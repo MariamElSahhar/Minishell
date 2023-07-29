@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 14:11:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:31:36 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,48 +78,19 @@ int	check_redir_helper(int type, t_redir *dir)
 	return (EXIT_SUCCESS);
 }
 
-void	parent_export(t_utils *utils, t_cmds *cmds)
-{
-	char	**tmp;
-	int		i;
-
-	i = 1;
-	if (!cmds->args[1] || cmds->args[1][0] == '\0')
-		return ;
-	else
-	{
-		while (cmds->args[i])
-		{
-			if (!check_parameter(cmds->args[i])
-				&& !variable_exist(utils, cmds->args[i])
-				&& !invalid_identifier(cmds->args[i], 1))
-			{
-				tmp = add_var(utils->envp, cmds->args[i]);
-				free_double_ptr((void **)utils->envp);
-				utils->envp = tmp;
-			}
-			else if ((invalid_identifier(cmds->args[i], 1)
-					|| check_parameter(cmds->args[i])))
-				return ;
-			i++;
-		}
-	}
-	return ;
-}
-
 int	double_slash(char *s)
 {
-	int	i;
+	char	**tmp;
 
-	i = 0;
-	while (s && s[i] && s[i] == '/')
-		i++;
-	while (s && s[i + 1])
+	tmp = ft_split(s, '/');
+	if (tmp[0] && tmp[1])
 	{
-		if (s[i] == '/' && s[i + 1] == '/')
-			return (1);
-		i++;
+		free_double_ptr((void **) tmp);
+		return (0);
 	}
+	free_double_ptr((void **) tmp);
+	if (s[0] && s[0] == '/')
+		return (1);
 	return (0);
 }
 
