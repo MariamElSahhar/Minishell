@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:10:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 20:07:04 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:21:53 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_fork(t_utils *utils, int end[2], int fd_in, t_cmds *cmd)
 	}
 	utils->pid[i] = fork();
 	if (utils->pid[i] < 0)
-		ft_error(5, utils);
+		ft_error(5);
 	if (utils->pid[i] == 0)
 		dup_cmd(cmd, utils, end, fd_in);
 	i++;
@@ -118,7 +118,7 @@ int	executor(t_utils *utils)
 	{
 		if (curr_cmd->next)
 			if (pipe(end) < 0)
-				return (!ft_error(4, 0));
+				return (!ft_error(4));
 		send_heredoc(utils, curr_cmd);
 		if (ft_fork(utils, end, fd_in, curr_cmd) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
@@ -169,7 +169,7 @@ int	prepare_executor(t_utils *utils)
 	{
 		utils->pid = ft_calloc(utils->pipes + 2, sizeof(int));
 		if (!utils->pid)
-			return (ft_error(1, utils));
+			return (ft_error(1));
 		if (executor(utils))
 			return (EXIT_FAILURE);
 	}

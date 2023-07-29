@@ -6,13 +6,13 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:04:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:02:08 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:41 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_error(int error, t_utils *utils)
+int	ft_error(int error)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)
@@ -35,7 +35,6 @@ int	ft_error(int error, t_utils *utils)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
 	else if (error == 9)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	(void) utils;
 	return (EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 19:40:29 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/03 19:59:09 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:28 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	lexer_error(int error, t_utils *utils);
 int		cmd_not_found(char *str);
 int		export_error(char *c);
 //ft_error
-int		ft_error(int error, t_utils *utils);
+int		ft_error(int error);
 
 typedef enum e_err_code
 {

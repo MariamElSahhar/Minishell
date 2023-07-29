@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:29:44 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/28 18:30:05 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**init_args(t_word *start, char *command)
 	count = count_args(start, command);
 	args = (char **)ft_calloc(count + 2, sizeof(char *));
 	if (!args)
-		ft_error(1, 0);
+		ft_error(1);
 	count = 1;
 	if (!command)
 		count = 0;
@@ -91,7 +91,7 @@ char	*ft_getenv(char *var, t_utils *utils)
 		value = ft_split(utils->envp[i], '=');
 		if (!value)
 		{
-			ft_error(1, 0);
+			ft_error(1);
 			return (0);
 		}
 		if (!ft_strcmp(var, value[0]))

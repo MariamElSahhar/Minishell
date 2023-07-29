@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 17:12:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/27 13:17:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**add_var(char **arr, char *str)
 	rtn = ft_calloc(i + 2, sizeof(char *));
 	if (!rtn)
 	{
-		ft_error(1, 0);
+		ft_error(1);
 		return (NULL);
 	}
 	i = 0;

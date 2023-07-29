@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 15:57:27 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:22:12 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,10 +142,10 @@ input file descriptor (fd_in).
 void	dup_cmd(t_cmds *cmd, t_utils *utils, int end[2], int fd_in)
 {
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
-		ft_error(4, utils);
+		ft_error(4);
 	close(end[0]);
 	if (cmd->next && dup2(end[1], STDOUT_FILENO) < 0)
-		ft_error(4, utils);
+		ft_error(4);
 	close(end[1]);
 	if (cmd->prev)
 		close(fd_in);
@@ -181,7 +181,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 		return ;
 	pid = fork();
 	if (pid < 0)
-		ft_error(5, utils);
+		ft_error(5);
 	else if (pid == 0)
 		handle_cmd(cmd, utils);
 	if (cmd->builtin == m_export || cmd->builtin == m_cd || cmd->builtin == m_exit

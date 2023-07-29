@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:09:53 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 21:10:37 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	sort_tokens(t_split *split, t_utils *utils)
 	{
 		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
 		if (!new_cmd)
-			return (!ft_error(1, 0));
+			return (!ft_error(1));
 		ptr = init_cmd(ptr, new_cmd);
 		if (!new_cmd || !new_cmd->args)
 			return (0);

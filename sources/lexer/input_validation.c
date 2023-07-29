@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:21:58 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/14 19:48:39 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:22:03 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	open_quotes(char *input)
 int	check_input(char *input)
 {
 	if (open_quotes(input))
-		return (!ft_error(2, 0));
+		return (!ft_error(2));
 	if (invalid_char(input, ';'))
 		return (!invalid_token_error("';'"));
 	if (invalid_char(input, '&'))

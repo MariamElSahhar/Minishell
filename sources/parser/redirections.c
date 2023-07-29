@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 16:51:59 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/26 18:03:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
 	if (!redir)
 	{
-		ft_error(1, 0);
+		ft_error(1);
 		return (0);
 	}
 	if (ptr->next->type == PATH)

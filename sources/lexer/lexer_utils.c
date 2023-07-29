@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:49:03 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/28 15:02:40 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_word	*new_word(char *c, int type)
 	word = (t_word *)ft_calloc(1, sizeof(t_word));
 	if (!word)
 	{
-		ft_error(1, 0);
+		ft_error(1);
 		return (0);
 	}
 	word->type = type;

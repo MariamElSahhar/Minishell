@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 21:11:51 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:22:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**sort_env(char **env)
 	sorted = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!sorted)
 	{
-		ft_error(1, 0);
+		ft_error(1);
 		return (0);
 	}
 	i = -1;

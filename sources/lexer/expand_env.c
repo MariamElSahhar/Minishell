@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 11:39:28 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/28 15:06:56 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:20:57 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	full = (char *)ft_calloc((ft_strlen(str) - len)
 			+ ft_strlen(exp) + 2, sizeof(char));
 	if (!full)
-		ft_error(1, 0);
+		ft_error(1);
 	j = -1;
 	k = (*i) - len - 1;
 	while (full && ++j < k)
@@ -54,7 +54,7 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 		return (1);
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
-		return (!ft_error(1, 0));
+		return (!ft_error(1));
 	j = 0;
 	(*i)++;
 	while (j < len)

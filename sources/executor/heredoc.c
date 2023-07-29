@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:04:41 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 16:22:49 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ int	create_heredoc(t_redir *heredoc, char *file_name, t_utils *utils)
 	int		fd;
 	char	*line;
 
+	(void) utils;
 	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		close(fd);
-		ft_error(7, utils);
+		ft_error(7);
 		return (EXIT_FAILURE);
 	}
 	line = readline(HEREDOC_MSG);
