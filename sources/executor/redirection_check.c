@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/14 15:53:09 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/07/29 11:40:35 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ dup2. Finally, it closes the file descriptor if it's greater
 int	handle_outfile(t_redir *redir)
 {
 	int	fd;
+	int fd1;
 
 	fd = check_append_outfile(redir);
 	if (fd < 0)
@@ -104,13 +105,17 @@ int	handle_outfile(t_redir *redir)
 		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
+	fd1 = dup(STDOUT_FILENO);
+	if (fd > 0 && dup2(fd, fd1) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)
+	{
 		close(fd);
+		close(fd1);
+	}
 	return (EXIT_SUCCESS);
 }
 /*
