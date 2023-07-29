@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/28 19:54:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 14:18:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	sigquit_handler(int sig)
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
-	else
+	else if (status_code != IN_HEREDOC)
 	{
 		rl_replace_line("", 0);
 		rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 13:49:50 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:42:52 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ if it's greater than zero and returns EXIT_SUCCESS.
 int	handle_infile(char *file)
 {
 	int	fd;
-	int	fd1;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -58,17 +57,13 @@ int	handle_infile(char *file)
 			STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	fd1 = dup(STDIN_FILENO);
-	if (fd > 0 && dup2(fd, fd1) < 0)
+	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)
-	{
-		close(fd1);
 		close(fd);
-	}
 	return (EXIT_SUCCESS);
 }
 
@@ -102,7 +97,6 @@ dup2. Finally, it closes the file descriptor if it's greater
 int	handle_outfile(t_redir *redir)
 {
 	int	fd;
-	int fd1;
 
 	fd = check_append_outfile(redir);
 	if (fd < 0)
@@ -110,17 +104,13 @@ int	handle_outfile(t_redir *redir)
 		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	fd1 = dup(STDOUT_FILENO);
-	if (fd > 0 && dup2(fd, fd1) < 0)
+	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd > 0)
-	{
 		close(fd);
-		close(fd1);
-	}
 	return (EXIT_SUCCESS);
 }
 /*
