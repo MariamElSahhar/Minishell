@@ -54,28 +54,35 @@ function returns a value indicating that the command was not found.
 int	find_cmd(t_cmds *cmd, t_utils *utils)
 {
 	int		i;
+	int		j;
 	char	*mycmd;
 
 	i = 0;
 	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
 		&& !access(cmd->command, F_OK))
 		return (exec_error(cmd->command, 3));
-	if (!access(cmd->command, F_OK) && !double_slash(cmd->command))
+
+	 if (cmd->command[0] != '/')
 	{
-		execve(cmd->command, cmd->args, utils->envp);
+		while (utils->paths && utils->paths[i] )
+		{
+			mycmd = ft_strjoin(utils->paths[i], cmd->command);
+			if (!access(mycmd, F_OK))
+			{
+				execve(mycmd, cmd->args, utils->envp);
+				return (find_exec_error(mycmd, 1));
+			}
+			free(mycmd);
+			i++;
+		}
+	}
+		else if (!access(cmd->command, F_OK) || cmd->command[0] == '/' || cmd->command[0] == '.')
+	{
+		j = execve(cmd->command, cmd->args, utils->envp);
+		if (j)
+			return (exec_error(cmd->command, 3));
 		if (!access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));
-	}
-	while (utils->paths && utils->paths[i] && !double_slash(cmd->command))
-	{
-		mycmd = ft_strjoin(utils->paths[i], cmd->command);
-		if (!access(mycmd, F_OK))
-		{
-			execve(mycmd, cmd->args, utils->envp);
-			return (find_exec_error(mycmd, 1));
-		}
-		free(mycmd);
-		i++;
 	}
 	return (find_exec_error(cmd->command, 2));
 }
