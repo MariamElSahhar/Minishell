@@ -58,9 +58,15 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	char	*mycmd;
 
 	i = 0;
+	if (ft_strlen(cmd->command) == 0)
+	{
+		exec_error(cmd->command, 0);
+		free(cmd);
+		return (126);
+	}
 	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
 		&& !access(cmd->command, F_OK))
-		return (exec_error(cmd->command, 3));
+		return (exec_error(cmd->command, 3)); 
 
 	 if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
