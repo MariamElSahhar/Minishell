@@ -62,7 +62,7 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 		&& !access(cmd->command, F_OK))
 		return (exec_error(cmd->command, 3));
 
-	 if (cmd->command[0] != '/')
+	 if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
 		while (utils->paths && utils->paths[i] )
 		{
