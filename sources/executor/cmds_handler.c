@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 17:31:28 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:01:17 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ function returns a value indicating that the command was not found.
 int	find_cmd(t_cmds *cmd, t_utils *utils)
 {
 	int		i;
-	int		j;
-	char	*mycmd;
 
-	i = 0;
 	if (ft_strlen(cmd->command) == 0)
 		return (exec_error(cmd->command, 0));
 	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
@@ -65,23 +62,14 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 		return (exec_error(cmd->command, 3));
 	if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
-		while (utils->paths && utils->paths[i])
-		{
-			mycmd = ft_strjoin(utils->paths[i], cmd->command);
-			if (!access(mycmd, F_OK))
-			{
-				execve(mycmd, cmd->args, utils->envp);
-				return (find_exec_error(mycmd, 1));
-			}
-			free(mycmd);
-			i++;
-		}
+		if (loop_paths(utils, cmd) != 0)
+			return (127);
 	}
 	else if (!access(cmd->command, F_OK) || cmd->command[0] == '/'
 		|| cmd->command[0] == '.')
 	{
-		j = execve(cmd->command, cmd->args, utils->envp);
-		if (j)
+		i = execve(cmd->command, cmd->args, utils->envp);
+		if (i)
 			return (exec_error(cmd->command, 3));
 		if (!access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));

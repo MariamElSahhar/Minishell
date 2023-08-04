@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 17:27:21 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:00:15 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,27 @@ int	exec_error(char *str, int code)
 	if (code == 1 || code == 0)
 		return (127);
 	return (126);
+}
+
+int	loop_paths(t_utils *utils, t_cmds *cmd)
+{
+	int		i;
+	char	*mycmd;
+
+	i = 0;
+	if (cmd->command[0] != '/' && cmd->command[0] != '.')
+	{
+		while (utils->paths && utils->paths[i])
+		{
+			mycmd = ft_strjoin(utils->paths[i], cmd->command);
+			if (!access(mycmd, F_OK))
+			{
+				execve(mycmd, cmd->args, utils->envp);
+				return (find_exec_error(mycmd, 1));
+			}
+			free(mycmd);
+			i++;
+		}
+	}
+	return (0);
 }
