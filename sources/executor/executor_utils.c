@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 13:31:36 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:27:21 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,6 @@ int	check_redir_helper(int type, t_redir *dir)
 		close (fd);
 	}
 	return (EXIT_SUCCESS);
-}
-
-int	double_slash(char *s)
-{
-	char	**tmp;
-
-	tmp = ft_split(s, '/');
-	if (tmp[0] && tmp[1])
-	{
-		free_double_ptr((void **) tmp);
-		return (0);
-	}
-	free_double_ptr((void **) tmp);
-	if (s[0] && s[0] == '/')
-		return (1);
-	return (0);
 }
 
 /*Additional Function command not found is added in error_handling.c*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 16:54:38 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:31:28 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,13 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 
 	i = 0;
 	if (ft_strlen(cmd->command) == 0)
-	{
-		exec_error(cmd->command, 0);
-		free(cmd);
-		return (126);
-	}
+		return (exec_error(cmd->command, 0));
 	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
 		&& !access(cmd->command, F_OK))
-		return (exec_error(cmd->command, 3)); 
-
-	 if (cmd->command[0] != '/' && cmd->command[0] != '.')
+		return (exec_error(cmd->command, 3));
+	if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
-		while (utils->paths && utils->paths[i] )
+		while (utils->paths && utils->paths[i])
 		{
 			mycmd = ft_strjoin(utils->paths[i], cmd->command);
 			if (!access(mycmd, F_OK))
@@ -82,7 +77,8 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 			i++;
 		}
 	}
-		else if (!access(cmd->command, F_OK) || cmd->command[0] == '/' || cmd->command[0] == '.')
+	else if (!access(cmd->command, F_OK) || cmd->command[0] == '/'
+		|| cmd->command[0] == '.')
 	{
 		j = execve(cmd->command, cmd->args, utils->envp);
 		if (j)
@@ -93,23 +89,23 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	return (find_exec_error(cmd->command, 2));
 }
 
-/* Inside the function, 
+/* Inside the function,
 it performs the following actions:
-It checks if there are any 
+It checks if there are any
 redirections specified by
 calling check_redirections if
  cmd->redirections is not NUL.
 If the command is a built-in
 command (indicated by
-cmd->builtin not being NULL), it calls the 
+cmd->builtin not being NULL), it calls the
 corresponding built-in
-command function and exits 
+command function and exits
 with the return code of the
- command. If the command is not a built-in command 
+ command. If the command is not a built-in command
  and the command
 string is not empty, it calls the find_cmd function to
 find and execute the command.
-Finally, it exits with the exit code 
+Finally, it exits with the exit code
 returned by find_cmd
 or 0 if no command was executed.
 */
@@ -171,7 +167,7 @@ void	dup_cmd(t_cmds *cmd, t_utils *utils, int end[2], int fd_in)
 
 /*
 The function single_cmd is responsible for handling a single
-command. It takes two parameters: a 
+command. It takes two parameters: a
 t_cmds struct pointer named cmd and
 a t_utils struct pointer named utils. Inside the function, it
 performs the following actions:
@@ -201,7 +197,7 @@ void	single_cmd(t_cmds *cmd, t_utils *utils)
 		ft_error(5);
 	else if (pid == 0)
 		handle_cmd(cmd, utils);
-	if (cmd->builtin == m_export || cmd->builtin == m_cd 
+	if (cmd->builtin == m_export || cmd->builtin == m_cd
 		|| cmd->builtin == m_exit || cmd->builtin == m_unset)
 		p_builtins(utils, cmd);
 	waitpid(pid, &status, 0);
