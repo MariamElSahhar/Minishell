@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:40:21 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:51:53 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	sigquit_handler(int sig)
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
-	// else 
+	// else
 	// {
 	// 	rl_on_new_line();
 	// 	rl_replace_line("", 0);
@@ -121,6 +121,7 @@ any specific action when it is received.
 */
 void	init_signals(void)
 {
+	rl_catch_signals = 0;
 	rl_event_hook = event;
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);

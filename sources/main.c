@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:40:05 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:52:26 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 // accepts input from user for parsing and execution
 void	minishell_loop(t_utils *utils)
 {
-	// rl_bind_key('\t', rl_insert);
-	rl_catch_signals = 0;
 	while (1)
 	{
 		utils->input = readline(READLINE_MSG);
