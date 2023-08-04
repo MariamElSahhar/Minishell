@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:44:34 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/29 16:56:23 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:45:10 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ void	p_exit(t_utils *utils, t_cmds *cmds)
 {
 	int		exit_code;
 
-	if (cmds->args[1] && cmds->args[2])
+	if (cmds->args[1] && cmds->args[2] && is_str_digit(cmds->args[1]))
 		return ;
-	if (!cmds->args[1])
+	if (!is_str_digit(cmds->args[1]))
+		exit_code = 255;
+	else if (!cmds->args[1])
 		exit_code = 0;
 	else if (is_str_digit(cmds->args[1]))
 		exit_code = ft_atoi(cmds->args[1]);

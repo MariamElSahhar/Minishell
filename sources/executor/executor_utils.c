@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:00:15 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:27:31 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,18 @@ int	loop_paths(t_utils *utils, t_cmds *cmd)
 		}
 	}
 	return (0);
+}
+
+int	is_directory(char *path)
+{
+	DIR*	dir;
+
+	dir = opendir(path);
+	if (!dir)
+		return (0);
+	else
+	{
+		closedir(dir);
+		return (1);
+	}
 }

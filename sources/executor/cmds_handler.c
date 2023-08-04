@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:01:17 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:26:11 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 
 	if (ft_strlen(cmd->command) == 0)
 		return (exec_error(cmd->command, 0));
-	if (cmd->command[ft_strlen(cmd->command) - 1] == '/'
-		&& !access(cmd->command, F_OK))
+	if ((cmd->command[ft_strlen(cmd->command) - 1] == '/'
+		&& !access(cmd->command, F_OK)) || is_directory(cmd->command))
 		return (exec_error(cmd->command, 3));
 	if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
@@ -70,7 +70,7 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 	{
 		i = execve(cmd->command, cmd->args, utils->envp);
 		if (i)
-			return (exec_error(cmd->command, 3));
+			return (exec_error(cmd->command, 1));
 		if (!access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));
 	}

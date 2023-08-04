@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:36:10 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:43:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,17 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 
 	if (utils->pipes == 0)
 		ft_putendl_fd("exit", STDERR_FILENO);
-	if (cmds->args[1] && cmds->args[2])
+	if (cmds->args[1] && cmds->args[2] && is_str_digit(cmds->args[1]))
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
+	}
+	else if (!is_str_digit(cmds->args[1]))
+	{
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		exit(255);
 	}
 	str = ft_arrdup(cmds->args);
 	reset_utils(utils);

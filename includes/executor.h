@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 17:57:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:25:14 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			dup_cmd(t_cmds *cmd, t_utils *utils,
 void			single_cmd(t_cmds *cmd, t_utils *utils);
 int				loop_paths(t_utils *utils, t_cmds *cmd);
 int				find_exec_error(char *cmd, int code);
+int				is_directory(char *path);
 
 // heredoc
 int				send_heredoc(t_utils *utils, t_cmds *cmd);

@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:44:48 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 18:52:26 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:00:22 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // accepts input from user for parsing and execution
 void	minishell_loop(t_utils *utils)
 {
+	rl_catch_signals = 0;
 	while (1)
 	{
 		utils->input = readline(READLINE_MSG);
