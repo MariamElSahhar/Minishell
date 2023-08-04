@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/26 21:05:01 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:36:10 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 {
 	char	**str;
 
-	ft_putendl_fd("exit", STDERR_FILENO);
+	if (utils->pipes == 0)
+		ft_putendl_fd("exit", STDERR_FILENO);
 	if (cmds->args[1] && cmds->args[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
