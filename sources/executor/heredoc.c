@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:53 by szerisen          #+#    #+#             */
-/*   Updated: 2023/07/29 17:06:06 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:02:18 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 	}
 	close(fd);
 	free(line);
-	if ((g_status_code == STOP_HEREDOC) || !line)
+	if (g_status_code == STOP_HEREDOC)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
