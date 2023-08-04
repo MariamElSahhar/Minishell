@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 19:54:07 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:48:24 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,41 @@ function returns a value indicating that the command was not found.
 */
 int	find_cmd(t_cmds *cmd, t_utils *utils)
 {
-	int		i;
+	char	*tmp;
 
 	if (ft_strlen(cmd->command) == 0)
 		return (exec_error(cmd->command, 0));
-	if ((cmd->command[ft_strlen(cmd->command) - 1] == '/'
-		&& !access(cmd->command, F_OK)) || is_directory(cmd->command))
+	if (is_directory(cmd->command))
 		return (exec_error(cmd->command, 3));
+	else if (cmd->command[ft_strlen(cmd->command) - 1] == '/')
+	{
+		tmp = ft_substr(cmd->command, 0, ft_strlen(cmd->command) - 1);
+		if (!access(tmp, F_OK))
+		{
+			free(tmp);
+			return (exec_error(cmd->command, 2));
+		}
+		else
+		{
+			free(tmp);
+			return (exec_error(cmd->command, 1));
+		}
+	}
 	if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
 		if (loop_paths(utils, cmd) != 0)
 			return (127);
 	}
-	else if (!access(cmd->command, F_OK) || cmd->command[0] == '/'
-		|| cmd->command[0] == '.')
+	else if (!access(cmd->command, F_OK) && (cmd->command[0] == '/'
+		|| cmd->command[0] == '.'))
 	{
-		i = execve(cmd->command, cmd->args, utils->envp);
-		if (i)
-			return (exec_error(cmd->command, 1));
-		if (!access(cmd->command, X_OK))
+		if (access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));
+		execve(cmd->command, cmd->args, utils->envp);
 	}
-	return (find_exec_error(cmd->command, 2));
+	else if (access(cmd->command, F_OK))
+		return (find_exec_error(cmd->command, 1));
+	return (find_exec_error(cmd->command, 0));
 }
 
 /* Inside the function,

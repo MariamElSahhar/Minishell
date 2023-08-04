@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 19:43:18 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:11:29 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_str_digit(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (!ft_isdigit(str[i]))
 			return (0);
@@ -62,7 +62,7 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	else if (!is_str_digit(cmds->args[1]))
+	else if (cmds->args[1] && !is_str_digit(cmds->args[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);

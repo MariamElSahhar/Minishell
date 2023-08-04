@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:57:40 by melsahha          #+#    #+#             */
-/*   Updated: 2023/07/29 15:59:49 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:05:00 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	free_double_ptr(void **ptr)
 		free(ptr[i]);
 		i++;
 	}
-	if (*ptr && ptr)
+	if (ptr)
 		free(ptr);
 }
