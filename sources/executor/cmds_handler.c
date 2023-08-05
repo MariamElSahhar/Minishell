@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:51 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/05 17:03:17 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:18:05 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ function returns a value indicating that the command was not found.
 */
 int	find_cmd(t_cmds *cmd, t_utils *utils)
 {
-
 	if (ft_strlen(cmd->command) == 0)
 		return (exec_error(cmd->command, 0));
 	if (is_directory(cmd->command))
@@ -66,7 +65,7 @@ int	find_cmd(t_cmds *cmd, t_utils *utils)
 			return (127);
 	}
 	else if (!access(cmd->command, F_OK) && (cmd->command[0] == '/'
-		|| cmd->command[0] == '.'))
+			|| cmd->command[0] == '.'))
 	{
 		if (access(cmd->command, X_OK))
 			return (exec_error(cmd->command, 4));

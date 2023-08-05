@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   m_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/05 16:30:15 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:21:34 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char *find_path_ret(char *str, t_utils *utils)
+char	*find_path_ret(char *str, t_utils *utils)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (utils->envp && utils->envp[i])
 	{
 		if (!ft_strncmp(utils->envp[i], str, ft_strlen(str)))
 			return (ft_substr(utils->envp[i], ft_strlen(str),
-							  ft_strlen(utils->envp[i]) - ft_strlen(str)));
+					ft_strlen(utils->envp[i]) - ft_strlen(str)));
 		i++;
 	}
 	return (NULL);
@@ -33,10 +33,10 @@ char *find_path_ret(char *str, t_utils *utils)
 // will return 0 if it successfully changes the working directory
 // if it didn't successfully change the directory
 // it will go inside the if condition to print error
-int specific_path(t_utils *utils, char *str)
+int	specific_path(t_utils *utils, char *str)
 {
-	char *tmp;
-	int ret;
+	char	*tmp;
+	int		ret;
 
 	ret = -1;
 	tmp = find_path_ret(str, utils);
@@ -64,10 +64,10 @@ with PWD= and update it in the env variable (PWD=/users/szerisen)
 // This will do the same thing as the first one
 which is concatinating OLDPWD= with the value of old_pwd
 */
-void update_path_to_env(t_utils *utils)
+void	update_path_to_env(t_utils *utils)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (utils->envp && utils->envp[i])
@@ -100,17 +100,17 @@ void update_path_to_env(t_utils *utils)
 // of 0 typically indicates a successful execution of chdir.
 // This function will update the pwd and old_pwd variables
 // with the new paths.
-int cd_helper(t_utils *utils, t_cmds *cmds)
+int	cd_helper(t_utils *utils, t_cmds *cmds)
 {
-	char *tmp;
-	char *tmp1;
-	char *tmp2;
+	char	*tmp;
+	char	*tmp1;
+	char	*tmp2;
 	int		ret;
 
 	if (cmds->args[1][0] == '~')
 	{
 		tmp = find_path_ret("HOME=", utils);
-		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1])-1);
+		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1]) - 1);
 		tmp2 = ft_strjoin(tmp, tmp1);
 		printf("%s", tmp2);
 		ret = chdir(tmp2);
@@ -126,11 +126,12 @@ int cd_helper(t_utils *utils, t_cmds *cmds)
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
 		perror(" ");
 	}
-	return ret;
+	return (ret);
 }
-int m_cd(t_utils *utils, t_cmds *cmds)
+
+int	m_cd(t_utils *utils, t_cmds *cmds)
 {
-	int ret;
+	int	ret;
 
 	if (!cmds->args[1])
 		ret = specific_path(utils, "HOME=");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:44:34 by melsahha          #+#    #+#             */
-/*   Updated: 2023/08/05 16:38:55 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:18:42 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	p_unset(t_utils *utils, t_cmds *cmds)
 
 void	p_cd(t_utils *utils, t_cmds *cmds)
 {
-	int	ret;
-	char *tmp;
-	char *tmp1;
-	char *tmp2;
+	int		ret;
+	char	*tmp;
+	char	*tmp1;
+	char	*tmp2;
 
 	if (!cmds->args[1])
 		ret = p_specific_path(utils, "HOME=");
@@ -86,7 +86,7 @@ void	p_cd(t_utils *utils, t_cmds *cmds)
 	else if (cmds->args[1][0] == '~')
 	{
 		tmp = find_path_ret("HOME=", utils);
-		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1])-1);
+		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1]) - 1);
 		tmp2 = ft_strjoin(tmp, tmp1);
 		ret = chdir(tmp2);
 		free(tmp);
