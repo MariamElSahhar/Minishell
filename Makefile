@@ -46,6 +46,7 @@ sources	=	sources/main.c \
 		sources/executor/redirection_check.c \
 		sources/executor/executor.c \
 		sources/executor/cmds_handler.c \
+		sources/executor/exec_utils.c \
 		sources/executor/heredoc.c \
 		sources/executor/executor_utils.c \
 		sources/lexer/input_validation.c \

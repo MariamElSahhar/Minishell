@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:56:31 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 19:25:14 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:03:26 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ int				send_heredoc(t_utils *utils, t_cmds *cmd);
 
 //executor_utils
 int				check_redir_helper(int type, t_redir *dir);
+
+//exec_utils
+int    find_cmd_helper(t_cmds *cmd);
 
 #endif

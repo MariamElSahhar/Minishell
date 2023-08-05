@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:44:34 by melsahha          #+#    #+#             */
-/*   Updated: 2023/08/04 19:45:10 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 16:38:55 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,24 @@ void	p_unset(t_utils *utils, t_cmds *cmds)
 void	p_cd(t_utils *utils, t_cmds *cmds)
 {
 	int	ret;
+	char *tmp;
+	char *tmp1;
+	char *tmp2;
 
 	if (!cmds->args[1])
 		ret = p_specific_path(utils, "HOME=");
 	else if (ft_strncmp(cmds->args[1], "-", 1) == 0)
 		ret = p_specific_path(utils, "OLDPWD=");
+	else if (cmds->args[1][0] == '~')
+	{
+		tmp = find_path_ret("HOME=", utils);
+		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1])-1);
+		tmp2 = ft_strjoin(tmp, tmp1);
+		ret = chdir(tmp2);
+		free(tmp);
+		free(tmp1);
+		free(tmp2);
+	}
 	else
 		ret = chdir(cmds->args[1]);
 	if (ret != 0)
