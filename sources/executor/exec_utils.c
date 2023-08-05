@@ -6,13 +6,13 @@
 /*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:55:14 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/05 17:03:07 by szerisen         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:15:39 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int    find_cmd_helper(t_cmds *cmd)
+int	find_cmd_helper(t_cmds *cmd)
 {
     char	*tmp;
 	char	*tmp1;

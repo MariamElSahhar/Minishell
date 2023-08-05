@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:35:54 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 20:50:57 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:13:37 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,6 @@ void	sigquit_handler(int sig)
 		ft_putchar_fd('\n', STDERR_FILENO);
 		return ;
 	}
-	// else
-	// {
-	// 	rl_on_new_line();
-	// 	rl_replace_line("", 0);
-	// 	rl_redisplay();
-	// 	printf("  \b\b");
-	// }
 }
 
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szerisen <szerisen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:01:46 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 19:27:31 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:14:19 by szerisen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	loop_paths(t_utils *utils, t_cmds *cmd)
 
 int	is_directory(char *path)
 {
-	DIR*	dir;
+	DIR	*dir;
 
 	dir = opendir(path);
 	if (!dir)
