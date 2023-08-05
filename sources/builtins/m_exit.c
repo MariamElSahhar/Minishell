@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:56 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/04 20:11:29 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:40:28 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		reset_utils(utils);
+		free_utils(utils);
 		exit(255);
 	}
 	str = ft_arrdup(cmds->args);

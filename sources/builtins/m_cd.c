@@ -6,7 +6,7 @@
 /*   By: melsahha <melsahha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:42:47 by szerisen          #+#    #+#             */
-/*   Updated: 2023/08/05 17:21:34 by melsahha         ###   ########.fr       */
+/*   Updated: 2023/08/05 17:52:25 by melsahha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ int	cd_helper(t_utils *utils, t_cmds *cmds)
 		tmp = find_path_ret("HOME=", utils);
 		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1]) - 1);
 		tmp2 = ft_strjoin(tmp, tmp1);
-		printf("%s", tmp2);
 		ret = chdir(tmp2);
 		free(tmp);
 		free(tmp1);
